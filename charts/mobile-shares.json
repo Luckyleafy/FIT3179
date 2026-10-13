@@ -1,0 +1,134 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Selected worldwide cumulative mobile puzzle category download and revenue shares; Sensor Tower, 2023 report, page 8.",
+  "width": "container",
+  "height": 350,
+  "autosize": {
+    "type": "fit",
+    "contains": "padding"
+  },
+  "padding": 12,
+  "data": {
+    "url": "data/mobile-shares.csv",
+    "format": {
+      "type": "csv",
+      "parse": {
+        "percent": "number"
+      }
+    }
+  },
+  "config": {
+    "view": {
+      "stroke": null
+    },
+    "font": "Arial",
+    "axis": {
+      "labelFontSize": 12,
+      "titleFontSize": 12,
+      "titlePadding": 14,
+      "domain": false,
+      "tickSize": 0,
+      "gridColor": "#e4e5e0",
+      "labelPadding": 9
+    },
+    "legend": {
+      "title": null,
+      "labelFontSize": 12,
+      "orient": "top"
+    },
+    "background": "#ffffff"
+  },
+  "encoding": {
+    "y": {
+      "field": "category",
+      "type": "nominal",
+      "sort": [
+        "Swap",
+        "Physics",
+        "Word",
+        "Blast",
+        "Chain",
+        "Merge",
+        "Pair"
+      ],
+      "title": null
+    }
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "rule",
+        "color": "#c6cfcc",
+        "strokeWidth": 3
+      },
+      "encoding": {
+        "x": {
+          "aggregate": "min",
+          "field": "percent",
+          "type": "quantitative",
+          "title": "Share of worldwide puzzle downloads or revenue (%)",
+          "scale": {
+            "domain": [
+              0,
+              70
+            ]
+          }
+        },
+        "x2": {
+          "aggregate": "max",
+          "field": "percent"
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "point",
+        "filled": true,
+        "size": 130,
+        "opacity": 1
+      },
+      "encoding": {
+        "x": {
+          "field": "percent",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              0,
+              70
+            ]
+          }
+        },
+        "color": {
+          "field": "metric",
+          "type": "nominal",
+          "scale": {
+            "domain": [
+              "Downloads",
+              "Revenue"
+            ],
+            "range": [
+              "#147d78",
+              "#bb5032"
+            ]
+          }
+        },
+        "tooltip": [
+          {
+            "field": "category",
+            "title": "Category"
+          },
+          {
+            "field": "metric",
+            "title": "Measure"
+          },
+          {
+            "field": "percent",
+            "type": "quantitative",
+            "title": "Percent (%)",
+            "format": ".0f"
+          }
+        ]
+      }
+    }
+  ]
+}

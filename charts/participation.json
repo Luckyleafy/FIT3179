@@ -1,0 +1,116 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "UK adult puzzle participation in the previous 12 months; Ipsos / Aviva, November 2022.",
+  "width": "container",
+  "height": 410,
+  "autosize": {
+    "type": "fit",
+    "contains": "padding"
+  },
+  "padding": 12,
+  "data": {
+    "url": "data/participation.csv",
+    "format": {
+      "type": "csv",
+      "parse": {
+        "percent": "number"
+      }
+    }
+  },
+  "config": {
+    "view": {
+      "stroke": null
+    },
+    "font": "Arial",
+    "axis": {
+      "labelFontSize": 12,
+      "titleFontSize": 12,
+      "titlePadding": 14,
+      "domain": false,
+      "tickSize": 0,
+      "gridColor": "#e4e5e0",
+      "labelPadding": 9
+    },
+    "legend": {
+      "title": null,
+      "labelFontSize": 12,
+      "orient": "top"
+    },
+    "background": "#ffffff"
+  },
+  "transform": [
+    {
+      "calculate": "datum.percent + '%'",
+      "as": "label"
+    }
+  ],
+  "encoding": {
+    "y": {
+      "field": "puzzle",
+      "type": "nominal",
+      "sort": [
+        "Crosswords",
+        "Wordsearch",
+        "Sudoku",
+        "Jigsaws",
+        "Wordle",
+        "Anagrams",
+        "Brain-training puzzles",
+        "Logic puzzles",
+        "Rubik\u2019s cube",
+        "Wooden puzzles",
+        "Sliding puzzles"
+      ],
+      "title": null,
+      "axis": {
+        "labelLimit": 170
+      }
+    },
+    "x": {
+      "field": "percent",
+      "type": "quantitative",
+      "title": "UK adults (%)",
+      "scale": {
+        "domain": [
+          0,
+          60
+        ]
+      }
+    },
+    "tooltip": [
+      {
+        "field": "puzzle",
+        "title": "Puzzle"
+      },
+      {
+        "field": "percent",
+        "type": "quantitative",
+        "title": "Percent (%)",
+        "format": ".0f"
+      }
+    ]
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "bar",
+        "color": "#147d78",
+        "cornerRadiusEnd": 3,
+        "height": 19
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "dx": 6,
+        "color": "#183733"
+      },
+      "encoding": {
+        "text": {
+          "field": "label"
+        }
+      }
+    }
+  ]
+}
