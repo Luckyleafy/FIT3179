@@ -1,0 +1,195 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+
+  "width": 850,
+  "height": 650,
+  "background": "#FAFAF7",
+
+  "params": [
+    {
+      "name": "selectedState",
+      "value": "All",
+      "bind": {
+        "input": "select",
+        "name": "Show state: ",
+        "options": [
+          "All",
+          "ACT",
+          "NSW",
+          "QLD",
+          "SA",
+          "TAS",
+          "VIC",
+          "WA"
+        ],
+        "labels": [
+          "All states and territories",
+          "Australian Capital Territory",
+          "New South Wales",
+          "Queensland",
+          "South Australia",
+          "Tasmania",
+          "Victoria",
+          "Western Australia"
+        ]
+      }
+    }
+  ],
+
+  "projection": {
+    "type": "mercator"
+  },
+
+  "layer": [
+    {
+      "data": {
+        "url": "https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json",
+        "format": {
+          "type": "topojson",
+          "feature": "countries"
+        }
+      },
+
+      "transform": [
+        {
+          "filter": "toNumber(datum.id) === 36"
+        }
+      ],
+
+      "mark": {
+        "type": "geoshape",
+        "fill": "#E8E5DE",
+        "stroke": "#B9B6AE",
+        "strokeWidth": 1
+      }
+    },
+
+    {
+      "data": {
+        "url": "data/australia-escape-rooms.csv",
+        "format": {
+          "type": "csv"
+        }
+      },
+
+      "transform": [
+        {
+          "filter": "toNumber(datum.include_in_fixed_location_map) === 1"
+        },
+        {
+          "calculate": "toNumber(datum.latitude)",
+          "as": "lat"
+        },
+        {
+          "calculate": "toNumber(datum.longitude)",
+          "as": "lon"
+        },
+        {
+          "filter": "isValid(datum.lat) && isValid(datum.lon) && datum.lat < -10 && datum.lat > -44 && datum.lon > 112 && datum.lon < 154"
+        },
+        {
+          "filter": "selectedState === 'All' || datum.state === selectedState"
+        }
+      ],
+
+      "mark": {
+        "type": "circle",
+        "size": 65,
+        "opacity": 0.75,
+        "stroke": "#FFFFFF",
+        "strokeWidth": 0.6
+      },
+
+      "encoding": {
+        "longitude": {
+          "field": "lon",
+          "type": "quantitative"
+        },
+
+        "latitude": {
+          "field": "lat",
+          "type": "quantitative"
+        },
+
+        "color": {
+          "field": "state",
+          "type": "nominal",
+          "scale": {
+            "domain": [
+              "ACT",
+              "NSW",
+              "QLD",
+              "SA",
+              "TAS",
+              "VIC",
+              "WA"
+            ],
+            "range": [
+              "#8865AD",
+              "#4F72B8",
+              "#E38D35",
+              "#C26993",
+              "#308F93",
+              "#4C9362",
+              "#BA6045"
+            ]
+          },
+          "legend": {
+            "title": "State / territory",
+            "orient": "bottom",
+            "direction": "horizontal",
+            "columns": 7,
+            "symbolType": "circle",
+            "symbolSize": 100
+          }
+        },
+
+        "tooltip": [
+          {
+            "field": "escape_room_name",
+            "type": "nominal",
+            "title": "Venue"
+          },
+          {
+            "field": "location",
+            "type": "nominal",
+            "title": "Locality"
+          },
+          {
+            "field": "state_name",
+            "type": "nominal",
+            "title": "State / territory"
+          },
+          {
+            "field": "escape_room_type",
+            "type": "nominal",
+            "title": "Venue type"
+          },
+          {
+            "field": "locality_venue_count",
+            "type": "quantitative",
+            "title": "Listed venues in this locality",
+            "format": ".0f"
+          },
+          {
+            "field": "coordinate_precision",
+            "type": "nominal",
+            "title": "Location precision"
+          }
+        ]
+      }
+    }
+  ],
+
+  "config": {
+    "font": "Arial",
+    "view": {
+      "stroke": null
+    },
+    "legend": {
+      "labelFontSize": 12,
+      "titleFontSize": 13,
+      "padding": 12
+    }
+  }
+}

@@ -22,72 +22,177 @@
     <p class="intro">A quiet crossword. A stubborn Sudoku. One more level on your phone. Explore what people play, why they return, and how puzzles become a mobile business.</p>
   </header>
   <main>
-    <section aria-labelledby="title-1">
-      <div class="section-heading"><span class="number">01</span><div><p class="eyebrow">THE FAMILIAR FAVOURITES</p><h2 id="title-1">Which puzzles do people do?</h2></div></div>
+    
+    <!-- Section 1.1: Puzzle Types -->
+    <section aria-labelledby="title-types">
+      <div class="section-heading">
+        <span class="number">1.1</span>
+        <div>
+          <p class="eyebrow">THE MANY FORMS OF PUZZLES</p>
+          <h2 id="title-types">What counts as a puzzle?</h2>  
+        </div>
+      </div>
+
+      <p>From word games to escape rooms, puzzles challenge us in different ways. Explore seven families and hover over each type for examples.</p>
+
+      <figure>
+        <div id="puzzle_types" class="chart" aria-label="Hierarchy of puzzle families and types">Loading chart…</div>
+
+        <figcaption>Author-created classification. Families may overlap, and escape experiences can combine several puzzle mechanics.</figcaption>
+      </figure>
+      
+      <p class="source">Source: <a href="https://www.aviva.com/newsroom/news-and-research-overview/news-releases/2022/12/a-nation-of-puzzlers-63-percent-of-uk-adults-do-puzzles-at-least-once-a-week/">Aviva / Ipsos UK</a>, November 2022 and <a href="https://investgame.net/wp-content/uploads/2023/11/the-state-of-puzzle-games.pdf">Sensor Tower, The State of Puzzle Games (2023)</a></p>
+    </section>
+
+    <!-- Section 1.2: Puzzle Popularity -->
+    <section aria-labelledby="title-popularity">
+      <div class="section-heading">
+        <span class="number">1.2</span>
+        <div>
+          <p class="eyebrow">THE FAMILIAR FAVOURITES</p>
+          <h2 id="title-popularity">Which puzzles do people do?</h2>
+        </div>
+      </div>
+
       <p>Crosswords lead the selected puzzle types in this UK survey, followed by wordsearches and Sudoku. Respondents could have tried more than one type.</p>
-      <figure><div id="participation" class="chart" aria-label="Bar chart of UK puzzle participation">Loading chart…</div><figcaption>UK adults who did each puzzle type from Nov 2021 - Nov 2022.</figcaption></figure>
+
+      <figure>
+        <div id="participation" class="chart" aria-label="Bar chart of UK puzzle participation">Loading chart…</div>
+        
+        <figcaption>UK adults who did each puzzle type from Nov 2021 - Nov 2022.</figcaption>
+      </figure>
+
       <p class="source">Source: <a href="https://www.aviva.com/newsroom/news-and-research-overview/news-releases/2022/12/a-nation-of-puzzlers-63-percent-of-uk-adults-do-puzzles-at-least-once-a-week/">Aviva / Ipsos UK</a>, November 2022; overall survey sample: 2,379 adults aged 18+.</p>
     </section>
 
-    <!-- Section 1: Puzzle Types -->
-    <section>
-      <h2>The Many Forms of Puzzles &amp; Brain Games</h2>
+    <!-- Note catcher -->
+    <aside class="bridge">
+      <p class="eyebrow">FROM PAPER TO PHONE</p>
+      <p>Participation tells one story. Mobile downloads and spending tell another.</p>
+      <small>The next charts use a different source and population. They are not a continuation of the UK survey.</small>
+    </aside>
 
-      <p>From crosswords to matching games, puzzles challenge us in different ways. Explore five puzzle families and hover over each type to learn more.</p>
+    <!-- Section 2.1: downloads by countries -->
+    <section aria-labelledby="title-downloads-map">
+      <div class="section-heading">
+        <span class="number">2.1</span>
+        <div>
+          <p class="eyebrow">PUZZLES AROUND THE WORLD</p>
+          <h2 id="title-downloads-map">Where do puzzle-game downloads come from?</h2>
+        </div>
+      </div>
 
-      <div id="puzzle-types" class="chart"></div>
+      <p>The United States and India account for the largest reported shares among the countries shown. Hover over a country to explore its share.</p>
 
-      <p class="chart-note">Puzzle families are grouped by their main solving mechanic and may overlap. Segment sizes represent the number of selected examples, not popularity or market share.  Sources: Aviva (2022) and Sensor Tower (2023).</p>
+      <figure>
+        <div id="puzzle_downloads" class="chart" aria-label="World choropleth of puzzle-game download shares">Loading chart…</div>
+
+        <figcaption>Selected countries’ shares of puzzle-game downloads in Apptica’s covered markets, Q1 2023. Percentages are rounded. Grey means not separately reported, not zero.</figcaption>
+      </figure>
+
+      <p class="source">Source: <a href="https://investgame.net/wp-content/uploads/2023/06/puzzle_games_q1_2023.pdf" target="_blank" rel="noopener noreferrer">Apptica, State of the Market: Puzzle Games, Q1 2023</a>, p. 7.</p>
     </section>
 
-    <section aria-labelledby="title-types">
-  <div class="section-heading">
-    <span class="number">02</span>
-    <div>
-      <p class="eyebrow">THE MANY FORMS OF PUZZLES</p>
-      <h2 id="title-types">What counts as a puzzle?</h2>
-    </div>
-  </div>
+    <!-- Section 2.2: Downloads and revenue per genre on mobile -->
+    <section aria-labelledby="title-mobile-shares">
+      <div class="section-heading">
+        <span class="number">2.2</span>
+        <div>
+          <p class="eyebrow">POPULARITY &amp; SPENDING</p>
+          <h2 id="title-mobile-shares">Do downloads translate into spending?</h2>
+        </div>
+      </div>
 
-  <p>
-    From word games to escape rooms, puzzles challenge us in different
-    ways. Explore seven families and hover over each type for examples.
-  </p>
-
-  <figure>
-    <div
-      id="puzzle_types"
-      class="chart"
-      aria-label="Hierarchy of puzzle families and types"
-    >Loading chart…</div>
-
-    <figcaption>
-      Author-created classification. Families may overlap, and escape
-      experiences can combine several puzzle mechanics.
-    </figcaption>
-  </figure>
-</section>
-
-    <section aria-labelledby="title-2">
-      <div class="section-heading"><span class="number">02</span><div><p class="eyebrow">THE REASONS WE RETURN</p><h2 id="title-2">Enjoyment meets a mental challenge</h2></div></div>
-      <p>People report several reasons for puzzling. Enjoyment and keeping the mind active share the highest reported percentage among these four motivations.</p>
-      <figure><div id="motivations" class="chart" aria-label="Dot plot of reported puzzle motivations">Loading chart…</div><figcaption>Reported motivations, not measured health benefits. </figcaption></figure>
-      <p class="source">Source: <a href="https://www.aviva.com/newsroom/news-and-research-overview/news-releases/2022/12/a-nation-of-puzzlers-63-percent-of-uk-adults-do-puzzles-at-least-once-a-week/">Aviva / Ipsos UK</a>, November 2022.</p>
-    </section>
-    <aside class="bridge"><p class="eyebrow">FROM PAPER TO PHONE</p><p>Participation tells one story. Mobile downloads and spending tell another.</p><small>The next charts use a different source and population. They are not a continuation of the UK survey.</small></aside>
-    <section aria-labelledby="title-3">
-      <div class="section-heading"><span class="number">03</span><div><p class="eyebrow">POPULARITY &amp; SPENDING</p><h2 id="title-3">Do downloads translate into spending?</h2></div></div>
       <p>Swap games, such as Candy Crush, occupy a much larger share of revenue than downloads. Physics puzzles show the opposite pattern. </p>
-      <figure><div id="mobile-shares" class="chart" aria-label="Dumbbell chart comparing mobile download and revenue shares">Loading chart…</div><figcaption>Selected categories; worldwide cumulative shares reported in 2023.</figcaption></figure>
+
+      <figure>
+        <div id="mobile-shares" class="chart" aria-label="Dumbbell chart comparing mobile download and revenue shares">Loading chart…</div>
+        
+        <figcaption>Selected categories; worldwide cumulative shares reported in 2023.</figcaption>
+      </figure>
+
       <p class="source">Source: <a href="https://investgame.net/wp-content/uploads/2023/11/the-state-of-puzzle-games.pdf">Sensor Tower, The State of Puzzle Games (2023)</a>, p. 8. App Store and Google Play estimates.</p>
     </section>
-    <section aria-labelledby="title-4">
-      <div class="section-heading"><span class="number">04</span><div><p class="eyebrow">DIFFERENT MARKETS</p><h2 id="title-4">The spending mix changes by market</h2></div></div>
+
+    <!-- Section 3: Market shares per genre for countries -->
+    <section aria-labelledby="title-market-shares">
+      <div class="section-heading">
+        <span class="number">3</span>
+        <div>
+          <p class="eyebrow">DIFFERENT MARKETS</p>
+          <h2 id="title-market-shares">The spending mix changes by market</h2>
+        </div>
+      </div>
+
       <p>Swap games account for more than half of puzzle revenue in each market shown.</p>
-      <figure><div id="market-shares" class="chart" aria-label="Heatmap of selected mobile revenue shares by market">Loading chart…</div><figcaption>2022 revenue shares within each market, not shares of worldwide revenue. Grey cells (—) mean not separately reported, not zero. China’s coverage is limited by the report’s exclusion of third-party Android stores.</figcaption></figure>
+
+      <figure>
+        <div id="market-shares" class="chart" aria-label="Heatmap of selected mobile revenue shares by market">Loading chart…</div>
+        
+        <figcaption>2022 revenue shares within each market, not shares of worldwide revenue. Grey cells (—) mean not separately reported, not zero. China’s coverage is limited by the report’s exclusion of third-party Android stores.</figcaption>
+      </figure>
+
       <p class="source">Source: <a href="https://investgame.net/wp-content/uploads/2023/11/the-state-of-puzzle-games.pdf">Sensor Tower, The State of Puzzle Games (2023)</a></p>
     </section>
+
+    <!-- Section 4: escape room locations in Australia -->
+    <section aria-labelledby="title-escape-map">
+      <div class="section-heading">
+        <span class="number">4</span>
+        <div>
+          <p class="eyebrow">PUZZLES BEYOND THE SCREEN</p>
+          <h2 id="title-escape-map">Where can you escape in Australia?</h2>
+        </div>
+      </div>
+
+      <p>
+        Escape rooms turn puzzle-solving into a shared experience. Explore the directory-listed locations across Australia, coloured by state or territory.</p>
+
+      <figure>
+        <div id="escape_rooms_locations" class="chart" aria-label="Dot map of directory-listed Australian escape-room locations">Loading chart…</div>
+
+        <figcaption>
+          Each dot represents a listed venue-location record at an approximate locality centre. 
+          Venues in the same locality overlap. Use the dropdown to filter by state or territory.
+          Directory coverage is incomplete; no listings does not mean no venues.
+        </figcaption>
+      </figure>
+
+      <p class="source">Venue data: <a href="https://escaperooms.com.au/escape-rooms/" target="_blank" rel="noopener noreferrer">Escape Rooms Australia</a>,
+        accessed 20 October 2026.
+        Locality coordinates:
+        <a
+          href="https://github.com/michalsn/australian-suburbs" target="_blank" rel="noopener noreferrer">Australian Suburbs dataset</a>
+        and
+        <a
+          href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">OpenStreetMap contributors</a>.
+      </p>
+    </section>
+
+    <!-- Section 5: reasons for playing puzzles -->
+    <section aria-labelledby="title-motivations">
+      <div class="section-heading">
+        <span class="number">5</span>
+        <div>
+          <p class="eyebrow">THE REASONS WE RETURN</p>
+          <h2 id="title-motivations">Enjoyment meets a mental challenge</h2>
+        </div>
+      </div>
+      
+      <p>People report several reasons for puzzling. Enjoyment and keeping the mind active share the highest reported percentage among these four motivations.</p>
+
+      <figure>
+        <div id="motivations" class="chart" aria-label="Dot plot of reported puzzle motivations">Loading chart…</div>
+        
+        <figcaption>Reported motivations, not measured health benefits. </figcaption>
+      </figure>
+
+      <p class="source">Source: <a href="https://www.aviva.com/newsroom/news-and-research-overview/news-releases/2022/12/a-nation-of-puzzlers-63-percent-of-uk-adults-do-puzzles-at-least-once-a-week/">Aviva / Ipsos UK</a>, November 2022.</p>
+    </section>
+
   </main>
+
   <footer><strong>Why we keep puzzling</strong></footer>
+
 </body>
 </html>

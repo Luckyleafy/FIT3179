@@ -14,3 +14,49 @@ vegaEmbed("#puzzle_types", vg_types, {
 }).then(function(result) {
   // The chart is available through result.view.
 }).catch(console.error);
+
+var vg_downloads = "charts/puzzle-downloads-countries-map.vg.json";
+
+vegaEmbed("#puzzle_downloads", vg_downloads, {
+    mode: "vega-lite",
+    actions: false
+}).then(function(result) {
+  // The chart is available through result.view.
+}).catch(console.error);
+
+var vg_locations = "charts/escape-rooms-locations-map.vg.json";
+
+vegaEmbed("#escape_rooms_locations", vg_locations, {
+    mode: "vega-lite",
+    actions: false
+}).then(function(result) {
+  // The chart is available through result.view.
+}).catch(console.error);
+
+var vg_market_shares = "charts/market-shares.vg.json";
+
+vegaEmbed("#market-shares", vg_market_shares, {
+  mode: "vega-lite",
+  actions: false
+}).catch(console.error);
+
+var vg_participation = "charts/participation.vg.json";
+
+vegaEmbed("#participation", vg_participation, {
+  mode: "vega-lite",
+  actions: false
+}).catch(console.error);
+
+var vg_mobile_shares = "charts/mobile-shares.vg.json";
+
+vegaEmbed("#mobile-shares", vg_mobile_shares, {
+  mode: "vega-lite",
+  actions: false
+}).catch(console.error);
+
+var vg_motivations = "charts/motivations.vg.json";
+
+vegaEmbed("#motivations", vg_motivations, {
+  mode: "vega-lite",
+  actions: false
+}).catch(console.error);
