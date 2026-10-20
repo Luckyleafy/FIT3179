@@ -1,0 +1,716 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Left-to-right puzzle hierarchy; prepared coordinates are layout values, not measurements.",
+  "width": 850,
+  "height": 1030,
+  "background": "#FAFAF7",
+  "padding": 30,
+  "title": {
+    "text": "The Many Forms of Puzzles & Brain Games",
+    "subtitle": "Explore seven families. Hover over a type for examples.",
+    "anchor": "start",
+    "fontSize": 21,
+    "subtitleFontSize": 14,
+    "offset": 25
+  },
+  "data": {
+    "values": [
+      {
+        "id": "root",
+        "parent": null,
+        "name": "Puzzles & Brain Games",
+        "examples": "Selected puzzle families and types. Some activities combine several families.",
+        "x": 0,
+        "y": 14.9,
+        "level": 0,
+        "family": "Topic"
+      },
+      {
+        "id": "word",
+        "parent": "root",
+        "name": "Word & language",
+        "family": "Word & language",
+        "examples": "Solve challenges involving letters, words and language.",
+        "x": 1,
+        "y": 1.5,
+        "level": 1,
+        "parent_x": 0,
+        "parent_y": 14.9
+      },
+      {
+        "id": "numbers",
+        "parent": "root",
+        "name": "Number puzzles",
+        "family": "Number puzzles",
+        "examples": "Solve numerical constraints or arithmetic challenges.",
+        "x": 1,
+        "y": 5.3,
+        "level": 1,
+        "parent_x": 0,
+        "parent_y": 14.9
+      },
+      {
+        "id": "logic",
+        "parent": "root",
+        "name": "Logic, deduction & strategy",
+        "family": "Logic, deduction & strategy",
+        "examples": "Infer solutions from clues, reason through rules or plan possible moves.",
+        "x": 1,
+        "y": 9.1,
+        "level": 1,
+        "parent_x": 0,
+        "parent_y": 14.9
+      },
+      {
+        "id": "spatial",
+        "parent": "root",
+        "name": "Spatial & mechanical",
+        "family": "Spatial & mechanical",
+        "examples": "Assemble, move or manipulate pieces.",
+        "x": 1,
+        "y": 13.4,
+        "level": 1,
+        "parent_x": 0,
+        "parent_y": 14.9
+      },
+      {
+        "id": "matching",
+        "parent": "root",
+        "name": "Matching & arrangement",
+        "family": "Matching & arrangement",
+        "examples": "Match, sort, merge or place pieces to reach a goal.",
+        "x": 1,
+        "y": 19.2,
+        "level": 1,
+        "parent_x": 0,
+        "parent_y": 14.9
+      },
+      {
+        "id": "environment",
+        "parent": "root",
+        "name": "Physics & environmental",
+        "family": "Physics & environmental",
+        "examples": "Use physical interactions, explore environments or navigate routes.",
+        "x": 1,
+        "y": 25.0,
+        "level": 1,
+        "parent_x": 0,
+        "parent_y": 14.9
+      },
+      {
+        "id": "escape",
+        "parent": "root",
+        "name": "Escape & investigation experiences",
+        "family": "Escape & investigation",
+        "examples": "Experiences combining linked clues and several puzzle mechanics. These may overlap other families.",
+        "x": 1,
+        "y": 28.3,
+        "level": 1,
+        "parent_x": 0,
+        "parent_y": 14.9
+      },
+      {
+        "id": "crosswords",
+        "parent": "word",
+        "name": "Crosswords",
+        "family": "Word & language",
+        "examples": "Standard crosswords; cryptic crosswords.",
+        "x": 2,
+        "y": 0,
+        "level": 2,
+        "parent_x": 1,
+        "parent_y": 1.5
+      },
+      {
+        "id": "anagrams",
+        "parent": "word",
+        "name": "Anagrams",
+        "family": "Word & language",
+        "examples": "Rearrange letters into another word. Example: LISTEN → SILENT.",
+        "x": 2,
+        "y": 1,
+        "level": 2,
+        "parent_x": 1,
+        "parent_y": 1.5
+      },
+      {
+        "id": "wordguessing",
+        "parent": "word",
+        "name": "Word guessing",
+        "family": "Word & language",
+        "examples": "Example: Wordle.",
+        "x": 2,
+        "y": 2,
+        "level": 2,
+        "parent_x": 1,
+        "parent_y": 1.5
+      },
+      {
+        "id": "wordsearch",
+        "parent": "word",
+        "name": "Word searches",
+        "family": "Word & language",
+        "examples": "Find hidden words in a grid of letters.",
+        "x": 2,
+        "y": 3,
+        "level": 2,
+        "parent_x": 1,
+        "parent_y": 1.5
+      },
+      {
+        "id": "numberplacement",
+        "parent": "numbers",
+        "name": "Number placement",
+        "family": "Number puzzles",
+        "examples": "Example: Sudoku. Place numbers while satisfying row, column and region rules.",
+        "x": 2,
+        "y": 4.8,
+        "level": 2,
+        "parent_x": 1,
+        "parent_y": 5.3
+      },
+      {
+        "id": "arithmetic",
+        "parent": "numbers",
+        "name": "Arithmetic puzzles",
+        "family": "Number puzzles",
+        "examples": "Example: Kakuro. Fill cells with numbers that satisfy sum clues.",
+        "x": 2,
+        "y": 5.8,
+        "level": 2,
+        "parent_x": 1,
+        "parent_y": 5.3
+      },
+      {
+        "id": "logicgrid",
+        "parent": "logic",
+        "name": "Logic-grid puzzles",
+        "family": "Logic, deduction & strategy",
+        "examples": "Use clues to match people, objects, places or times.",
+        "x": 2,
+        "y": 7.6,
+        "level": 2,
+        "parent_x": 1,
+        "parent_y": 9.1
+      },
+      {
+        "id": "deduction",
+        "parent": "logic",
+        "name": "Deduction mysteries",
+        "family": "Logic, deduction & strategy",
+        "examples": "Murder mysteries: compare evidence, statements and alibis to identify a culprit.",
+        "x": 2,
+        "y": 8.6,
+        "level": 2,
+        "parent_x": 1,
+        "parent_y": 9.1
+      },
+      {
+        "id": "riddles",
+        "parent": "logic",
+        "name": "Logic riddles",
+        "family": "Logic, deduction & strategy",
+        "examples": "Solve a short reasoning problem. This includes reasoning-based riddles rather than all wordplay riddles.",
+        "x": 2,
+        "y": 9.6,
+        "level": 2,
+        "parent_x": 1,
+        "parent_y": 9.1
+      },
+      {
+        "id": "strategy",
+        "parent": "logic",
+        "name": "Strategy puzzles",
+        "family": "Logic, deduction & strategy",
+        "examples": "Chess puzzles: find a move or sequence while considering the opponent’s possible responses.",
+        "x": 2,
+        "y": 10.6,
+        "level": 2,
+        "parent_x": 1,
+        "parent_y": 9.1
+      },
+      {
+        "id": "assembly",
+        "parent": "spatial",
+        "name": "Assembly puzzles",
+        "family": "Spatial & mechanical",
+        "examples": "Jigsaws; tangrams. Fit pieces together to form a picture or shape.",
+        "x": 2,
+        "y": 12.4,
+        "level": 2,
+        "parent_x": 1,
+        "parent_y": 13.4
+      },
+      {
+        "id": "sliding",
+        "parent": "spatial",
+        "name": "Sliding puzzles",
+        "family": "Spatial & mechanical",
+        "examples": "Sliding-tile puzzles: move pieces through available spaces to reach a target arrangement.",
+        "x": 2,
+        "y": 13.4,
+        "level": 2,
+        "parent_x": 1,
+        "parent_y": 13.4
+      },
+      {
+        "id": "mechanical",
+        "parent": "spatial",
+        "name": "Mechanical manipulation",
+        "family": "Spatial & mechanical",
+        "examples": "Rubik’s cube; interlocking puzzles.",
+        "x": 2,
+        "y": 14.4,
+        "level": 2,
+        "parent_x": 1,
+        "parent_y": 13.4
+      },
+      {
+        "id": "swap",
+        "parent": "matching",
+        "name": "Swap",
+        "family": "Matching & arrangement",
+        "examples": "Swap adjacent pieces to create matches. Example: Candy Crush Saga.",
+        "x": 2,
+        "y": 16.2,
+        "level": 2,
+        "parent_x": 1,
+        "parent_y": 19.2
+      },
+      {
+        "id": "blast",
+        "parent": "matching",
+        "name": "Blast",
+        "family": "Matching & arrangement",
+        "examples": "Tap a group of matching coloured tiles to clear it.",
+        "x": 2,
+        "y": 17.2,
+        "level": 2,
+        "parent_x": 1,
+        "parent_y": 19.2
+      },
+      {
+        "id": "chain",
+        "parent": "matching",
+        "name": "Chain",
+        "family": "Matching & arrangement",
+        "examples": "Connect matching pieces into a chain to remove them.",
+        "x": 2,
+        "y": 18.2,
+        "level": 2,
+        "parent_x": 1,
+        "parent_y": 19.2
+      },
+      {
+        "id": "pair",
+        "parent": "matching",
+        "name": "Pair",
+        "family": "Matching & arrangement",
+        "examples": "Find and remove matching pairs of tiles or pieces.",
+        "x": 2,
+        "y": 19.2,
+        "level": 2,
+        "parent_x": 1,
+        "parent_y": 19.2
+      },
+      {
+        "id": "sort",
+        "parent": "matching",
+        "name": "Sort",
+        "family": "Matching & arrangement",
+        "examples": "Sort mixed coloured objects or liquids into the required groups.",
+        "x": 2,
+        "y": 20.2,
+        "level": 2,
+        "parent_x": 1,
+        "parent_y": 19.2
+      },
+      {
+        "id": "merge",
+        "parent": "matching",
+        "name": "Merge",
+        "family": "Matching & arrangement",
+        "examples": "Combine compatible pieces into a new or upgraded piece.",
+        "x": 2,
+        "y": 21.2,
+        "level": 2,
+        "parent_x": 1,
+        "parent_y": 19.2
+      },
+      {
+        "id": "block",
+        "parent": "matching",
+        "name": "Block placement",
+        "family": "Matching & arrangement",
+        "examples": "Place blocks into a grid to complete rows or columns.",
+        "x": 2,
+        "y": 22.2,
+        "level": 2,
+        "parent_x": 1,
+        "parent_y": 19.2
+      },
+      {
+        "id": "physicspuzzles",
+        "parent": "environment",
+        "name": "Physics puzzles",
+        "family": "Physics & environmental",
+        "examples": "Manipulate ropes, balls or blocks using physical interactions.",
+        "x": 2,
+        "y": 24.0,
+        "level": 2,
+        "parent_x": 1,
+        "parent_y": 25.0
+      },
+      {
+        "id": "environmentalpuzzles",
+        "parent": "environment",
+        "name": "Environmental puzzles",
+        "family": "Physics & environmental",
+        "examples": "Explore an environment and manipulate objects to solve challenges.",
+        "x": 2,
+        "y": 25.0,
+        "level": 2,
+        "parent_x": 1,
+        "parent_y": 25.0
+      },
+      {
+        "id": "maze",
+        "parent": "environment",
+        "name": "Mazes",
+        "family": "Physics & environmental",
+        "examples": "Find a route through passages, obstacles and dead ends.",
+        "x": 2,
+        "y": 26.0,
+        "level": 2,
+        "parent_x": 1,
+        "parent_y": 25.0
+      },
+      {
+        "id": "escaperooms",
+        "parent": "escape",
+        "name": "Physical escape rooms",
+        "family": "Escape & investigation",
+        "examples": "Work through linked clues and tasks in a physical space. May combine deduction, number, word and mechanical puzzles.",
+        "x": 2,
+        "y": 27.8,
+        "level": 2,
+        "parent_x": 1,
+        "parent_y": 28.3
+      },
+      {
+        "id": "escapegames",
+        "parent": "escape",
+        "name": "Digital escape games",
+        "family": "Escape & investigation",
+        "examples": "Explore a digital setting, investigate objects and solve linked puzzles to progress or escape.",
+        "x": 2,
+        "y": 28.8,
+        "level": 2,
+        "parent_x": 1,
+        "parent_y": 28.3
+      }
+    ]
+  },
+  "encoding": {
+    "x": {
+      "field": "x",
+      "type": "quantitative",
+      "scale": {
+        "domain": [
+          -0.12,
+          3.15
+        ],
+        "nice": false
+      },
+      "axis": null
+    },
+    "y": {
+      "field": "y",
+      "type": "quantitative",
+      "scale": {
+        "domain": [
+          -1,
+          30.6
+        ],
+        "reverse": true,
+        "nice": false
+      },
+      "axis": null
+    }
+  },
+  "layer": [
+    {
+      "transform": [
+        {
+          "filter": "datum.level > 0"
+        }
+      ],
+      "mark": {
+        "type": "rule",
+        "strokeWidth": 2,
+        "opacity": 0.45
+      },
+      "encoding": {
+        "x": {
+          "field": "parent_x",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              -0.12,
+              3.15
+            ],
+            "nice": false
+          },
+          "axis": null
+        },
+        "y": {
+          "field": "parent_y",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              -1,
+              30.6
+            ],
+            "reverse": true,
+            "nice": false
+          },
+          "axis": null
+        },
+        "x2": {
+          "field": "x"
+        },
+        "y2": {
+          "field": "y"
+        },
+        "color": {
+          "field": "family",
+          "type": "nominal",
+          "scale": {
+            "domain": [
+              "Word & language",
+              "Number puzzles",
+              "Logic, deduction & strategy",
+              "Spatial & mechanical",
+              "Matching & arrangement",
+              "Physics & environmental",
+              "Escape & investigation",
+              "Topic"
+            ],
+            "range": [
+              "#C4C3E3",
+              "#FCDD9D",
+              "#A3B565",
+              "#F1642E",
+              "#504E76",
+              "#C56A45",
+              "#4C9362",
+              "#263238"
+            ]
+          },
+          "legend": null
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "circle",
+        "opacity": 1,
+        "stroke": "#FAFAF7",
+        "strokeWidth": 2
+      },
+      "encoding": {
+        "color": {
+          "field": "family",
+          "type": "nominal",
+          "scale": {
+            "domain": [
+              "Word & language",
+              "Number puzzles",
+              "Logic, deduction & strategy",
+              "Spatial & mechanical",
+              "Matching & arrangement",
+              "Physics & environmental",
+              "Escape & investigation",
+              "Topic"
+            ],
+            "range": [
+              "#C4C3E3",
+              "#FCDD9D",
+              "#A3B565",
+              "#F1642E",
+              "#504E76",
+              "#C56A45",
+              "#4C9362",
+              "#263238"
+            ]
+          },
+          "legend": null
+        },
+        "size": {
+          "condition": [
+            {
+              "test": "datum.level === 0",
+              "value": 260
+            },
+            {
+              "test": "datum.level === 1",
+              "value": 190
+            }
+          ],
+          "value": 100
+        },
+        "tooltip": [
+          {
+            "field": "name",
+            "type": "nominal",
+            "title": "Puzzle / family"
+          },
+          {
+            "field": "examples",
+            "type": "nominal",
+            "title": "Examples / explanation"
+          }
+        ]
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.level === 0"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "dy": -24,
+        "fontSize": 16,
+        "fontWeight": "bold",
+        "color": "#263238",
+        "align": "left",
+        "baseline": "bottom"
+      },
+      "encoding": {
+        "text": {
+          "field": "name"
+        },
+        "tooltip": [
+          {
+            "field": "name",
+            "type": "nominal",
+            "title": "Puzzle / family"
+          },
+          {
+            "field": "examples",
+            "type": "nominal",
+            "title": "Examples / explanation"
+          }
+        ]
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.level === 1"
+        },
+        {
+          "calculate": "datum.id === 'logic' ? ['Logic, deduction', '& strategy'] : datum.id === 'environment' ? ['Physics &', 'environmental'] : datum.id === 'matching' ? ['Matching &', 'arrangement'] : datum.id === 'spatial' ? ['Spatial &', 'mechanical'] : datum.id === 'escape' ? ['Escape & investigation', 'experiences'] : [datum.name]",
+          "as": "family_label"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "dy": -22,
+        "fontSize": 13,
+        "fontWeight": "bold",
+        "lineHeight": 16,
+        "align": "center",
+        "baseline": "bottom"
+      },
+      "encoding": {
+        "text": {
+          "field": "family_label"
+        },
+        "color": {
+          "field": "family",
+          "type": "nominal",
+          "scale": {
+            "domain": [
+              "Word & language",
+              "Number puzzles",
+              "Logic, deduction & strategy",
+              "Spatial & mechanical",
+              "Matching & arrangement",
+              "Physics & environmental",
+              "Escape & investigation",
+              "Topic"
+            ],
+            "range": [
+              "#C4C3E3",
+              "#FCDD9D",
+              "#A3B565",
+              "#F1642E",
+              "#504E76",
+              "#C56A45",
+              "#4C9362",
+              "#263238"
+            ]
+          },
+          "legend": null
+        },
+        "tooltip": [
+          {
+            "field": "name",
+            "type": "nominal",
+            "title": "Puzzle / family"
+          },
+          {
+            "field": "examples",
+            "type": "nominal",
+            "title": "Examples / explanation"
+          }
+        ]
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.level === 2"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "baseline": "middle",
+        "dx": 13,
+        "fontSize": 13,
+        "color": "#263238"
+      },
+      "encoding": {
+        "text": {
+          "field": "name"
+        },
+        "tooltip": [
+          {
+            "field": "name",
+            "type": "nominal",
+            "title": "Puzzle / family"
+          },
+          {
+            "field": "examples",
+            "type": "nominal",
+            "title": "Examples / explanation"
+          }
+        ]
+      }
+    }
+  ],
+  "config": {
+    "view": {
+      "stroke": null
+    },
+    "font": "Arial"
+  },
+  "autosize": {
+    "type": "pad",
+    "contains": "padding"
+  }
+}

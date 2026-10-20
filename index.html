@@ -2,13 +2,18 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible"content="IE=edge">
+  <meta name="viewport"content="width=device-width,initial-scale=1.0">
+  <script src="https://cdn.jsdelivr.net/npm/vega@5.20.2"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.1.0"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.17.0"></script>
+  
   <title>Why We Keep Puzzling</title>
   <link rel="stylesheet" href="css/style.css">
-  <script defer src="https://cdn.jsdelivr.net/npm/vega@5.30.0/build/vega.min.js"></script>
-  <script defer src="https://cdn.jsdelivr.net/npm/vega-lite@5.20.1/build/vega-lite.min.js"></script>
-  <script defer src="https://cdn.jsdelivr.net/npm/vega-embed@6.26.0/build/vega-embed.min.js"></script>
-  <script defer src="js/charts.js"></script>
+  
+  
+
+  <script src="vega_lite_vis.js" defer></script>
 </head>
 <body>
   <header class="hero">
@@ -23,6 +28,46 @@
       <figure><div id="participation" class="chart" aria-label="Bar chart of UK puzzle participation">Loading chart…</div><figcaption>UK adults who did each puzzle type from Nov 2021 - Nov 2022.</figcaption></figure>
       <p class="source">Source: <a href="https://www.aviva.com/newsroom/news-and-research-overview/news-releases/2022/12/a-nation-of-puzzlers-63-percent-of-uk-adults-do-puzzles-at-least-once-a-week/">Aviva / Ipsos UK</a>, November 2022; overall survey sample: 2,379 adults aged 18+.</p>
     </section>
+
+    <!-- Section 1: Puzzle Types -->
+    <section>
+      <h2>The Many Forms of Puzzles &amp; Brain Games</h2>
+
+      <p>From crosswords to matching games, puzzles challenge us in different ways. Explore five puzzle families and hover over each type to learn more.</p>
+
+      <div id="puzzle-types" class="chart"></div>
+
+      <p class="chart-note">Puzzle families are grouped by their main solving mechanic and may overlap. Segment sizes represent the number of selected examples, not popularity or market share.  Sources: Aviva (2022) and Sensor Tower (2023).</p>
+    </section>
+
+    <section aria-labelledby="title-types">
+  <div class="section-heading">
+    <span class="number">02</span>
+    <div>
+      <p class="eyebrow">THE MANY FORMS OF PUZZLES</p>
+      <h2 id="title-types">What counts as a puzzle?</h2>
+    </div>
+  </div>
+
+  <p>
+    From word games to escape rooms, puzzles challenge us in different
+    ways. Explore seven families and hover over each type for examples.
+  </p>
+
+  <figure>
+    <div
+      id="puzzle_types"
+      class="chart"
+      aria-label="Hierarchy of puzzle families and types"
+    >Loading chart…</div>
+
+    <figcaption>
+      Author-created classification. Families may overlap, and escape
+      experiences can combine several puzzle mechanics.
+    </figcaption>
+  </figure>
+</section>
+
     <section aria-labelledby="title-2">
       <div class="section-heading"><span class="number">02</span><div><p class="eyebrow">THE REASONS WE RETURN</p><h2 id="title-2">Enjoyment meets a mental challenge</h2></div></div>
       <p>People report several reasons for puzzling. Enjoyment and keeping the mind active share the highest reported percentage among these four motivations.</p>
