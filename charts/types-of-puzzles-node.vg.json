@@ -5,14 +5,6 @@
   "height": 1030,
   "background": "#FAFAF7",
   "padding": 30,
-  "title": {
-    "text": "The Many Forms of Puzzles & Brain Games",
-    "subtitle": "Explore seven families. Hover over a type for examples.",
-    "anchor": "start",
-    "fontSize": 21,
-    "subtitleFontSize": 14,
-    "offset": 25
-  },
   "data": {
     "values": [
       {

@@ -60,3 +60,10 @@ vegaEmbed("#motivations", vg_motivations, {
   mode: "vega-lite",
   actions: false
 }).catch(console.error);
+
+var vg_age_groups = "charts/age-groups.vg.json";
+
+vegaEmbed("#age-groups", vg_age_groups, {
+  mode: "vega-lite",
+  actions: false
+}).catch(console.error);

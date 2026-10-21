@@ -1,0 +1,109 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+
+  "width": 650,
+  "height": 320,
+  "background": "#FAFAF7",
+
+  "data": {
+    "values": [
+      {"generation": "Gen Alpha · 8–13", "percent": 54},
+      {"generation": "Gen Z · 14–29", "percent": 51},
+      {"generation": "Millennials · 30–45", "percent": 58},
+      {"generation": "Gen X · 46–61", "percent": 67},
+      {"generation": "Boomers / Silent · 62–90", "percent": 74}
+    ]
+  },
+
+  "encoding": {
+    "y": {
+      "field": "generation",
+      "type": "ordinal",
+      "sort": [
+        "Gen Alpha · 8–13",
+        "Gen Z · 14–29",
+        "Millennials · 30–45",
+        "Gen X · 46–61",
+        "Boomers / Silent · 62–90"
+      ],
+      "title": null,
+      "axis": {
+        "labelFontSize": 13,
+        "labelLimit": 240,
+        "labelPadding": 12,
+        "domain": false,
+        "ticks": false
+      }
+    },
+
+    "x": {
+      "field": "percent",
+      "type": "quantitative",
+      "scale": {
+        "domain": [0, 100]
+      },
+      "axis": {
+        "title": "Players who regularly played puzzle games (%)",
+        "values": [0, 20, 40, 60, 80, 100],
+        "labelExpr": "datum.value + '%'",
+        "titlePadding": 15,
+        "domain": false,
+        "gridColor": "#E4E5E0",
+        "tickSize": 0
+      }
+    },
+
+    "tooltip": [
+      {
+        "field": "generation",
+        "type": "ordinal",
+        "title": "Generation and age"
+      },
+      {
+        "field": "percent",
+        "type": "quantitative",
+        "title": "Puzzle participation (%)"
+      }
+    ]
+  },
+
+  "layer": [
+    {
+      "mark": {
+        "type": "bar",
+        "size": 32,
+        "color": "#F1642E"
+      }
+    },
+
+    {
+      "transform": [
+        {
+          "calculate": "datum.percent + '%'",
+          "as": "label"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "baseline": "middle",
+        "dx": 7,
+        "fontSize": 14,
+        "fontWeight": "bold",
+        "color": "#263238"
+      },
+      "encoding": {
+        "text": {
+          "field": "label"
+        }
+      }
+    }
+  ],
+
+  "config": {
+    "font": "Arial",
+    "view": {
+      "stroke": null
+    }
+  }
+}
