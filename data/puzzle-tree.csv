@@ -1,0 +1,34 @@
+id,parent,name,family,examples
+root,,Puzzles & Brain Games,Topic,Selected puzzle families and types. Some activities combine several families.
+word,root,Word & language,Word & language,"Solve challenges involving letters, words and language."
+numbers,root,Number puzzles,Number puzzles,Solve numerical constraints or arithmetic challenges.
+logic,root,"Logic, deduction & strategy","Logic, deduction & strategy","Infer solutions from clues, reason through rules or plan possible moves."
+spatial,root,Spatial & mechanical,Spatial & mechanical,"Assemble, move or manipulate pieces."
+matching,root,Matching & arrangement,Matching & arrangement,"Match, sort, merge or place pieces to reach a goal."
+environment,root,Physics & environmental,Physics & environmental,"Use physical interactions, explore environments or navigate routes."
+escape,root,Escape & investigation experiences,Escape & investigation,Experiences combining linked clues and several puzzle mechanics. These may overlap other families.
+crosswords,word,Crosswords,Word & language,Standard crosswords; cryptic crosswords.
+anagrams,word,Anagrams,Word & language,Rearrange letters into another word. Example: LISTEN → SILENT.
+wordguessing,word,Word guessing,Word & language,Example: Wordle.
+wordsearch,word,Word searches,Word & language,Find hidden words in a grid of letters.
+numberplacement,numbers,Number placement,Number puzzles,"Example: Sudoku. Place numbers while satisfying row, column and region rules."
+arithmetic,numbers,Arithmetic puzzles,Number puzzles,Example: Kakuro. Fill cells with numbers that satisfy sum clues.
+logicgrid,logic,Logic-grid puzzles,"Logic, deduction & strategy","Use clues to match people, objects, places or times."
+deduction,logic,Deduction mysteries,"Logic, deduction & strategy","Murder mysteries: compare evidence, statements and alibis to identify a culprit."
+riddles,logic,Logic riddles,"Logic, deduction & strategy",Solve a short reasoning problem. This includes reasoning-based riddles rather than all wordplay riddles.
+strategy,logic,Strategy puzzles,"Logic, deduction & strategy",Chess puzzles: find a move or sequence while considering the opponent’s possible responses.
+assembly,spatial,Assembly puzzles,Spatial & mechanical,Jigsaws; tangrams. Fit pieces together to form a picture or shape.
+sliding,spatial,Sliding puzzles,Spatial & mechanical,Sliding-tile puzzles: move pieces through available spaces to reach a target arrangement.
+mechanical,spatial,Mechanical manipulation,Spatial & mechanical,Rubik’s cube; interlocking puzzles.
+swap,matching,Swap,Matching & arrangement,Swap adjacent pieces to create matches. Example: Candy Crush Saga.
+blast,matching,Blast,Matching & arrangement,Tap a group of matching coloured tiles to clear it.
+chain,matching,Chain,Matching & arrangement,Connect matching pieces into a chain to remove them.
+pair,matching,Pair,Matching & arrangement,Find and remove matching pairs of tiles or pieces.
+sort,matching,Sort,Matching & arrangement,Sort mixed coloured objects or liquids into the required groups.
+merge,matching,Merge,Matching & arrangement,Combine compatible pieces into a new or upgraded piece.
+block,matching,Block placement,Matching & arrangement,Place blocks into a grid to complete rows or columns.
+physicspuzzles,environment,Physics puzzles,Physics & environmental,"Manipulate ropes, balls or blocks using physical interactions."
+environmentalpuzzles,environment,Environmental puzzles,Physics & environmental,Explore an environment and manipulate objects to solve challenges.
+maze,environment,Mazes,Physics & environmental,"Find a route through passages, obstacles and dead ends."
+escaperooms,escape,Physical escape rooms,Escape & investigation,"Work through linked clues and tasks in a physical space. May combine deduction, number, word and mechanical puzzles."
+escapegames,escape,Digital escape games,Escape & investigation,"Explore a digital setting, investigate objects and solve linked puzzles to progress or escape."

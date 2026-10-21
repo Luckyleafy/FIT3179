@@ -1,0 +1,195 @@
+{
+  "$schema": "https://vega.github.io/schema/vega/v5.json",
+  "description": "Puzzle families and types, positioned automatically using a tree layout.",
+  "width": 850,
+  "height": 1030,
+  "padding": 30,
+  "background": "#FAFAF7",
+  "autosize": "pad",
+
+  "data": [
+    {
+      "name": "tree",
+      "url": "data/puzzle-tree.csv",
+      "format": {
+        "type": "csv"
+      },
+      "transform": [
+        {
+          "type": "stratify",
+          "key": "id",
+          "parentKey": "parent"
+        },
+        {
+          "type": "tree",
+          "method": "tidy",
+          "size": [
+            {"signal": "height"},
+            {"signal": "width - 310"}
+          ],
+          "separation": true,
+          "as": ["y", "x", "depth", "children"]
+        },
+        {
+          "type": "formula",
+          "expr": "datum.id === 'logic' ? ['Logic, deduction', '& strategy'] : datum.id === 'environment' ? ['Physics &', 'environmental'] : datum.id === 'matching' ? ['Matching &', 'arrangement'] : datum.id === 'spatial' ? ['Spatial &', 'mechanical'] : datum.id === 'escape' ? ['Escape & investigation', 'experiences'] : [datum.name]",
+          "as": "label"
+        }
+      ]
+    },
+    {
+      "name": "links",
+      "source": "tree",
+      "transform": [
+        {
+          "type": "treelinks"
+        },
+        {
+          "type": "linkpath",
+          "orient": "horizontal",
+          "shape": "diagonal"
+        }
+      ]
+    }
+  ],
+
+  "scales": [
+    {
+      "name": "familyColor",
+      "type": "ordinal",
+      "domain": [
+        "Word & language",
+        "Number puzzles",
+        "Logic, deduction & strategy",
+        "Spatial & mechanical",
+        "Matching & arrangement",
+        "Physics & environmental",
+        "Escape & investigation",
+        "Topic"
+      ],
+      "range": [
+        "#C4C3E3",
+        "#FCDD9D",
+        "#A3B565",
+        "#F1642E",
+        "#504E76",
+        "#C56A45",
+        "#4C9362",
+        "#263238"
+      ]
+    }
+  ],
+
+  "marks": [
+    {
+      "type": "path",
+      "from": {
+        "data": "links"
+      },
+      "encode": {
+        "update": {
+          "path": {
+            "field": "path"
+          },
+          "stroke": {
+            "scale": "familyColor",
+            "field": "target.family"
+          },
+          "strokeWidth": {
+            "value": 2
+          },
+          "strokeOpacity": {
+            "value": 0.45
+          },
+          "fill": {
+            "value": null
+          }
+        }
+      }
+    },
+    {
+      "type": "symbol",
+      "from": {
+        "data": "tree"
+      },
+      "encode": {
+        "update": {
+          "x": {
+            "field": "x"
+          },
+          "y": {
+            "field": "y"
+          },
+          "shape": {
+            "value": "circle"
+          },
+          "size": {
+            "signal": "datum.depth === 0 ? 260 : datum.depth === 1 ? 190 : 100"
+          },
+          "fill": {
+            "scale": "familyColor",
+            "field": "family"
+          },
+          "stroke": {
+            "value": "#FAFAF7"
+          },
+          "strokeWidth": {
+            "value": 2
+          },
+          "tooltip": {
+            "signal": "{'Puzzle / family': datum.name, 'Examples / explanation': datum.examples}"
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "from": {
+        "data": "tree"
+      },
+      "encode": {
+        "update": {
+          "x": {
+            "field": "x"
+          },
+          "y": {
+            "field": "y"
+          },
+          "text": {
+            "field": "label"
+          },
+          "font": {
+            "value": "Arial"
+          },
+          "fontSize": {
+            "signal": "datum.depth === 0 ? 16 : 13"
+          },
+          "fontWeight": {
+            "signal": "datum.depth < 2 ? 'bold' : 'normal'"
+          },
+          "lineHeight": {
+            "value": 16
+          },
+          "align": {
+            "signal": "datum.depth === 1 ? 'center' : 'left'"
+          },
+          "baseline": {
+            "signal": "datum.depth < 2 ? 'bottom' : 'middle'"
+          },
+          "dx": {
+            "signal": "datum.depth === 2 ? 13 : 0"
+          },
+          "dy": {
+            "signal": "datum.depth === 0 ? -24 : datum.depth === 1 ? -22 : 0"
+          },
+          "fill": {
+            "signal": "datum.depth === 1 ? scale('familyColor', datum.family) : '#263238'"
+          },
+          "tooltip": {
+            "signal": "{'Puzzle / family': datum.name, 'Examples / explanation': datum.examples}"
+          }
+        }
+      }
+    }
+  ]
+}

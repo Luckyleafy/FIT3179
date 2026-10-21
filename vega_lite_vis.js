@@ -6,10 +6,9 @@ vegaEmbed("#bar_chart", vg_1).then(function(result) {
 }).catch(console.error);
 */
 
-var vg_types = "charts/types-of-puzzles-node.vg.json";
+var vg_types = "charts/puzzle-types-tree.vg.json";
 
 vegaEmbed("#puzzle_types", vg_types, {
-    mode: "vega-lite",
     actions: false
 }).then(function(result) {
   // The chart is available through result.view.
