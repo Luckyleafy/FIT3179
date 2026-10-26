@@ -65,6 +65,16 @@ vegaEmbed("#escape_rooms_locations", vg_locations, {
   // The chart is available through result.view.
 }).catch(console.error);
 
+var vg_escape_rooms = "charts/escape-rooms-map.vg.json";
+
+vegaEmbed("#escape_rooms", vg_escape_rooms, {
+    mode: "vega",
+    renderer: "svg",
+    actions: false
+}).then(function(result) {
+  // The chart is available through result.view.
+}).catch(console.error);
+
 var vg_market_shares = "charts/market-shares.vg.json";
 
 vegaEmbed("#market-shares", vg_market_shares, {

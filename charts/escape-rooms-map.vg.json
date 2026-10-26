@@ -1,0 +1,1880 @@
+{
+  "$schema": "https://vega.github.io/schema/vega/v5.json",
+  "description": "Australia escape-room directory locations, with circular street-map insets. Branches are separate points. This is a directory-based sample, not a census of operating Australian venues.",
+  "width": 1120,
+  "height": 950,
+  "padding": 10,
+  "background": null,
+  "config": {
+    "font": "Arial"
+  },
+  "data": [
+    {
+      "name": "australia",
+      "url": "data/australia.geojson",
+      "format": {
+        "type": "json",
+        "property": "features"
+      }
+    },
+    {
+      "name": "venues",
+      "url": "data/australia-escape-room-venues.csv",
+      "format": {
+        "type": "csv",
+        "parse": {
+          "longitude": "number",
+          "latitude": "number",
+          "include_in_map": "number"
+        }
+      },
+      "transform": [
+        {
+          "type": "filter",
+          "expr": "datum.include_in_map === 1 && isValid(datum.latitude) && isValid(datum.longitude)"
+        }
+      ]
+    },
+    {
+      "name": "cities",
+      "values": [
+        {
+          "name": "Perth",
+          "lon": 115.87,
+          "lat": -31.98,
+          "z": 11,
+          "gx": 20,
+          "gy": 80,
+          "left": 430782,
+          "top": 311234,
+          "scale": 83443.02680376363,
+          "translate": [
+            -168638,
+            -49090
+          ]
+        },
+        {
+          "name": "Brisbane",
+          "lon": 153.025,
+          "lat": -27.475,
+          "z": 12,
+          "gx": 880,
+          "gy": 55,
+          "left": 969896,
+          "top": 607461,
+          "scale": 166886.05360752725,
+          "translate": [
+            -445608,
+            -83173
+          ]
+        },
+        {
+          "name": "Sydney",
+          "lon": 151.21,
+          "lat": -33.88,
+          "z": 12,
+          "gx": 880,
+          "gy": 360,
+          "left": 964609,
+          "top": 629172,
+          "scale": 166886.05360752725,
+          "translate": [
+            -440321,
+            -104884
+          ]
+        },
+        {
+          "name": "Melbourne",
+          "lon": 144.978,
+          "lat": -37.815,
+          "z": 12,
+          "gx": 650,
+          "gy": 640,
+          "left": 946457,
+          "top": 643317,
+          "scale": 166886.05360752725,
+          "translate": [
+            -422169,
+            -119029
+          ]
+        },
+        {
+          "name": "Adelaide",
+          "lon": 138.605,
+          "lat": -34.925,
+          "z": 12,
+          "gx": 330,
+          "gy": 640,
+          "left": 927894,
+          "top": 632861,
+          "scale": 166886.05360752725,
+          "translate": [
+            -403606,
+            -108573
+          ]
+        },
+        {
+          "name": "Fremantle",
+          "lon": 115.748,
+          "lat": -32.055,
+          "z": 14,
+          "gx": 20,
+          "gy": 365,
+          "left": 3445604,
+          "top": 2491671,
+          "scale": 667544.214430109,
+          "translate": [
+            -1348452,
+            -394519
+          ]
+        },
+        {
+          "name": "Parramatta",
+          "lon": 151.004,
+          "lat": -33.814,
+          "z": 14,
+          "gx": 20,
+          "gy": 650,
+          "left": 3856366,
+          "top": 2516091,
+          "scale": 667544.214430109,
+          "translate": [
+            -1759214,
+            -418939
+          ]
+        }
+      ],
+      "transform": [
+        {
+          "type": "geopoint",
+          "projection": "national",
+          "fields": [
+            "lon",
+            "lat"
+          ],
+          "as": [
+            "mapx",
+            "mapy"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "points_national",
+      "source": "venues",
+      "transform": [
+        {
+          "type": "geopoint",
+          "projection": "national",
+          "fields": [
+            "longitude",
+            "latitude"
+          ],
+          "as": [
+            "mapx",
+            "mapy"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "points_perth",
+      "source": "venues",
+      "transform": [
+        {
+          "type": "geopoint",
+          "projection": "perth",
+          "fields": [
+            "longitude",
+            "latitude"
+          ],
+          "as": [
+            "mapx",
+            "mapy"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "points_brisbane",
+      "source": "venues",
+      "transform": [
+        {
+          "type": "geopoint",
+          "projection": "brisbane",
+          "fields": [
+            "longitude",
+            "latitude"
+          ],
+          "as": [
+            "mapx",
+            "mapy"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "points_sydney",
+      "source": "venues",
+      "transform": [
+        {
+          "type": "geopoint",
+          "projection": "sydney",
+          "fields": [
+            "longitude",
+            "latitude"
+          ],
+          "as": [
+            "mapx",
+            "mapy"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "points_melbourne",
+      "source": "venues",
+      "transform": [
+        {
+          "type": "geopoint",
+          "projection": "melbourne",
+          "fields": [
+            "longitude",
+            "latitude"
+          ],
+          "as": [
+            "mapx",
+            "mapy"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "points_adelaide",
+      "source": "venues",
+      "transform": [
+        {
+          "type": "geopoint",
+          "projection": "adelaide",
+          "fields": [
+            "longitude",
+            "latitude"
+          ],
+          "as": [
+            "mapx",
+            "mapy"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "points_fremantle",
+      "source": "venues",
+      "transform": [
+        {
+          "type": "geopoint",
+          "projection": "fremantle",
+          "fields": [
+            "longitude",
+            "latitude"
+          ],
+          "as": [
+            "mapx",
+            "mapy"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "points_parramatta",
+      "source": "venues",
+      "transform": [
+        {
+          "type": "geopoint",
+          "projection": "parramatta",
+          "fields": [
+            "longitude",
+            "latitude"
+          ],
+          "as": [
+            "mapx",
+            "mapy"
+          ]
+        }
+      ]
+    }
+  ],
+  "projections": [
+    {
+      "name": "national",
+      "type": "mercator",
+      "fit": {
+        "signal": "data('australia')"
+      },
+      "extent": [
+        [
+          260,
+          100
+        ],
+        [
+          850,
+          570
+        ]
+      ]
+    },
+    {
+      "name": "perth",
+      "type": "mercator",
+      "scale": 83443.02680376363,
+      "translate": [
+        -168638,
+        -49090
+      ]
+    },
+    {
+      "name": "brisbane",
+      "type": "mercator",
+      "scale": 166886.05360752725,
+      "translate": [
+        -445608,
+        -83173
+      ]
+    },
+    {
+      "name": "sydney",
+      "type": "mercator",
+      "scale": 166886.05360752725,
+      "translate": [
+        -440321,
+        -104884
+      ]
+    },
+    {
+      "name": "melbourne",
+      "type": "mercator",
+      "scale": 166886.05360752725,
+      "translate": [
+        -422169,
+        -119029
+      ]
+    },
+    {
+      "name": "adelaide",
+      "type": "mercator",
+      "scale": 166886.05360752725,
+      "translate": [
+        -403606,
+        -108573
+      ]
+    },
+    {
+      "name": "fremantle",
+      "type": "mercator",
+      "scale": 667544.214430109,
+      "translate": [
+        -1348452,
+        -394519
+      ]
+    },
+    {
+      "name": "parramatta",
+      "type": "mercator",
+      "scale": 667544.214430109,
+      "translate": [
+        -1759214,
+        -418939
+      ]
+    }
+  ],
+  "marks": [
+    {
+      "type": "text",
+      "interactive": false,
+      "encode": {
+        "update": {
+          "x": {
+            "value": 20
+          },
+          "y": {
+            "value": 24
+          },
+          "text": {
+            "value": "Australia\u2019s listed escape-room locations"
+          },
+          "fontSize": {
+            "value": 26
+          },
+          "fontWeight": {
+            "value": "bold"
+          },
+          "align": {
+            "value": "left"
+          },
+          "fill": {
+            "value": "#183733"
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "interactive": false,
+      "encode": {
+        "update": {
+          "x": {
+            "value": 20
+          },
+          "y": {
+            "value": 50
+          },
+          "text": {
+            "value": "One dot represents one physical venue. Hover over a dot for its address."
+          },
+          "fontSize": {
+            "value": 14
+          },
+          "fontWeight": {
+            "value": "normal"
+          },
+          "align": {
+            "value": "left"
+          },
+          "fill": {
+            "value": "#596963"
+          }
+        }
+      }
+    },
+    {
+      "type": "shape",
+      "from": {
+        "data": "australia"
+      },
+      "transform": [
+        {
+          "type": "geoshape",
+          "projection": "national"
+        }
+      ],
+      "encode": {
+        "update": {
+          "fill": {
+            "value": "#E1E5DE"
+          },
+          "stroke": {
+            "value": "#FFFFFF"
+          },
+          "strokeWidth": {
+            "value": 1
+          }
+        }
+      }
+    },
+    {
+      "type": "rule",
+      "from": {
+        "data": "cities"
+      },
+      "encode": {
+        "update": {
+          "x": {
+            "field": "mapx"
+          },
+          "y": {
+            "field": "mapy"
+          },
+          "x2": {
+            "signal": "datum.gx + 110"
+          },
+          "y2": {
+            "signal": "datum.gy + 110"
+          },
+          "stroke": {
+            "value": "#99ADA5"
+          },
+          "strokeWidth": {
+            "value": 1
+          },
+          "strokeDash": {
+            "value": [
+              3,
+              4
+            ]
+          }
+        }
+      }
+    },
+    {
+      "type": "symbol",
+      "from": {
+        "data": "points_national"
+      },
+      "encode": {
+        "update": {
+          "x": {
+            "field": "mapx"
+          },
+          "y": {
+            "field": "mapy"
+          },
+          "size": {
+            "value": 24
+          },
+          "fill": {
+            "value": "#147D78"
+          },
+          "fillOpacity": {
+            "value": 0.88
+          },
+          "stroke": {
+            "value": "#FAFAF7"
+          },
+          "strokeWidth": {
+            "value": 0.8
+          },
+          "tooltip": {
+            "signal": "{'Venue':datum.venue_name, 'Address':datum.address, 'Location type':replace(datum.coordinate_precision, /_/g, ' ')}"
+          }
+        },
+        "hover": {
+          "size": {
+            "value": 43.2
+          },
+          "fill": {
+            "value": "#BB5032"
+          },
+          "fillOpacity": {
+            "value": 1
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "interactive": false,
+      "encode": {
+        "update": {
+          "x": {
+            "value": 535
+          },
+          "y": {
+            "value": 90
+          },
+          "text": {
+            "value": "AUSTRALIA"
+          },
+          "fontSize": {
+            "value": 12
+          },
+          "fontWeight": {
+            "value": "bold"
+          },
+          "align": {
+            "value": "center"
+          },
+          "fill": {
+            "value": "#788C80"
+          }
+        }
+      }
+    },
+    {
+      "type": "group",
+      "encode": {
+        "update": {
+          "x": {
+            "value": 20
+          },
+          "y": {
+            "value": 80
+          },
+          "width": {
+            "value": 220
+          },
+          "height": {
+            "value": 220
+          }
+        }
+      },
+      "marks": [
+        {
+          "type": "image",
+          "clip": {
+            "path": "M110,0 A110,110 0 1,1 110,220 A110,110 0 1,1 110,0 Z"
+          },
+          "interactive": false,
+          "encode": {
+            "update": {
+              "url": {
+                "value": "data/perth-basemap.png"
+              },
+              "x": {
+                "value": 0
+              },
+              "y": {
+                "value": 0
+              },
+              "width": {
+                "value": 220
+              },
+              "height": {
+                "value": 220
+              }
+            }
+          }
+        },
+        {
+          "type": "symbol",
+          "from": {
+            "data": "points_perth"
+          },
+          "encode": {
+            "update": {
+              "x": {
+                "field": "mapx"
+              },
+              "y": {
+                "field": "mapy"
+              },
+              "size": {
+                "value": 52
+              },
+              "fill": {
+                "value": "#147D78"
+              },
+              "fillOpacity": {
+                "value": 0.88
+              },
+              "stroke": {
+                "value": "#FAFAF7"
+              },
+              "strokeWidth": {
+                "value": 0.8
+              },
+              "tooltip": {
+                "signal": "{'Venue':datum.venue_name, 'Address':datum.address, 'Location type':replace(datum.coordinate_precision, /_/g, ' ')}"
+              }
+            },
+            "hover": {
+              "size": {
+                "value": 93.60000000000001
+              },
+              "fill": {
+                "value": "#BB5032"
+              },
+              "fillOpacity": {
+                "value": 1
+              }
+            }
+          },
+          "clip": {
+            "path": "M110,0 A110,110 0 1,1 110,220 A110,110 0 1,1 110,0 Z"
+          }
+        },
+        {
+          "type": "path",
+          "interactive": false,
+          "encode": {
+            "update": {
+              "path": {
+                "value": "M110,0 A110,110 0 1,1 110,220 A110,110 0 1,1 110,0 Z"
+              },
+              "stroke": {
+                "value": "#9CAF9F"
+              },
+              "strokeWidth": {
+                "value": 1.4
+              },
+              "fill": {
+                "value": null
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "interactive": false,
+      "encode": {
+        "update": {
+          "x": {
+            "value": 130
+          },
+          "y": {
+            "value": 68
+          },
+          "text": {
+            "value": "Perth"
+          },
+          "fontSize": {
+            "value": 18
+          },
+          "fontWeight": {
+            "value": "bold"
+          },
+          "align": {
+            "value": "center"
+          },
+          "fill": {
+            "value": "#183733"
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "interactive": false,
+      "encode": {
+        "update": {
+          "x": {
+            "value": 130
+          },
+          "y": {
+            "value": 320
+          },
+          "text": {
+            "value": "Central area \u2022 enlarged"
+          },
+          "fontSize": {
+            "value": 11
+          },
+          "fontWeight": {
+            "value": "normal"
+          },
+          "align": {
+            "value": "center"
+          },
+          "fill": {
+            "value": "#596963"
+          }
+        }
+      }
+    },
+    {
+      "type": "group",
+      "encode": {
+        "update": {
+          "x": {
+            "value": 880
+          },
+          "y": {
+            "value": 55
+          },
+          "width": {
+            "value": 220
+          },
+          "height": {
+            "value": 220
+          }
+        }
+      },
+      "marks": [
+        {
+          "type": "image",
+          "clip": {
+            "path": "M110,0 A110,110 0 1,1 110,220 A110,110 0 1,1 110,0 Z"
+          },
+          "interactive": false,
+          "encode": {
+            "update": {
+              "url": {
+                "value": "data/brisbane-basemap.png"
+              },
+              "x": {
+                "value": 0
+              },
+              "y": {
+                "value": 0
+              },
+              "width": {
+                "value": 220
+              },
+              "height": {
+                "value": 220
+              }
+            }
+          }
+        },
+        {
+          "type": "symbol",
+          "from": {
+            "data": "points_brisbane"
+          },
+          "encode": {
+            "update": {
+              "x": {
+                "field": "mapx"
+              },
+              "y": {
+                "field": "mapy"
+              },
+              "size": {
+                "value": 52
+              },
+              "fill": {
+                "value": "#147D78"
+              },
+              "fillOpacity": {
+                "value": 0.88
+              },
+              "stroke": {
+                "value": "#FAFAF7"
+              },
+              "strokeWidth": {
+                "value": 0.8
+              },
+              "tooltip": {
+                "signal": "{'Venue':datum.venue_name, 'Address':datum.address, 'Location type':replace(datum.coordinate_precision, /_/g, ' ')}"
+              }
+            },
+            "hover": {
+              "size": {
+                "value": 93.60000000000001
+              },
+              "fill": {
+                "value": "#BB5032"
+              },
+              "fillOpacity": {
+                "value": 1
+              }
+            }
+          },
+          "clip": {
+            "path": "M110,0 A110,110 0 1,1 110,220 A110,110 0 1,1 110,0 Z"
+          }
+        },
+        {
+          "type": "path",
+          "interactive": false,
+          "encode": {
+            "update": {
+              "path": {
+                "value": "M110,0 A110,110 0 1,1 110,220 A110,110 0 1,1 110,0 Z"
+              },
+              "stroke": {
+                "value": "#9CAF9F"
+              },
+              "strokeWidth": {
+                "value": 1.4
+              },
+              "fill": {
+                "value": null
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "interactive": false,
+      "encode": {
+        "update": {
+          "x": {
+            "value": 990
+          },
+          "y": {
+            "value": 43
+          },
+          "text": {
+            "value": "Brisbane"
+          },
+          "fontSize": {
+            "value": 18
+          },
+          "fontWeight": {
+            "value": "bold"
+          },
+          "align": {
+            "value": "center"
+          },
+          "fill": {
+            "value": "#183733"
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "interactive": false,
+      "encode": {
+        "update": {
+          "x": {
+            "value": 990
+          },
+          "y": {
+            "value": 295
+          },
+          "text": {
+            "value": "Central area \u2022 enlarged"
+          },
+          "fontSize": {
+            "value": 11
+          },
+          "fontWeight": {
+            "value": "normal"
+          },
+          "align": {
+            "value": "center"
+          },
+          "fill": {
+            "value": "#596963"
+          }
+        }
+      }
+    },
+    {
+      "type": "group",
+      "encode": {
+        "update": {
+          "x": {
+            "value": 880
+          },
+          "y": {
+            "value": 360
+          },
+          "width": {
+            "value": 220
+          },
+          "height": {
+            "value": 220
+          }
+        }
+      },
+      "marks": [
+        {
+          "type": "image",
+          "clip": {
+            "path": "M110,0 A110,110 0 1,1 110,220 A110,110 0 1,1 110,0 Z"
+          },
+          "interactive": false,
+          "encode": {
+            "update": {
+              "url": {
+                "value": "data/sydney-basemap.png"
+              },
+              "x": {
+                "value": 0
+              },
+              "y": {
+                "value": 0
+              },
+              "width": {
+                "value": 220
+              },
+              "height": {
+                "value": 220
+              }
+            }
+          }
+        },
+        {
+          "type": "symbol",
+          "from": {
+            "data": "points_sydney"
+          },
+          "encode": {
+            "update": {
+              "x": {
+                "field": "mapx"
+              },
+              "y": {
+                "field": "mapy"
+              },
+              "size": {
+                "value": 52
+              },
+              "fill": {
+                "value": "#147D78"
+              },
+              "fillOpacity": {
+                "value": 0.88
+              },
+              "stroke": {
+                "value": "#FAFAF7"
+              },
+              "strokeWidth": {
+                "value": 0.8
+              },
+              "tooltip": {
+                "signal": "{'Venue':datum.venue_name, 'Address':datum.address, 'Location type':replace(datum.coordinate_precision, /_/g, ' ')}"
+              }
+            },
+            "hover": {
+              "size": {
+                "value": 93.60000000000001
+              },
+              "fill": {
+                "value": "#BB5032"
+              },
+              "fillOpacity": {
+                "value": 1
+              }
+            }
+          },
+          "clip": {
+            "path": "M110,0 A110,110 0 1,1 110,220 A110,110 0 1,1 110,0 Z"
+          }
+        },
+        {
+          "type": "path",
+          "interactive": false,
+          "encode": {
+            "update": {
+              "path": {
+                "value": "M110,0 A110,110 0 1,1 110,220 A110,110 0 1,1 110,0 Z"
+              },
+              "stroke": {
+                "value": "#9CAF9F"
+              },
+              "strokeWidth": {
+                "value": 1.4
+              },
+              "fill": {
+                "value": null
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "interactive": false,
+      "encode": {
+        "update": {
+          "x": {
+            "value": 990
+          },
+          "y": {
+            "value": 348
+          },
+          "text": {
+            "value": "Sydney"
+          },
+          "fontSize": {
+            "value": 18
+          },
+          "fontWeight": {
+            "value": "bold"
+          },
+          "align": {
+            "value": "center"
+          },
+          "fill": {
+            "value": "#183733"
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "interactive": false,
+      "encode": {
+        "update": {
+          "x": {
+            "value": 990
+          },
+          "y": {
+            "value": 600
+          },
+          "text": {
+            "value": "Central area \u2022 enlarged"
+          },
+          "fontSize": {
+            "value": 11
+          },
+          "fontWeight": {
+            "value": "normal"
+          },
+          "align": {
+            "value": "center"
+          },
+          "fill": {
+            "value": "#596963"
+          }
+        }
+      }
+    },
+    {
+      "type": "group",
+      "encode": {
+        "update": {
+          "x": {
+            "value": 650
+          },
+          "y": {
+            "value": 640
+          },
+          "width": {
+            "value": 220
+          },
+          "height": {
+            "value": 220
+          }
+        }
+      },
+      "marks": [
+        {
+          "type": "image",
+          "clip": {
+            "path": "M110,0 A110,110 0 1,1 110,220 A110,110 0 1,1 110,0 Z"
+          },
+          "interactive": false,
+          "encode": {
+            "update": {
+              "url": {
+                "value": "data/melbourne-basemap.png"
+              },
+              "x": {
+                "value": 0
+              },
+              "y": {
+                "value": 0
+              },
+              "width": {
+                "value": 220
+              },
+              "height": {
+                "value": 220
+              }
+            }
+          }
+        },
+        {
+          "type": "symbol",
+          "from": {
+            "data": "points_melbourne"
+          },
+          "encode": {
+            "update": {
+              "x": {
+                "field": "mapx"
+              },
+              "y": {
+                "field": "mapy"
+              },
+              "size": {
+                "value": 52
+              },
+              "fill": {
+                "value": "#147D78"
+              },
+              "fillOpacity": {
+                "value": 0.88
+              },
+              "stroke": {
+                "value": "#FAFAF7"
+              },
+              "strokeWidth": {
+                "value": 0.8
+              },
+              "tooltip": {
+                "signal": "{'Venue':datum.venue_name, 'Address':datum.address, 'Location type':replace(datum.coordinate_precision, /_/g, ' ')}"
+              }
+            },
+            "hover": {
+              "size": {
+                "value": 93.60000000000001
+              },
+              "fill": {
+                "value": "#BB5032"
+              },
+              "fillOpacity": {
+                "value": 1
+              }
+            }
+          },
+          "clip": {
+            "path": "M110,0 A110,110 0 1,1 110,220 A110,110 0 1,1 110,0 Z"
+          }
+        },
+        {
+          "type": "path",
+          "interactive": false,
+          "encode": {
+            "update": {
+              "path": {
+                "value": "M110,0 A110,110 0 1,1 110,220 A110,110 0 1,1 110,0 Z"
+              },
+              "stroke": {
+                "value": "#9CAF9F"
+              },
+              "strokeWidth": {
+                "value": 1.4
+              },
+              "fill": {
+                "value": null
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "interactive": false,
+      "encode": {
+        "update": {
+          "x": {
+            "value": 760
+          },
+          "y": {
+            "value": 628
+          },
+          "text": {
+            "value": "Melbourne"
+          },
+          "fontSize": {
+            "value": 18
+          },
+          "fontWeight": {
+            "value": "bold"
+          },
+          "align": {
+            "value": "center"
+          },
+          "fill": {
+            "value": "#183733"
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "interactive": false,
+      "encode": {
+        "update": {
+          "x": {
+            "value": 760
+          },
+          "y": {
+            "value": 880
+          },
+          "text": {
+            "value": "Central area \u2022 enlarged"
+          },
+          "fontSize": {
+            "value": 11
+          },
+          "fontWeight": {
+            "value": "normal"
+          },
+          "align": {
+            "value": "center"
+          },
+          "fill": {
+            "value": "#596963"
+          }
+        }
+      }
+    },
+    {
+      "type": "group",
+      "encode": {
+        "update": {
+          "x": {
+            "value": 330
+          },
+          "y": {
+            "value": 640
+          },
+          "width": {
+            "value": 220
+          },
+          "height": {
+            "value": 220
+          }
+        }
+      },
+      "marks": [
+        {
+          "type": "image",
+          "clip": {
+            "path": "M110,0 A110,110 0 1,1 110,220 A110,110 0 1,1 110,0 Z"
+          },
+          "interactive": false,
+          "encode": {
+            "update": {
+              "url": {
+                "value": "data/adelaide-basemap.png"
+              },
+              "x": {
+                "value": 0
+              },
+              "y": {
+                "value": 0
+              },
+              "width": {
+                "value": 220
+              },
+              "height": {
+                "value": 220
+              }
+            }
+          }
+        },
+        {
+          "type": "symbol",
+          "from": {
+            "data": "points_adelaide"
+          },
+          "encode": {
+            "update": {
+              "x": {
+                "field": "mapx"
+              },
+              "y": {
+                "field": "mapy"
+              },
+              "size": {
+                "value": 52
+              },
+              "fill": {
+                "value": "#147D78"
+              },
+              "fillOpacity": {
+                "value": 0.88
+              },
+              "stroke": {
+                "value": "#FAFAF7"
+              },
+              "strokeWidth": {
+                "value": 0.8
+              },
+              "tooltip": {
+                "signal": "{'Venue':datum.venue_name, 'Address':datum.address, 'Location type':replace(datum.coordinate_precision, /_/g, ' ')}"
+              }
+            },
+            "hover": {
+              "size": {
+                "value": 93.60000000000001
+              },
+              "fill": {
+                "value": "#BB5032"
+              },
+              "fillOpacity": {
+                "value": 1
+              }
+            }
+          },
+          "clip": {
+            "path": "M110,0 A110,110 0 1,1 110,220 A110,110 0 1,1 110,0 Z"
+          }
+        },
+        {
+          "type": "path",
+          "interactive": false,
+          "encode": {
+            "update": {
+              "path": {
+                "value": "M110,0 A110,110 0 1,1 110,220 A110,110 0 1,1 110,0 Z"
+              },
+              "stroke": {
+                "value": "#9CAF9F"
+              },
+              "strokeWidth": {
+                "value": 1.4
+              },
+              "fill": {
+                "value": null
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "interactive": false,
+      "encode": {
+        "update": {
+          "x": {
+            "value": 440
+          },
+          "y": {
+            "value": 628
+          },
+          "text": {
+            "value": "Adelaide"
+          },
+          "fontSize": {
+            "value": 18
+          },
+          "fontWeight": {
+            "value": "bold"
+          },
+          "align": {
+            "value": "center"
+          },
+          "fill": {
+            "value": "#183733"
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "interactive": false,
+      "encode": {
+        "update": {
+          "x": {
+            "value": 440
+          },
+          "y": {
+            "value": 880
+          },
+          "text": {
+            "value": "Central area \u2022 enlarged"
+          },
+          "fontSize": {
+            "value": 11
+          },
+          "fontWeight": {
+            "value": "normal"
+          },
+          "align": {
+            "value": "center"
+          },
+          "fill": {
+            "value": "#596963"
+          }
+        }
+      }
+    },
+    {
+      "type": "group",
+      "encode": {
+        "update": {
+          "x": {
+            "value": 20
+          },
+          "y": {
+            "value": 365
+          },
+          "width": {
+            "value": 220
+          },
+          "height": {
+            "value": 220
+          }
+        }
+      },
+      "marks": [
+        {
+          "type": "image",
+          "clip": {
+            "path": "M110,0 A110,110 0 1,1 110,220 A110,110 0 1,1 110,0 Z"
+          },
+          "interactive": false,
+          "encode": {
+            "update": {
+              "url": {
+                "value": "data/fremantle-basemap.png"
+              },
+              "x": {
+                "value": 0
+              },
+              "y": {
+                "value": 0
+              },
+              "width": {
+                "value": 220
+              },
+              "height": {
+                "value": 220
+              }
+            }
+          }
+        },
+        {
+          "type": "symbol",
+          "from": {
+            "data": "points_fremantle"
+          },
+          "encode": {
+            "update": {
+              "x": {
+                "field": "mapx"
+              },
+              "y": {
+                "field": "mapy"
+              },
+              "size": {
+                "value": 52
+              },
+              "fill": {
+                "value": "#147D78"
+              },
+              "fillOpacity": {
+                "value": 0.88
+              },
+              "stroke": {
+                "value": "#FAFAF7"
+              },
+              "strokeWidth": {
+                "value": 0.8
+              },
+              "tooltip": {
+                "signal": "{'Venue':datum.venue_name, 'Address':datum.address, 'Location type':replace(datum.coordinate_precision, /_/g, ' ')}"
+              }
+            },
+            "hover": {
+              "size": {
+                "value": 93.60000000000001
+              },
+              "fill": {
+                "value": "#BB5032"
+              },
+              "fillOpacity": {
+                "value": 1
+              }
+            }
+          },
+          "clip": {
+            "path": "M110,0 A110,110 0 1,1 110,220 A110,110 0 1,1 110,0 Z"
+          }
+        },
+        {
+          "type": "path",
+          "interactive": false,
+          "encode": {
+            "update": {
+              "path": {
+                "value": "M110,0 A110,110 0 1,1 110,220 A110,110 0 1,1 110,0 Z"
+              },
+              "stroke": {
+                "value": "#9CAF9F"
+              },
+              "strokeWidth": {
+                "value": 1.4
+              },
+              "fill": {
+                "value": null
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "interactive": false,
+      "encode": {
+        "update": {
+          "x": {
+            "value": 130
+          },
+          "y": {
+            "value": 353
+          },
+          "text": {
+            "value": "Fremantle"
+          },
+          "fontSize": {
+            "value": 18
+          },
+          "fontWeight": {
+            "value": "bold"
+          },
+          "align": {
+            "value": "center"
+          },
+          "fill": {
+            "value": "#183733"
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "interactive": false,
+      "encode": {
+        "update": {
+          "x": {
+            "value": 130
+          },
+          "y": {
+            "value": 605
+          },
+          "text": {
+            "value": "Central area \u2022 enlarged"
+          },
+          "fontSize": {
+            "value": 11
+          },
+          "fontWeight": {
+            "value": "normal"
+          },
+          "align": {
+            "value": "center"
+          },
+          "fill": {
+            "value": "#596963"
+          }
+        }
+      }
+    },
+    {
+      "type": "group",
+      "encode": {
+        "update": {
+          "x": {
+            "value": 20
+          },
+          "y": {
+            "value": 650
+          },
+          "width": {
+            "value": 220
+          },
+          "height": {
+            "value": 220
+          }
+        }
+      },
+      "marks": [
+        {
+          "type": "image",
+          "clip": {
+            "path": "M110,0 A110,110 0 1,1 110,220 A110,110 0 1,1 110,0 Z"
+          },
+          "interactive": false,
+          "encode": {
+            "update": {
+              "url": {
+                "value": "data/parramatta-basemap.png"
+              },
+              "x": {
+                "value": 0
+              },
+              "y": {
+                "value": 0
+              },
+              "width": {
+                "value": 220
+              },
+              "height": {
+                "value": 220
+              }
+            }
+          }
+        },
+        {
+          "type": "symbol",
+          "from": {
+            "data": "points_parramatta"
+          },
+          "encode": {
+            "update": {
+              "x": {
+                "field": "mapx"
+              },
+              "y": {
+                "field": "mapy"
+              },
+              "size": {
+                "value": 52
+              },
+              "fill": {
+                "value": "#147D78"
+              },
+              "fillOpacity": {
+                "value": 0.88
+              },
+              "stroke": {
+                "value": "#FAFAF7"
+              },
+              "strokeWidth": {
+                "value": 0.8
+              },
+              "tooltip": {
+                "signal": "{'Venue':datum.venue_name, 'Address':datum.address, 'Location type':replace(datum.coordinate_precision, /_/g, ' ')}"
+              }
+            },
+            "hover": {
+              "size": {
+                "value": 93.60000000000001
+              },
+              "fill": {
+                "value": "#BB5032"
+              },
+              "fillOpacity": {
+                "value": 1
+              }
+            }
+          },
+          "clip": {
+            "path": "M110,0 A110,110 0 1,1 110,220 A110,110 0 1,1 110,0 Z"
+          }
+        },
+        {
+          "type": "path",
+          "interactive": false,
+          "encode": {
+            "update": {
+              "path": {
+                "value": "M110,0 A110,110 0 1,1 110,220 A110,110 0 1,1 110,0 Z"
+              },
+              "stroke": {
+                "value": "#9CAF9F"
+              },
+              "strokeWidth": {
+                "value": 1.4
+              },
+              "fill": {
+                "value": null
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "interactive": false,
+      "encode": {
+        "update": {
+          "x": {
+            "value": 130
+          },
+          "y": {
+            "value": 638
+          },
+          "text": {
+            "value": "Parramatta"
+          },
+          "fontSize": {
+            "value": 18
+          },
+          "fontWeight": {
+            "value": "bold"
+          },
+          "align": {
+            "value": "center"
+          },
+          "fill": {
+            "value": "#183733"
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "interactive": false,
+      "encode": {
+        "update": {
+          "x": {
+            "value": 130
+          },
+          "y": {
+            "value": 890
+          },
+          "text": {
+            "value": "Central area \u2022 enlarged"
+          },
+          "fontSize": {
+            "value": 11
+          },
+          "fontWeight": {
+            "value": "normal"
+          },
+          "align": {
+            "value": "center"
+          },
+          "fill": {
+            "value": "#596963"
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "interactive": false,
+      "encode": {
+        "update": {
+          "x": {
+            "value": 20
+          },
+          "y": {
+            "value": 907
+          },
+          "text": {
+            "value": "Source: escaperooms.com.au and linked operators. Checked 26 October 2026."
+          },
+          "fontSize": {
+            "value": 11
+          },
+          "fontWeight": {
+            "value": "normal"
+          },
+          "align": {
+            "value": "left"
+          },
+          "fill": {
+            "value": "#596963"
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "interactive": false,
+      "encode": {
+        "update": {
+          "x": {
+            "value": 20
+          },
+          "y": {
+            "value": 925
+          },
+          "text": {
+            "value": "Coordinates: operator pins, OpenStreetMap and address geocoding. Basemaps \u00a9 OpenStreetMap contributors."
+          },
+          "fontSize": {
+            "value": 10
+          },
+          "fontWeight": {
+            "value": "normal"
+          },
+          "align": {
+            "value": "left"
+          },
+          "fill": {
+            "value": "#596963"
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "interactive": false,
+      "encode": {
+        "update": {
+          "x": {
+            "value": 20
+          },
+          "y": {
+            "value": 943
+          },
+          "text": {
+            "value": "Locations are directory listings; inclusion does not confirm that a venue is currently operating."
+          },
+          "fontSize": {
+            "value": 10
+          },
+          "fontWeight": {
+            "value": "normal"
+          },
+          "align": {
+            "value": "left"
+          },
+          "fill": {
+            "value": "#596963"
+          }
+        }
+      }
+    }
+  ]
+}
