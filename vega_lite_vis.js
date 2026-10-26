@@ -31,6 +31,14 @@ vegaEmbed("#puzzle_gender", vg_gender, {
   actions: false
 }).catch(console.error);
 
+var vg_countries = "charts/countries-map.vg.json";
+
+vegaEmbed("#puzzle_countries", vg_countries, {
+  mode: "vega-lite",
+  renderer: "svg",
+  actions: false
+}).catch(console.error);
+
 var vg_downloads = "charts/puzzle-downloads-countries-map.vg.json";
 
 vegaEmbed("#puzzle_downloads", vg_downloads, {
