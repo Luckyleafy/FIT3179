@@ -1,0 +1,883 @@
+{
+  "$schema": "https://vega.github.io/schema/vega/v5.json",
+  "description": "World Sudoku Championship representation connections. Original layout using teal, black, white and coral. Counts are individual-result entries, not travel records.",
+  "width": 1000,
+  "height": 660,
+  "padding": 10,
+  "background": "#65A0A0",
+  "signals": [
+    {
+      "name": "hoverCountry",
+      "value": null,
+      "on": [
+        {
+          "events": "@badges:mouseover, @routes:mouseover, @origins:mouseover",
+          "update": "datum.country"
+        },
+        {
+          "events": "@badges:mouseout, @routes:mouseout, @origins:mouseout",
+          "update": "null"
+        }
+      ]
+    }
+  ],
+  "projections": [
+    {
+      "name": "worldProjection",
+      "type": "equirectangular",
+      "scale": 152.78874536821954,
+      "translate": [
+        500,
+        389.8725355643583
+      ]
+    }
+  ],
+  "data": [
+    {
+      "name": "badgeLayout",
+      "values": [
+        {
+          "iso3": "USA",
+          "badge_x": 361.44,
+          "badge_y": 245.68
+        },
+        {
+          "iso3": "FRA",
+          "badge_x": 524.04,
+          "badge_y": 264.5
+        },
+        {
+          "iso3": "DEU",
+          "badge_x": 563.11,
+          "badge_y": 177.63
+        },
+        {
+          "iso3": "JPN",
+          "badge_x": 841.51,
+          "badge_y": 287.67
+        },
+        {
+          "iso3": "HUN",
+          "badge_x": 615.6,
+          "badge_y": 290.76
+        },
+        {
+          "iso3": "CHN",
+          "badge_x": 764.13,
+          "badge_y": 288.81
+        },
+        {
+          "iso3": "TUR",
+          "badge_x": 648.25,
+          "badge_y": 275.61
+        },
+        {
+          "iso3": "GBR",
+          "badge_x": 527.25,
+          "badge_y": 228.64
+        },
+        {
+          "iso3": "EST",
+          "badge_x": 625.22,
+          "badge_y": 183.19
+        },
+        {
+          "iso3": "NLD",
+          "badge_x": 559.9,
+          "badge_y": 213.49
+        },
+        {
+          "iso3": "SVK",
+          "badge_x": 618.8,
+          "badge_y": 254.9
+        },
+        {
+          "iso3": "THA",
+          "badge_x": 760.01,
+          "badge_y": 329.61
+        },
+        {
+          "iso3": "ITA",
+          "badge_x": 550.28,
+          "badge_y": 321.06
+        },
+        {
+          "iso3": "RUS",
+          "badge_x": 750.35,
+          "badge_y": 233.08
+        },
+        {
+          "iso3": "HRV",
+          "badge_x": 582.94,
+          "badge_y": 305.91
+        },
+        {
+          "iso3": "KOR",
+          "badge_x": 808.37,
+          "badge_y": 273.61
+        },
+        {
+          "iso3": "BGR",
+          "badge_x": 642.61,
+          "badge_y": 314.56
+        },
+        {
+          "iso3": "CAN",
+          "badge_x": 363.19,
+          "badge_y": 208.71
+        },
+        {
+          "iso3": "CZE",
+          "badge_x": 589.35,
+          "badge_y": 234.19
+        },
+        {
+          "iso3": "PHL",
+          "badge_x": 806.34,
+          "badge_y": 341.31
+        },
+        {
+          "iso3": "CHE",
+          "badge_x": 553.49,
+          "badge_y": 285.2
+        },
+        {
+          "iso3": "AUS",
+          "badge_x": 827.36,
+          "badge_y": 407.73
+        },
+        {
+          "iso3": "AUT",
+          "badge_x": 586.15,
+          "badge_y": 270.05
+        },
+        {
+          "iso3": "BLR",
+          "badge_x": 651.46,
+          "badge_y": 239.75
+        },
+        {
+          "iso3": "DNK",
+          "badge_x": 592.56,
+          "badge_y": 198.34
+        },
+        {
+          "iso3": "LUX",
+          "badge_x": 556.7,
+          "badge_y": 249.34
+        },
+        {
+          "iso3": "MAR",
+          "badge_x": 520.83,
+          "badge_y": 300.35
+        },
+        {
+          "iso3": "POL",
+          "badge_x": 622.01,
+          "badge_y": 219.04
+        },
+        {
+          "iso3": "SGP",
+          "badge_x": 767.51,
+          "badge_y": 364.82
+        },
+        {
+          "iso3": "TWN",
+          "badge_x": 795.15,
+          "badge_y": 307.09
+        },
+        {
+          "iso3": "ARE",
+          "badge_x": 678.27,
+          "badge_y": 309.65
+        }
+      ]
+    },
+    {
+      "name": "participants",
+      "url": "data/wsc-2026-country-flows.csv",
+      "format": {
+        "type": "csv",
+        "parse": {
+          "competitors": "number",
+          "share_pct": "number",
+          "origin_lon": "number",
+          "origin_lat": "number",
+          "destination_lon": "number",
+          "destination_lat": "number"
+        }
+      }
+    },
+    {
+      "name": "countries",
+      "url": "https://raw.githubusercontent.com/FIT3179/Vega-Lite/main/2_symbol_map/js/ne_110m_admin_0_countries.topojson",
+      "format": {
+        "type": "topojson",
+        "feature": "ne_110m_admin_0_countries"
+      },
+      "transform": [
+        {
+          "type": "filter",
+          "expr": "datum.properties.CONTINENT !== 'Antarctica'"
+        },
+        {
+          "type": "lookup",
+          "from": "participants",
+          "key": "iso3",
+          "fields": [
+            "properties.ADM0_A3"
+          ],
+          "values": [
+            "competitors"
+          ],
+          "as": [
+            "represented"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "international",
+      "source": "participants",
+      "transform": [
+        {
+          "type": "filter",
+          "expr": "datum.iso3 !== 'IND'"
+        },
+        {
+          "type": "geopoint",
+          "projection": "worldProjection",
+          "fields": [
+            "origin_lon",
+            "origin_lat"
+          ],
+          "as": [
+            "sx",
+            "sy"
+          ]
+        },
+        {
+          "type": "geopoint",
+          "projection": "worldProjection",
+          "fields": [
+            "destination_lon",
+            "destination_lat"
+          ],
+          "as": [
+            "tx",
+            "ty"
+          ]
+        },
+        {
+          "type": "formula",
+          "expr": "(datum.sx + datum.tx)/2",
+          "as": "cx"
+        },
+        {
+          "type": "formula",
+          "expr": "(datum.sy + datum.ty)/2 - abs(datum.sx - datum.tx)*0.22 - 22",
+          "as": "cy"
+        },
+        {
+          "type": "formula",
+          "expr": "'M' + datum.sx + ',' + datum.sy + ' Q' + datum.cx + ',' + datum.cy + ' ' + datum.tx + ',' + datum.ty",
+          "as": "route"
+        },
+        {
+          "type": "lookup",
+          "from": "badgeLayout",
+          "key": "iso3",
+          "fields": [
+            "iso3"
+          ],
+          "values": [
+            "badge_x",
+            "badge_y"
+          ],
+          "as": [
+            "badge_x",
+            "badge_y"
+          ]
+        },
+        {
+          "type": "formula",
+          "expr": "0.5625*datum.sx + 0.375*datum.cx + 0.0625*datum.tx",
+          "as": "anchor_x"
+        },
+        {
+          "type": "formula",
+          "expr": "0.5625*datum.sy + 0.375*datum.cy + 0.0625*datum.ty",
+          "as": "anchor_y"
+        },
+        {
+          "type": "formula",
+          "expr": "0.09*datum.sx + 0.42*datum.cx + 0.49*datum.tx",
+          "as": "arrow_x"
+        },
+        {
+          "type": "formula",
+          "expr": "0.09*datum.sy + 0.42*datum.cy + 0.49*datum.ty",
+          "as": "arrow_y"
+        },
+        {
+          "type": "formula",
+          "expr": "atan2(0.6*(datum.cy-datum.sy) + 1.4*(datum.ty-datum.cy), 0.6*(datum.cx-datum.sx) + 1.4*(datum.tx-datum.cx))*180/PI + 90",
+          "as": "arrow_angle"
+        }
+      ]
+    },
+    {
+      "name": "host",
+      "values": [
+        {
+          "lon": 88.36304,
+          "lat": 22.56263
+        }
+      ],
+      "transform": [
+        {
+          "type": "geopoint",
+          "projection": "worldProjection",
+          "fields": [
+            "lon",
+            "lat"
+          ],
+          "as": [
+            "x",
+            "y"
+          ]
+        }
+      ]
+    }
+  ],
+  "scales": [
+    {
+      "name": "flowWidth",
+      "type": "linear",
+      "domain": [
+        0,
+        15
+      ],
+      "range": [
+        0.45,
+        2.8
+      ],
+      "zero": true
+    }
+  ],
+  "marks": [
+    {
+      "type": "shape",
+      "from": {
+        "data": "countries"
+      },
+      "transform": [
+        {
+          "type": "geoshape",
+          "projection": "worldProjection"
+        }
+      ],
+      "encode": {
+        "update": {
+          "fill": {
+            "signal": "isValid(datum.represented) ? '#087F7B' : '#101919'"
+          },
+          "stroke": {
+            "value": "#65A0A0"
+          },
+          "strokeWidth": {
+            "value": 0.45
+          }
+        }
+      }
+    },
+    {
+      "name": "routes",
+      "type": "path",
+      "from": {
+        "data": "international"
+      },
+      "encode": {
+        "update": {
+          "path": {
+            "field": "route"
+          },
+          "fill": {
+            "value": null
+          },
+          "stroke": {
+            "value": "#FFFFFF"
+          },
+          "strokeWidth": {
+            "signal": "hoverCountry === datum.country ? 3 : scale('flowWidth', datum.competitors)"
+          },
+          "opacity": {
+            "signal": "hoverCountry === null || hoverCountry === datum.country ? 0.85 : 0.12"
+          },
+          "tooltip": {
+            "signal": "{'Country': datum.country, 'Competitors': datum.competitors, 'Share of all competitors': format(datum.share_pct, '.2f') + '%', 'Event': '2026 World Sudoku Championship, Kolkata'}"
+          }
+        }
+      }
+    },
+    {
+      "type": "rule",
+      "interactive": false,
+      "from": {
+        "data": "international"
+      },
+      "encode": {
+        "update": {
+          "x": {
+            "field": "anchor_x"
+          },
+          "y": {
+            "field": "anchor_y"
+          },
+          "x2": {
+            "field": "badge_x"
+          },
+          "y2": {
+            "field": "badge_y"
+          },
+          "stroke": {
+            "value": "#FFFFFF"
+          },
+          "strokeWidth": {
+            "value": 0.65
+          },
+          "opacity": {
+            "signal": "hoverCountry === null || hoverCountry === datum.country ? 0.7 : 0.1"
+          }
+        }
+      }
+    },
+    {
+      "name": "origins",
+      "type": "symbol",
+      "from": {
+        "data": "international"
+      },
+      "encode": {
+        "update": {
+          "x": {
+            "field": "sx"
+          },
+          "y": {
+            "field": "sy"
+          },
+          "size": {
+            "value": 30
+          },
+          "fill": {
+            "value": "#FFFFFF"
+          },
+          "stroke": {
+            "value": "#087F7B"
+          },
+          "strokeWidth": {
+            "value": 0.7
+          },
+          "tooltip": {
+            "signal": "{'Country': datum.country, 'Competitors': datum.competitors}"
+          }
+        }
+      }
+    },
+    {
+      "type": "symbol",
+      "interactive": false,
+      "from": {
+        "data": "international"
+      },
+      "encode": {
+        "update": {
+          "x": {
+            "field": "arrow_x"
+          },
+          "y": {
+            "field": "arrow_y"
+          },
+          "shape": {
+            "value": "triangle-up"
+          },
+          "angle": {
+            "field": "arrow_angle"
+          },
+          "size": {
+            "value": 38
+          },
+          "fill": {
+            "value": "#FFFFFF"
+          },
+          "opacity": {
+            "signal": "hoverCountry === null || hoverCountry === datum.country ? 0.95 : 0.12"
+          }
+        }
+      }
+    },
+    {
+      "name": "badges",
+      "type": "symbol",
+      "from": {
+        "data": "international"
+      },
+      "encode": {
+        "update": {
+          "x": {
+            "field": "badge_x"
+          },
+          "y": {
+            "field": "badge_y"
+          },
+          "size": {
+            "value": 850
+          },
+          "fill": {
+            "value": "#E98B9C"
+          },
+          "opacity": {
+            "signal": "hoverCountry === null || hoverCountry === datum.country ? 1 : 0.25"
+          },
+          "tooltip": {
+            "signal": "{'Country': datum.country, 'Competitors': datum.competitors, 'Share of all competitors': format(datum.share_pct, '.2f') + '%'}"
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "interactive": false,
+      "from": {
+        "data": "international"
+      },
+      "encode": {
+        "update": {
+          "x": {
+            "field": "badge_x"
+          },
+          "y": {
+            "field": "badge_y"
+          },
+          "text": {
+            "field": "competitors"
+          },
+          "align": {
+            "value": "center"
+          },
+          "baseline": {
+            "value": "middle"
+          },
+          "font": {
+            "value": "Arial"
+          },
+          "fontSize": {
+            "value": 11
+          },
+          "fontWeight": {
+            "value": 600
+          },
+          "fill": {
+            "value": "#FFFFFF"
+          },
+          "opacity": {
+            "signal": "hoverCountry === null || hoverCountry === datum.country ? 1 : 0.3"
+          }
+        }
+      }
+    },
+    {
+      "type": "symbol",
+      "from": {
+        "data": "host"
+      },
+      "encode": {
+        "update": {
+          "x": {
+            "field": "x"
+          },
+          "y": {
+            "field": "y"
+          },
+          "size": {
+            "value": 150
+          },
+          "fill": {
+            "value": "#FFFFFF"
+          },
+          "stroke": {
+            "value": "#087F7B"
+          },
+          "strokeWidth": {
+            "value": 2
+          },
+          "tooltip": {
+            "signal": "{'Host city':'Kolkata, India','India competitors':15,'Competitors representing other countries':138}"
+          }
+        }
+      }
+    },
+    {
+      "type": "rule",
+      "from": {
+        "data": "host"
+      },
+      "encode": {
+        "update": {
+          "x": {
+            "field": "x"
+          },
+          "y": {
+            "field": "y"
+          },
+          "x2": {
+            "signal": "datum.x - 20"
+          },
+          "y2": {
+            "signal": "datum.y + 60"
+          },
+          "stroke": {
+            "value": "#FFFFFF"
+          },
+          "strokeWidth": {
+            "value": 0.8
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "from": {
+        "data": "host"
+      },
+      "encode": {
+        "update": {
+          "x": {
+            "signal": "datum.x - 80"
+          },
+          "y": {
+            "signal": "datum.y + 78"
+          },
+          "text": {
+            "value": "KOLKATA · HOST"
+          },
+          "font": {
+            "value": "Arial"
+          },
+          "fontSize": {
+            "value": 13
+          },
+          "fontWeight": {
+            "value": 700
+          },
+          "fill": {
+            "value": "#FFFFFF"
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "interactive": false,
+      "encode": {
+        "update": {
+          "x": {
+            "value": 30
+          },
+          "y": {
+            "value": 45
+          },
+          "text": {
+            "value": "PUZZLES BRING THE WORLD TOGETHER"
+          },
+          "font": {
+            "value": "Arial"
+          },
+          "fontSize": {
+            "value": 35
+          },
+          "fontWeight": {
+            "value": 700
+          },
+          "fill": {
+            "value": "#FFFFFF"
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "interactive": false,
+      "encode": {
+        "update": {
+          "x": {
+            "value": 32
+          },
+          "y": {
+            "value": 82
+          },
+          "text": {
+            "value": "Countries represented at the 2026 World Sudoku Championship, Kolkata, India."
+          },
+          "font": {
+            "value": "Arial"
+          },
+          "fontSize": {
+            "value": 15
+          },
+          "fontWeight": {
+            "value": 400
+          },
+          "fill": {
+            "value": "#FFFFFF"
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "interactive": false,
+      "encode": {
+        "update": {
+          "x": {
+            "value": 32
+          },
+          "y": {
+            "value": 108
+          },
+          "text": {
+            "value": "153 competitors · 32 countries · 15 competitors representing host country India"
+          },
+          "font": {
+            "value": "Arial"
+          },
+          "fontSize": {
+            "value": 13
+          },
+          "fontWeight": {
+            "value": 400
+          },
+          "fill": {
+            "value": "#FFFFFF"
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "interactive": false,
+      "encode": {
+        "update": {
+          "x": {
+            "value": 32
+          },
+          "y": {
+            "value": 595
+          },
+          "text": {
+            "value": "Coral badges show competitor counts. Thicker white connections represent larger groups."
+          },
+          "font": {
+            "value": "Arial"
+          },
+          "fontSize": {
+            "value": 12
+          },
+          "fontWeight": {
+            "value": 400
+          },
+          "fill": {
+            "value": "#FFFFFF"
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "interactive": false,
+      "encode": {
+        "update": {
+          "x": {
+            "value": 32
+          },
+          "y": {
+            "value": 617
+          },
+          "text": {
+            "value": "Connections show representation at the event, not recorded journeys or flight routes."
+          },
+          "font": {
+            "value": "Arial"
+          },
+          "fontSize": {
+            "value": 12
+          },
+          "fontWeight": {
+            "value": 400
+          },
+          "fill": {
+            "value": "#FFFFFF"
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "interactive": false,
+      "encode": {
+        "update": {
+          "x": {
+            "value": 32
+          },
+          "y": {
+            "value": 639
+          },
+          "text": {
+            "value": "Source: Logic Masters India, overall individual results · Natural Earth basemap · GeoNames host location"
+          },
+          "font": {
+            "value": "Arial"
+          },
+          "fontSize": {
+            "value": 11
+          },
+          "fontWeight": {
+            "value": 400
+          },
+          "fill": {
+            "value": "#FFFFFF"
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "interactive": false,
+      "encode": {
+        "update": {
+          "x": {
+            "value": 32
+          },
+          "y": {
+            "value": 565
+          },
+          "text": {
+            "signal": "hoverCountry === null ? 'Hover over a coral badge or a connection to identify the country.' : hoverCountry + ' → Kolkata'"
+          },
+          "font": {
+            "value": "Arial"
+          },
+          "fontSize": {
+            "value": 13
+          },
+          "fontWeight": {
+            "value": 600
+          },
+          "fill": {
+            "value": "#FFFFFF"
+          }
+        }
+      }
+    }
+  ]
+}

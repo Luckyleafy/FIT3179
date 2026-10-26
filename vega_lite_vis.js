@@ -48,6 +48,14 @@ vegaEmbed("#puzzle_downloads", vg_downloads, {
   // The chart is available through result.view.
 }).catch(console.error);
 
+var vg_flow = "charts/countries-flow.vg.json";
+
+vegaEmbed("#countries_flow", vg_flow, {
+  mode: "vega",
+  renderer: "svg",
+  actions: false
+}).catch(console.error);
+
 var vg_locations = "charts/escape-rooms-locations-map.vg.json";
 
 vegaEmbed("#escape_rooms_locations", vg_locations, {
