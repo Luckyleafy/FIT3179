@@ -116,3 +116,13 @@ figure:has(#puzzle_categories) {
   max-width: 100%;
   height: auto;
 }
+
+#puzzle_skills {
+  width: 100%;
+}
+
+#puzzle_skills svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}

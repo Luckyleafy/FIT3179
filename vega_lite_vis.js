@@ -109,3 +109,11 @@ vegaEmbed("#age-groups", vg_age_groups, {
   mode: "vega-lite",
   actions: false
 }).catch(console.error);
+
+var vg_skills = "charts/puzzle-skills.vg.json";
+
+vegaEmbed("#puzzle_skills", vg_skills, {
+  mode: "vega",
+  renderer: "svg",
+  actions: false
+}).catch(console.error);

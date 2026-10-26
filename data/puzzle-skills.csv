@@ -1,0 +1,9 @@
+id,order,skill,label_top,label_bottom,puzzle_type,explanation,relationship
+perception,0,Visual perception,Visual,perception,Jigsaw puzzling,"Recognising shapes, patterns and the orientation of lines.",Cognitive ability engaged in jigsaw puzzling
+construction,1,Constructional praxis,Constructional,ability,Jigsaw puzzling,Combining visual and motor information to assemble pieces.,Cognitive ability engaged in jigsaw puzzling
+rotation,2,Mental rotation,Mental,rotation,Jigsaw puzzling,Mentally turning a piece to consider how it might fit.,Cognitive ability engaged in jigsaw puzzling
+speed,3,Visuospatial processing speed,Processing,speed,Jigsaw puzzling,Scanning and sorting visual information while handling puzzle pieces.,Cognitive ability engaged in jigsaw puzzling
+flexibility,4,Visuospatial cognitive flexibility,Cognitive,flexibility,Jigsaw puzzling,"Switching between strategies and attending to piece shape, image or colour.",Cognitive ability engaged in jigsaw puzzling
+working_memory,5,Visuospatial working memory,Working,memory,Jigsaw puzzling,Keeping the location and appearance of pieces in mind while solving.,Cognitive ability engaged in jigsaw puzzling
+reasoning,6,Visuospatial reasoning,Spatial,reasoning,Jigsaw puzzling,Combining visual information to plan a way to solve the puzzle.,Cognitive ability engaged in jigsaw puzzling
+episodic_memory,7,Visuospatial episodic memory,Episodic,memory,Jigsaw puzzling,Remembering associations between piece locations and visual patterns over time.,Cognitive ability engaged in jigsaw puzzling

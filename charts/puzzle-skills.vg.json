@@ -1,0 +1,377 @@
+{
+  "$schema": "https://vega.github.io/schema/vega/v5.json",
+  "description": "Radial node-link diagram of eight cognitive abilities engaged in jigsaw puzzling, based on Fissler et al. (2018). Equal node size and line width encode no score or improvement. Explanations are paraphrased from the study cognitive task analysis.",
+  "width": 860,
+  "height": 580,
+  "padding": 10,
+  "background": null,
+  "config": {
+    "font": "Arial"
+  },
+  "signals": [
+    {
+      "name": "cx",
+      "value": 430
+    },
+    {
+      "name": "cy",
+      "value": 280
+    },
+    {
+      "name": "hovered",
+      "value": "",
+      "on": [
+        {
+          "events": "@skillCards:mouseover, @skillLabels:mouseover",
+          "update": "datum.id"
+        },
+        {
+          "events": "@skillCards:mouseout, @skillLabels:mouseout",
+          "update": "''"
+        }
+      ]
+    }
+  ],
+  "data": [
+    {
+      "name": "skills",
+      "url": "data/puzzle-skills.csv",
+      "format": {
+        "type": "csv",
+        "parse": {
+          "order": "number"
+        }
+      },
+      "transform": [
+        {
+          "type": "formula",
+          "expr": "datum.order * 2 * PI / 8 - PI / 2",
+          "as": "angle"
+        },
+        {
+          "type": "formula",
+          "expr": "cx + 285 * cos(datum.angle)",
+          "as": "x"
+        },
+        {
+          "type": "formula",
+          "expr": "cy + 185 * sin(datum.angle)",
+          "as": "y"
+        }
+      ]
+    }
+  ],
+  "marks": [
+    {
+      "type": "text",
+      "interactive": false,
+      "encode": {
+        "update": {
+          "x": {
+            "value": 15
+          },
+          "y": {
+            "value": 24
+          },
+          "text": {
+            "value": "What skills does jigsaw puzzling engage?"
+          },
+          "fontSize": {
+            "value": 24
+          },
+          "fill": {
+            "value": "#183733"
+          },
+          "fontWeight": {
+            "value": "bold"
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "interactive": false,
+      "encode": {
+        "update": {
+          "x": {
+            "value": 15
+          },
+          "y": {
+            "value": 48
+          },
+          "text": {
+            "value": "Explore eight cognitive abilities involved in solving a jigsaw."
+          },
+          "fontSize": {
+            "value": 14
+          },
+          "fill": {
+            "value": "#596963"
+          },
+          "fontWeight": {
+            "value": "normal"
+          }
+        }
+      }
+    },
+    {
+      "type": "rule",
+      "from": {
+        "data": "skills"
+      },
+      "interactive": false,
+      "encode": {
+        "update": {
+          "x": {
+            "signal": "cx"
+          },
+          "y": {
+            "signal": "cy"
+          },
+          "x2": {
+            "field": "x"
+          },
+          "y2": {
+            "field": "y"
+          },
+          "stroke": {
+            "signal": "hovered === datum.id ? '#147D78' : '#ADBCB0'"
+          },
+          "strokeWidth": {
+            "signal": "hovered === datum.id ? 2.5 : 1.5"
+          }
+        }
+      }
+    },
+    {
+      "name": "skillCards",
+      "type": "rect",
+      "from": {
+        "data": "skills"
+      },
+      "encode": {
+        "update": {
+          "x": {
+            "signal": "datum.x - 81"
+          },
+          "y": {
+            "signal": "datum.y - 31"
+          },
+          "width": {
+            "value": 162
+          },
+          "height": {
+            "value": 62
+          },
+          "cornerRadius": {
+            "value": 16
+          },
+          "fill": {
+            "signal": "hovered === datum.id ? '#D4E8DD' : '#E8EDE5'"
+          },
+          "stroke": {
+            "signal": "hovered === datum.id ? '#147D78' : '#C8D3C6'"
+          },
+          "strokeWidth": {
+            "value": 1
+          },
+          "cursor": {
+            "value": "help"
+          },
+          "tooltip": {
+            "signal": "{'Ability':datum.skill,'Role in jigsaw puzzling':datum.explanation,'Evidence':'Skills engaged; not a measured improvement score'}"
+          }
+        }
+      }
+    },
+    {
+      "name": "skillLabels",
+      "type": "text",
+      "from": {
+        "data": "skills"
+      },
+      "encode": {
+        "update": {
+          "x": {
+            "field": "x"
+          },
+          "y": {
+            "signal": "datum.y - 8"
+          },
+          "text": {
+            "signal": "[datum.label_top, datum.label_bottom]"
+          },
+          "align": {
+            "value": "center"
+          },
+          "baseline": {
+            "value": "middle"
+          },
+          "lineHeight": {
+            "value": 19
+          },
+          "fontSize": {
+            "value": 15
+          },
+          "fontWeight": {
+            "value": 600
+          },
+          "fill": {
+            "value": "#183733"
+          },
+          "cursor": {
+            "value": "help"
+          },
+          "tooltip": {
+            "signal": "{'Ability':datum.skill,'Role in jigsaw puzzling':datum.explanation,'Evidence':'Skills engaged; not a measured improvement score'}"
+          }
+        }
+      }
+    },
+    {
+      "type": "symbol",
+      "interactive": false,
+      "encode": {
+        "update": {
+          "x": {
+            "signal": "cx"
+          },
+          "y": {
+            "signal": "cy"
+          },
+          "shape": {
+            "value": "circle"
+          },
+          "size": {
+            "value": 15500
+          },
+          "fill": {
+            "value": "#147D78"
+          },
+          "stroke": {
+            "value": "#FAFAF7"
+          },
+          "strokeWidth": {
+            "value": 5
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "interactive": false,
+      "encode": {
+        "update": {
+          "x": {
+            "signal": "cx"
+          },
+          "y": {
+            "signal": "cy - 12"
+          },
+          "text": {
+            "value": [
+              "Jigsaw",
+              "puzzling"
+            ]
+          },
+          "align": {
+            "value": "center"
+          },
+          "baseline": {
+            "value": "middle"
+          },
+          "fontSize": {
+            "value": 19
+          },
+          "fontWeight": {
+            "value": "bold"
+          },
+          "lineHeight": {
+            "value": 25
+          },
+          "fill": {
+            "value": "#FFFFFF"
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "interactive": false,
+      "encode": {
+        "update": {
+          "x": {
+            "value": 15
+          },
+          "y": {
+            "value": 526
+          },
+          "text": {
+            "value": "Connections show skills involved, not how much a skill improves."
+          },
+          "fontSize": {
+            "value": 12
+          },
+          "fill": {
+            "value": "#596963"
+          },
+          "fontWeight": {
+            "value": "normal"
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "interactive": false,
+      "encode": {
+        "update": {
+          "x": {
+            "value": 15
+          },
+          "y": {
+            "value": 548
+          },
+          "text": {
+            "value": "Source: Fissler et al. (2018), Frontiers in Aging Neuroscience. doi:10.3389/fnagi.2018.00299"
+          },
+          "fontSize": {
+            "value": 11
+          },
+          "fill": {
+            "value": "#596963"
+          },
+          "fontWeight": {
+            "value": "normal"
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "interactive": false,
+      "encode": {
+        "update": {
+          "x": {
+            "value": 15
+          },
+          "y": {
+            "value": 568
+          },
+          "text": {
+            "value": "Scope: jigsaw puzzles. Node positions, sizes and link widths do not represent numerical measurements."
+          },
+          "fontSize": {
+            "value": 11
+          },
+          "fill": {
+            "value": "#596963"
+          },
+          "fontWeight": {
+            "value": "normal"
+          }
+        }
+      }
+    }
+  ]
+}
