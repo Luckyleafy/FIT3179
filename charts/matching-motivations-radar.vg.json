@@ -1,0 +1,524 @@
+{
+  "$schema": "https://vega.github.io/schema/vega/v5.json",
+  "description": "Matching Puzzle player motivation comparison for US, UK, Japan and South Korea. Only the three motivations reported in all four country panels are plotted; unreported motives are not zero. Importance only, not perceived delivery. Interpret survey Nov-Dec 2019; Genre and Great Games (2020), pp.49-50; via Udonis.",
+  "width": 860,
+  "height": 680,
+  "padding": 15,
+  "background": null,
+  "config": {
+    "font": "Arial"
+  },
+  "signals": [
+    {
+      "name": "cx",
+      "value": 430
+    },
+    {
+      "name": "cy",
+      "value": 337
+    },
+    {
+      "name": "radius",
+      "value": 205
+    },
+    {
+      "name": "hoverCountry",
+      "value": "",
+      "on": [
+        {
+          "events": "@radarPoints:mouseover",
+          "update": "datum.country"
+        },
+        {
+          "events": "@radarPoints:mouseout",
+          "update": "''"
+        }
+      ]
+    }
+  ],
+  "data": [
+    {
+      "name": "table",
+      "url": "data/matching-motivations-radar.csv",
+      "format": {
+        "type": "csv",
+        "parse": {
+          "axis_order": "number",
+          "percent": "number"
+        }
+      },
+      "transform": [
+        {
+          "type": "formula",
+          "expr": "datum.axis_order * 2 * PI / 3 - PI / 2",
+          "as": "angle"
+        },
+        {
+          "type": "formula",
+          "expr": "cx + scale('radial',datum.percent)*cos(datum.angle)",
+          "as": "x"
+        },
+        {
+          "type": "formula",
+          "expr": "cy + scale('radial',datum.percent)*sin(datum.angle)",
+          "as": "y"
+        }
+      ]
+    },
+    {
+      "name": "axes",
+      "source": "table",
+      "transform": [
+        {
+          "type": "aggregate",
+          "groupby": [
+            "axis_order",
+            "motivation",
+            "axis_label",
+            "angle"
+          ]
+        },
+        {
+          "type": "collect",
+          "sort": {
+            "field": "axis_order"
+          }
+        }
+      ]
+    },
+    {
+      "name": "rings",
+      "values": [
+        {
+          "percent": 20
+        },
+        {
+          "percent": 40
+        },
+        {
+          "percent": 60
+        },
+        {
+          "percent": 80
+        },
+        {
+          "percent": 100
+        }
+      ],
+      "transform": [
+        {
+          "type": "formula",
+          "expr": "'M' + (cx+scale('radial',datum.percent)*cos((0 * 2 * PI / 3 - PI / 2))) + ',' + (cy+scale('radial',datum.percent)*sin((0 * 2 * PI / 3 - PI / 2))) + 'L' + (cx+scale('radial',datum.percent)*cos((1 * 2 * PI / 3 - PI / 2))) + ',' + (cy+scale('radial',datum.percent)*sin((1 * 2 * PI / 3 - PI / 2))) + 'L' + (cx+scale('radial',datum.percent)*cos((2 * 2 * PI / 3 - PI / 2))) + ',' + (cy+scale('radial',datum.percent)*sin((2 * 2 * PI / 3 - PI / 2))) + 'Z'",
+          "as": "path"
+        }
+      ]
+    }
+  ],
+  "scales": [
+    {
+      "name": "radial",
+      "type": "linear",
+      "domain": [
+        0,
+        100
+      ],
+      "range": [
+        0,
+        {
+          "signal": "radius"
+        }
+      ],
+      "zero": true
+    },
+    {
+      "name": "colour",
+      "type": "ordinal",
+      "domain": [
+        "United States",
+        "United Kingdom",
+        "Japan",
+        "South Korea"
+      ],
+      "range": [
+        "#147D78",
+        "#BB5032",
+        "#6B5CA5",
+        "#AC7B20"
+      ]
+    }
+  ],
+  "legends": [
+    {
+      "stroke": "colour",
+      "orient": "none",
+      "legendX": 90,
+      "legendY": 578,
+      "direction": "horizontal",
+      "title": null,
+      "symbolType": "stroke",
+      "symbolStrokeWidth": 3,
+      "labelFontSize": 13,
+      "labelLimit": 230,
+      "labelColor": "#183733",
+      "columnPadding": 23
+    }
+  ],
+  "marks": [
+    {
+      "type": "text",
+      "interactive": false,
+      "encode": {
+        "update": {
+          "x": {
+            "value": 15
+          },
+          "y": {
+            "value": 24
+          },
+          "text": {
+            "value": "Why matching-puzzle players play"
+          },
+          "fontSize": {
+            "value": 24
+          },
+          "fill": {
+            "value": "#183733"
+          },
+          "fontWeight": {
+            "value": "bold"
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "interactive": false,
+      "encode": {
+        "update": {
+          "x": {
+            "value": 15
+          },
+          "y": {
+            "value": 49
+          },
+          "text": {
+            "value": "Very important reasons for enjoying mobile gaming (%) \u2014 four-country comparison"
+          },
+          "fontSize": {
+            "value": 14
+          },
+          "fill": {
+            "value": "#596963"
+          }
+        }
+      }
+    },
+    {
+      "type": "path",
+      "interactive": false,
+      "from": {
+        "data": "rings"
+      },
+      "encode": {
+        "update": {
+          "path": {
+            "field": "path"
+          },
+          "fill": {
+            "value": null
+          },
+          "stroke": {
+            "value": "#DDE4DA"
+          },
+          "strokeWidth": {
+            "value": 1
+          }
+        }
+      }
+    },
+    {
+      "type": "rule",
+      "interactive": false,
+      "from": {
+        "data": "axes"
+      },
+      "encode": {
+        "update": {
+          "x": {
+            "signal": "cx"
+          },
+          "y": {
+            "signal": "cy"
+          },
+          "x2": {
+            "signal": "cx + radius*cos(datum.angle)"
+          },
+          "y2": {
+            "signal": "cy + radius*sin(datum.angle)"
+          },
+          "stroke": {
+            "value": "#E4E9E1"
+          },
+          "strokeWidth": {
+            "value": 1
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "interactive": false,
+      "from": {
+        "data": "rings"
+      },
+      "encode": {
+        "update": {
+          "x": {
+            "signal": "cx+7"
+          },
+          "y": {
+            "signal": "cy-scale('radial',datum.percent)+3"
+          },
+          "text": {
+            "signal": "datum.percent+'%'"
+          },
+          "fontSize": {
+            "value": 10
+          },
+          "fill": {
+            "value": "#78877F"
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "interactive": false,
+      "encode": {
+        "update": {
+          "x": {
+            "signal": "cx+7"
+          },
+          "y": {
+            "signal": "cy+4"
+          },
+          "text": {
+            "value": "0%"
+          },
+          "fontSize": {
+            "value": 10
+          },
+          "fill": {
+            "value": "#78877F"
+          }
+        }
+      }
+    },
+    {
+      "type": "group",
+      "from": {
+        "facet": {
+          "name": "genre",
+          "data": "table",
+          "groupby": "country"
+        }
+      },
+      "marks": [
+        {
+          "type": "line",
+          "from": {
+            "data": "genre"
+          },
+          "sort": {
+            "field": "datum.axis_order"
+          },
+          "encode": {
+            "update": {
+              "x": {
+                "field": "x"
+              },
+              "y": {
+                "field": "y"
+              },
+              "interpolate": {
+                "value": "linear-closed"
+              },
+              "stroke": {
+                "scale": "colour",
+                "field": "country"
+              },
+              "strokeWidth": {
+                "value": 2.5
+              },
+              "strokeDash": {
+                "signal": "datum.country === 'United States' ? [1,0] : datum.country === 'United Kingdom' ? [7,3] : datum.country === 'Japan' ? [2,3] : [9,3,2,3]"
+              },
+              "opacity": {
+                "signal": "hoverCountry === '' || hoverCountry === datum.country ? 1 : 0.18"
+              },
+              "fill": {
+                "scale": "colour",
+                "field": "country"
+              },
+              "fillOpacity": {
+                "value": 0.06
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "radarPoints",
+      "type": "symbol",
+      "from": {
+        "data": "table"
+      },
+      "encode": {
+        "update": {
+          "x": {
+            "field": "x"
+          },
+          "y": {
+            "field": "y"
+          },
+          "size": {
+            "signal": "hoverCountry === datum.country ? 110 : 60"
+          },
+          "fill": {
+            "scale": "colour",
+            "field": "country"
+          },
+          "stroke": {
+            "value": "#FAFAF7"
+          },
+          "strokeWidth": {
+            "value": 1
+          },
+          "opacity": {
+            "signal": "hoverCountry === '' || hoverCountry === datum.country ? 1 : 0.18"
+          },
+          "tooltip": {
+            "signal": "{'Country':datum.country,'Players':datum.subgenre,'Reason':datum.source_wording,'Very important':datum.percent + '%','Survey period':datum.survey_period,'Source':'Genre and Great Games (2020), p.'+datum.source_page}"
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "interactive": false,
+      "from": {
+        "data": "axes"
+      },
+      "encode": {
+        "update": {
+          "x": {
+            "signal": "cx+(radius+26)*cos(datum.angle)"
+          },
+          "y": {
+            "signal": "cy+(radius+26)*sin(datum.angle)"
+          },
+          "text": {
+            "signal": "split(datum.axis_label,'|')"
+          },
+          "align": {
+            "signal": "abs(cos(datum.angle)) < 0.1 ? 'center' : cos(datum.angle) > 0 ? 'left' : 'right'"
+          },
+          "baseline": {
+            "signal": "sin(datum.angle) < -0.9 ? 'bottom' : sin(datum.angle) > 0.7 ? 'top' : 'middle'"
+          },
+          "lineHeight": {
+            "value": 18
+          },
+          "fontSize": {
+            "value": 14
+          },
+          "fontWeight": {
+            "value": 600
+          },
+          "fill": {
+            "value": "#183733"
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "interactive": false,
+      "encode": {
+        "update": {
+          "x": {
+            "value": 15
+          },
+          "y": {
+            "value": 620
+          },
+          "text": {
+            "value": "Matching Puzzle players only. Three motivations reported in all four country panels."
+          },
+          "fontSize": {
+            "value": 12
+          },
+          "fill": {
+            "value": "#596963"
+          },
+          "fontWeight": {
+            "value": "normal"
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "interactive": false,
+      "encode": {
+        "update": {
+          "x": {
+            "value": 15
+          },
+          "y": {
+            "value": 640
+          },
+          "text": {
+            "value": "Source: Facebook Gaming / Facebook IQ / GameRefinery (2020), pp.49\u201350, via Udonis."
+          },
+          "fontSize": {
+            "value": 11
+          },
+          "fill": {
+            "value": "#596963"
+          },
+          "fontWeight": {
+            "value": "normal"
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "interactive": false,
+      "encode": {
+        "update": {
+          "x": {
+            "value": 15
+          },
+          "y": {
+            "value": 660
+          },
+          "text": {
+            "value": "Interpret survey: November\u2013December 2019. Reasons can overlap; percentages do not sum to 100%."
+          },
+          "fontSize": {
+            "value": 11
+          },
+          "fill": {
+            "value": "#596963"
+          },
+          "fontWeight": {
+            "value": "normal"
+          }
+        }
+      }
+    }
+  ]
+}

@@ -126,3 +126,13 @@ figure:has(#puzzle_categories) {
   width: 100%;
   height: auto;
 }
+
+#matching_motivations {
+  width: 100%;
+}
+
+#matching_motivations svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}

@@ -117,3 +117,12 @@ vegaEmbed("#puzzle_skills", vg_skills, {
   renderer: "svg",
   actions: false
 }).catch(console.error);
+
+var vg_matching_radar =
+  "charts/matching-motivations-radar.vg.json";
+
+vegaEmbed("#matching_motivations", vg_matching_radar, {
+  mode: "vega",
+  renderer: "svg",
+  actions: false
+}).catch(console.error);
