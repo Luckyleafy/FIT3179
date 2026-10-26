@@ -22,6 +22,15 @@ vegaEmbed("#puzzle_types", vg_types, {
   // The chart is available through result.view.
 }).catch(console.error);
 
+
+var vg_gender = "charts/gender-group.vg.json";
+
+vegaEmbed("#puzzle_gender", vg_gender, {
+  mode: "vega",
+  renderer: "svg",
+  actions: false
+}).catch(console.error);
+
 var vg_downloads = "charts/puzzle-downloads-countries-map.vg.json";
 
 vegaEmbed("#puzzle_downloads", vg_downloads, {

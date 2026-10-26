@@ -1,0 +1,185 @@
+{
+  "$schema": "https://vega.github.io/schema/vega/v5.json",
+  "description": "Percentage of male and female US video-game players aged 8+ who regularly played puzzle games.",
+
+  "width": 500,
+  "height": 325,
+  "padding": 15,
+  "background": null,
+
+  "signals": [
+    {
+      "name": "maleSilhouette",
+      "value": "M78,24 A18,18 0 1,0 42,24 A18,18 0 1,0 78,24 Z M52,46 L68,46 L90,58 L102,115 L88,119 L77,85 L77,142 L80,220 L64,220 L60,160 L56,220 L40,220 L43,142 L43,85 L32,119 L18,115 L30,58 Z"
+    },
+    {
+      "name": "femaleSilhouette",
+      "value": "M78,24 A18,18 0 1,0 42,24 A18,18 0 1,0 78,24 Z M52,46 L68,46 L78,52 L102,110 L90,116 L76,84 L75,105 L96,165 L76,165 L76,220 L64,220 L64,165 L56,165 L56,220 L44,220 L44,165 L24,165 L45,105 L44,84 L30,116 L18,110 L42,52 Z"
+    }
+  ],
+
+  "data": [
+    {
+      "name": "players",
+      "values": [
+        {
+          "group": "Male players",
+          "percent": 49,
+          "x": 70,
+          "filledPath": "M99.629311,103.739228 L102,115 L88,119 L83.062691,103.739228 L77,103.739228 L77,142 L80,220 L64,220 L60,160 L56,220 L40,220 L43,142 L43,103.739228 L36.937309,103.739228 L32,119 L18,115 L20.370689,103.739228 Z"
+        },
+        {
+          "group": "Female players",
+          "percent": 71,
+          "x": 310,
+          "filledPath": "M89.591271,80.012238 L102,110 L90,116 L76,84 L75,105 L96,165 L76,165 L76,220 L64,220 L64,165 L56,165 L56,220 L44,220 L44,165 L24,165 L45,105 L44,84 L30,116 L18,110 L30.408729,80.012238 Z"
+        }
+      ]
+    }
+  ],
+
+  "marks": [
+    {
+      "name": "backgroundFigures",
+      "type": "path",
+
+      "from": {
+        "data": "players"
+      },
+
+      "encode": {
+        "update": {
+          "x": {
+            "field": "x"
+          },
+          "y": {
+            "value": 10
+          },
+          "path": {
+            "signal": "datum.group === 'Female players' ? femaleSilhouette : maleSilhouette"
+          },
+          "fill": {
+            "value": "#E1E6DF"
+          },
+
+          "tooltip": {
+            "signal": "{'Group': datum.group, 'Regularly played puzzle games': datum.percent + '%', 'Population': 'US video-game players aged 8+', 'Source': 'ESA / YouGov, 2026 Essential Facts, p. 14'}"
+          },
+
+          "description": {
+            "signal": "datum.group + ': ' + datum.percent + '% regularly played puzzle games.'"
+          }
+        }
+      }
+    },
+
+    {
+      "name": "filledFigures",
+      "type": "path",
+
+      "from": {
+        "data": "players"
+      },
+
+      "encode": {
+        "update": {
+          "x": {
+            "field": "x"
+          },
+          "y": {
+            "value": 10
+          },
+          "path": {
+            "field": "filledPath"
+          },
+          "fill": {
+            "value": "#147D78"
+          },
+
+          "tooltip": {
+            "signal": "{'Group': datum.group, 'Regularly played puzzle games': datum.percent + '%', 'Population': 'US video-game players aged 8+', 'Source': 'ESA / YouGov, 2026 Essential Facts, p. 14'}"
+          }
+        }
+      }
+    },
+
+    {
+      "type": "text",
+      "interactive": false,
+
+      "from": {
+        "data": "players"
+      },
+
+      "encode": {
+        "update": {
+          "x": {
+            "signal": "datum.x + 60"
+          },
+          "y": {
+            "value": 258
+          },
+          "text": {
+            "field": "group"
+          },
+          "align": {
+            "value": "center"
+          },
+          "baseline": {
+            "value": "middle"
+          },
+          "font": {
+            "value": "Arial"
+          },
+          "fontSize": {
+            "value": 16
+          },
+          "fill": {
+            "value": "#183733"
+          }
+        }
+      }
+    },
+
+    {
+      "type": "text",
+      "interactive": false,
+
+      "from": {
+        "data": "players"
+      },
+
+      "encode": {
+        "update": {
+          "x": {
+            "signal": "datum.x + 60"
+          },
+          "y": {
+            "value": 299
+          },
+          "text": {
+            "signal": "datum.percent + '%'"
+          },
+          "align": {
+            "value": "center"
+          },
+          "baseline": {
+            "value": "middle"
+          },
+          "font": {
+            "value": "Arial"
+          },
+          "fontSize": {
+            "value": 36
+          },
+          "fontWeight": {
+            "value": 600
+          },
+          "fill": {
+            "value": "#147D78"
+          }
+        }
+      }
+    }
+  ]
+}
