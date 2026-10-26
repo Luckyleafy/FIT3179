@@ -6,6 +6,14 @@ vegaEmbed("#bar_chart", vg_1).then(function(result) {
 }).catch(console.error);
 */
 
+var vg_categories = "charts/puzzle-categories-jigsaw.vg.json";
+
+vegaEmbed("#puzzle_categories", vg_categories, {
+  mode: "vega",
+  renderer: "svg",
+  actions: false
+}).catch(console.error);
+
 var vg_types = "charts/puzzle-types-tree.vg.json";
 
 vegaEmbed("#puzzle_types", vg_types, {

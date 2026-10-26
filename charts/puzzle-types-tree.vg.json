@@ -10,7 +10,7 @@
   "data": [
     {
       "name": "tree",
-      "url": "data/puzzle-tree.csv",
+      "url": "data/puzzle-types.csv",
       "format": {
         "type": "csv"
       },

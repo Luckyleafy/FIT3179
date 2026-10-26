@@ -1,0 +1,464 @@
+{
+  "$schema": "https://vega.github.io/schema/vega/v5.json",
+  "description": "Puzzle types arranged as jigsaw pieces, clustered by their author-defined family.",
+
+  "width": 800,
+  "height": 500,
+  "padding": 15,
+  "background": null,
+
+  "signals": [
+    {
+      "name": "hoveredFamily",
+      "value": null,
+      "on": [
+        {
+          "events": "@pieces:mouseover",
+          "update": "datum.family"
+        },
+        {
+          "events": "@pieces:mouseout",
+          "update": "null"
+        }
+      ]
+    }
+  ],
+
+  "data": [
+    {
+      "name": "layout",
+      "values": [
+        {
+          "id": "crosswords",
+          "column": 0,
+          "row": 0,
+          "line1": "Crosswords",
+          "line2": ""
+        },
+        {
+          "id": "anagrams",
+          "column": 1,
+          "row": 0,
+          "line1": "Anagrams",
+          "line2": ""
+        },
+        {
+          "id": "numberplacement",
+          "column": 2,
+          "row": 0,
+          "line1": "Number",
+          "line2": "placement"
+        },
+        {
+          "id": "arithmetic",
+          "column": 3,
+          "row": 0,
+          "line1": "Arithmetic",
+          "line2": "puzzles"
+        },
+        {
+          "id": "logicgrid",
+          "column": 4,
+          "row": 0,
+          "line1": "Logic-grid",
+          "line2": "puzzles"
+        },
+        {
+          "id": "wordguessing",
+          "column": 0,
+          "row": 1,
+          "line1": "Word guessing",
+          "line2": ""
+        },
+        {
+          "id": "wordsearch",
+          "column": 1,
+          "row": 1,
+          "line1": "Word searches",
+          "line2": ""
+        },
+        {
+          "id": "assembly",
+          "column": 2,
+          "row": 1,
+          "line1": "Assembly",
+          "line2": "puzzles"
+        },
+        {
+          "id": "deduction",
+          "column": 3,
+          "row": 1,
+          "line1": "Deduction",
+          "line2": "mysteries"
+        },
+        {
+          "id": "riddles",
+          "column": 4,
+          "row": 1,
+          "line1": "Logic riddles",
+          "line2": ""
+        },
+        {
+          "id": "physicspuzzles",
+          "column": 0,
+          "row": 2,
+          "line1": "Physics",
+          "line2": "puzzles"
+        },
+        {
+          "id": "environmentalpuzzles",
+          "column": 1,
+          "row": 2,
+          "line1": "Environmental",
+          "line2": "puzzles"
+        },
+        {
+          "id": "sliding",
+          "column": 2,
+          "row": 2,
+          "line1": "Sliding",
+          "line2": "puzzles"
+        },
+        {
+          "id": "mechanical",
+          "column": 3,
+          "row": 2,
+          "line1": "Mechanical",
+          "line2": "manipulation"
+        },
+        {
+          "id": "strategy",
+          "column": 4,
+          "row": 2,
+          "line1": "Strategy",
+          "line2": "puzzles"
+        },
+        {
+          "id": "maze",
+          "column": 0,
+          "row": 3,
+          "line1": "Mazes",
+          "line2": ""
+        },
+        {
+          "id": "escaperooms",
+          "column": 1,
+          "row": 3,
+          "line1": "Physical",
+          "line2": "escape rooms"
+        },
+        {
+          "id": "escapegames",
+          "column": 2,
+          "row": 3,
+          "line1": "Digital",
+          "line2": "escape games"
+        },
+        {
+          "id": "swap",
+          "column": 3,
+          "row": 3,
+          "line1": "Swap",
+          "line2": ""
+        },
+        {
+          "id": "blast",
+          "column": 4,
+          "row": 3,
+          "line1": "Blast",
+          "line2": ""
+        },
+        {
+          "id": "chain",
+          "column": 0,
+          "row": 4,
+          "line1": "Chain",
+          "line2": ""
+        },
+        {
+          "id": "pair",
+          "column": 1,
+          "row": 4,
+          "line1": "Pair",
+          "line2": ""
+        },
+        {
+          "id": "sort",
+          "column": 2,
+          "row": 4,
+          "line1": "Sort",
+          "line2": ""
+        },
+        {
+          "id": "merge",
+          "column": 3,
+          "row": 4,
+          "line1": "Merge",
+          "line2": ""
+        },
+        {
+          "id": "block",
+          "column": 4,
+          "row": 4,
+          "line1": "Block",
+          "line2": "placement"
+        }
+      ]
+    },
+
+    {
+      "name": "puzzles",
+      "url": "data/puzzle-types.csv",
+      "format": {
+        "type": "csv"
+      },
+
+      "transform": [
+        {
+          "type": "filter",
+          "expr": "datum.id !== 'root' && datum.parent !== 'root'"
+        },
+        {
+          "type": "lookup",
+          "from": "layout",
+          "key": "id",
+          "fields": ["id"],
+          "values": ["column", "row", "line1", "line2"],
+          "as": ["column", "row", "line1", "line2"]
+        },
+        {
+          "type": "filter",
+          "expr": "isValid(datum.column) && isValid(datum.row)"
+        },
+        {
+          "type": "formula",
+          "expr": "datum.column * 160",
+          "as": "x"
+        },
+        {
+          "type": "formula",
+          "expr": "datum.row * 100",
+          "as": "y"
+        },
+        {
+          "type": "formula",
+          "expr": "datum.row === 0 ? 'L160,0 ' : 'L60,0 C48,20 112,20 100,0 L160,0 '",
+          "as": "topEdge"
+        },
+        {
+          "type": "formula",
+          "expr": "datum.column === 4 ? 'L160,100 ' : 'L160,35 C180,23 180,77 160,65 L160,100 '",
+          "as": "rightEdge"
+        },
+        {
+          "type": "formula",
+          "expr": "datum.row === 4 ? 'L0,100 ' : 'L100,100 C112,120 48,120 60,100 L0,100 '",
+          "as": "bottomEdge"
+        },
+        {
+          "type": "formula",
+          "expr": "datum.column === 0 ? 'L0,0 ' : 'L0,65 C20,77 20,23 0,35 L0,0 '",
+          "as": "leftEdge"
+        },
+        {
+          "type": "formula",
+          "expr": "'M0,0 ' + datum.topEdge + datum.rightEdge + datum.bottomEdge + datum.leftEdge + 'Z'",
+          "as": "piecePath"
+        }
+      ]
+    }
+  ],
+
+  "scales": [
+    {
+      "name": "familyColour",
+      "type": "ordinal",
+      "domain": [
+        "Word & language",
+        "Number puzzles",
+        "Logic, deduction & strategy",
+        "Spatial & mechanical",
+        "Matching & arrangement",
+        "Physics & environmental",
+        "Escape & investigation"
+      ],
+      "range": [
+        "#E9A268",
+        "#AFC992",
+        "#C5A0B9",
+        "#AAA0C5",
+        "#8FAFC9",
+        "#8EBDB2",
+        "#DBC17E"
+      ]
+    }
+  ],
+
+  "legends": [
+    {
+      "fill": "familyColour",
+      "title": "Puzzle family",
+      "orient": "bottom",
+      "direction": "horizontal",
+      "columns": 2,
+      "offset": 25,
+
+      "symbolType": "square",
+      "symbolSize": 130,
+
+      "labelFont": "Arial",
+      "labelFontSize": 12,
+      "labelLimit": 280,
+      "labelColor": "#183733",
+
+      "titleFont": "Arial",
+      "titleFontSize": 13,
+      "titleColor": "#183733"
+    }
+  ],
+
+  "marks": [
+    {
+      "name": "pieces",
+      "type": "path",
+
+      "from": {
+        "data": "puzzles"
+      },
+
+      "encode": {
+        "update": {
+          "x": {
+            "field": "x"
+          },
+          "y": {
+            "field": "y"
+          },
+          "path": {
+            "field": "piecePath"
+          },
+
+          "fill": {
+            "scale": "familyColour",
+            "field": "family"
+          },
+
+          "fillOpacity": {
+            "signal": "hoveredFamily === null || datum.family === hoveredFamily ? 1 : 0.25"
+          },
+
+          "stroke": {
+            "value": "#FAFAF7"
+          },
+          "strokeWidth": {
+            "value": 2.5
+          },
+
+          "tooltip": {
+            "signal": "{'Puzzle type': datum.name, 'Family': datum.family, 'Examples / explanation': datum.examples}"
+          },
+
+          "description": {
+            "signal": "datum.name + '. Family: ' + datum.family + '. ' + datum.examples"
+          }
+        }
+      }
+    },
+
+    {
+      "type": "text",
+      "interactive": false,
+
+      "from": {
+        "data": "puzzles"
+      },
+
+      "encode": {
+        "update": {
+          "x": {
+            "signal": "datum.x + 83"
+          },
+          "y": {
+            "signal": "datum.y + (datum.line2 === '' ? 52 : 43)"
+          },
+
+          "text": {
+            "field": "line1"
+          },
+
+          "align": {
+            "value": "center"
+          },
+          "baseline": {
+            "value": "middle"
+          },
+
+          "font": {
+            "value": "Arial"
+          },
+          "fontSize": {
+            "value": 14
+          },
+          "fontWeight": {
+            "value": 600
+          },
+          "fill": {
+            "value": "#183733"
+          },
+
+          "opacity": {
+            "signal": "hoveredFamily === null || datum.family === hoveredFamily ? 1 : 0.35"
+          }
+        }
+      }
+    },
+
+    {
+      "type": "text",
+      "interactive": false,
+
+      "from": {
+        "data": "puzzles"
+      },
+
+      "encode": {
+        "update": {
+          "x": {
+            "signal": "datum.x + 83"
+          },
+          "y": {
+            "signal": "datum.y + 63"
+          },
+
+          "text": {
+            "field": "line2"
+          },
+
+          "align": {
+            "value": "center"
+          },
+          "baseline": {
+            "value": "middle"
+          },
+
+          "font": {
+            "value": "Arial"
+          },
+          "fontSize": {
+            "value": 14
+          },
+          "fontWeight": {
+            "value": 600
+          },
+          "fill": {
+            "value": "#183733"
+          },
+
+          "opacity": {
+            "signal": "hoveredFamily === null || datum.family === hoveredFamily ? 1 : 0.35"
+          }
+        }
+      }
+    }
+  ]
+}
