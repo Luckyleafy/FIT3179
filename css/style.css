@@ -389,3 +389,159 @@ main > .section-link {
   line-height: 1.5;
   color: var(--grape);
 }
+
+/* Final sections: chart and notes share one row.
+   The caption sits underneath both columns. */
+main figure.final-chart-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 3fr) minmax(220px, 1fr);
+  column-gap: 36px;
+  row-gap: 20px;
+
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  padding: 0;
+  margin: 28px 0 16px;
+}
+
+/* Chart on the left */
+.final-chart-layout > .chart {
+  grid-column: 1;
+  grid-row: 1;
+  min-width: 0;
+  width: 100%;
+}
+
+/* Centre the combined note stack beside the chart */
+.final-chart-layout > .final-note-stack {
+  grid-column: 2;
+  grid-row: 1;
+  align-self: center;
+}
+
+/* Reverse the jigsaw layout */
+main figure.final-chart-right {
+  grid-template-columns: minmax(220px, 1fr) minmax(0, 3fr);
+}
+
+.final-chart-right > .chart {
+  grid-column: 2;
+}
+
+.final-chart-right > .final-note-stack {
+  grid-column: 1;
+}
+
+/* Caption no longer affects note centring */
+.final-chart-layout > figcaption {
+  grid-column: 1 / -1;
+  grid-row: 2;
+  margin: 0;
+  padding-top: 14px;
+  border-top: 1px solid var(--line);
+}
+
+/* Fit diagrams into their columns */
+.final-chart-layout .chart svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin-inline: auto;
+}
+
+/* Two notes, grouped together */
+.final-note-stack {
+  display: grid;
+  gap: 28px;
+}
+
+.final-note {
+  border-left: 4px solid var(--orange);
+  padding-left: 18px;
+}
+
+.final-note-secondary {
+  border-left-color: var(--green);
+}
+
+.final-note .note-label {
+  display: block;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: var(--green);
+  margin-bottom: 10px;
+}
+
+.final-note .note-stat {
+  display: block;
+  font-family: "Nunito", Arial, sans-serif;
+  font-size: clamp(36px, 4vw, 54px);
+  font-weight: 900;
+  line-height: 1.05;
+  letter-spacing: -1.5px;
+  color: var(--grape);
+  margin-bottom: 10px;
+}
+
+.final-note h3 {
+  font-family: "Nunito", Arial, sans-serif;
+  font-size: 23px;
+  font-weight: 800;
+  line-height: 1.25;
+  color: var(--grape);
+  margin: 0 0 12px;
+}
+
+.final-note p {
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--muted);
+  margin: 0;
+}
+
+.final-note .stat-accent {
+  color: var(--orange);
+}
+
+/* Short connection between the sections */
+main > .final-transition {
+  max-width: 820px;
+  margin: 28px auto;
+  padding-left: 20px;
+  border-left: 3px solid var(--green);
+
+  font-family: "Nunito", Arial, sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.5;
+  color: var(--grape);
+}
+
+/* Mobile: chart, notes, then caption */
+@media (max-width: 900px) {
+  main figure.final-chart-layout,
+  main figure.final-chart-right {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 24px;
+  }
+
+  .final-chart-layout > .chart,
+  .final-chart-right > .chart {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .final-chart-layout > .final-note-stack,
+  .final-chart-right > .final-note-stack {
+    grid-column: 1;
+    grid-row: 2;
+  }
+
+  .final-chart-layout > figcaption {
+    grid-column: 1;
+    grid-row: 3;
+  }
+}
