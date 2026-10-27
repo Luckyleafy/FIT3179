@@ -118,11 +118,20 @@ vegaEmbed("#puzzle_skills", vg_skills, {
   actions: false
 }).catch(console.error);
 
-var vg_matching_radar =
-  "charts/matching-motivations-radar.vg.json";
+var vg_matching_radar =  "charts/matching-motivations-radar.vg.json";
 
 vegaEmbed("#matching_motivations", vg_matching_radar, {
   mode: "vega",
   renderer: "svg",
   actions: false
 }).catch(console.error);
+
+var vg_puzzle_growth =  "charts/puzzle-growth.vg.json";
+
+vegaEmbed("#puzzle_growth",vg_puzzle_growth,
+  {
+    mode: "vega-lite",
+    renderer: "svg",
+    actions: false
+  }
+).catch(console.error);
