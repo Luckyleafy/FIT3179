@@ -11,3 +11,73 @@ figure{margin:25px 0 15px;padding:24px;background:var(--panel);border:1.5px soli
 @media(max-width:820px){.site-top{align-items:flex-start;flex-direction:column;gap:18px}.hero{gap:25px;padding-block:45px}.hero .intro{font-size:15px}figure{padding:16px}}
 @media(max-width:620px){.site-top,.hero,main,footer,.play-strip{width:calc(100% - 32px)}nav{gap:16px}nav a{font-size:12px}.site-logo{font-size:21px}.hero{grid-template-columns:1fr;padding-top:32px;gap:30px}h1{font-size:clamp(46px,11vw,66px);letter-spacing:-2px}.art{width:100%;max-width:390px;margin-inline:auto}.tile{font-size:24px}.section-heading{gap:14px;align-items:flex-start}.number{min-width:44px;height:44px;font-size:19px}h2{font-size:27px}.eyebrow{font-size:10px;letter-spacing:1.4px}section{padding-top:33px}figure{padding:12px}.bridge{padding:25px}.play-strip{font-size:10px;letter-spacing:1px;gap:8px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.start{transition:none}}
+
+/* Consistent figure spacing */
+main figure {
+  width: 100%;
+  margin: 24px 0 16px;
+  padding: 24px;
+  box-sizing: border-box;
+}
+
+/* Full-width chart containers */
+main .chart,
+main .chart.vega-embed,
+main .chart .vega-embed {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  padding: 0;
+  text-align: left;
+  box-sizing: border-box;
+}
+
+/* Centre each complete chart, including axes and legends */
+main .chart svg,
+main .chart canvas {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Fit large SVG charts while preserving their proportions */
+main .chart svg {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Keep dropdowns aligned with the panel's left edge */
+main .chart .vega-bindings {
+  width: 100%;
+  margin: 0 0 16px;
+  text-align: left;
+}
+
+/* Consistent caption spacing and alignment */
+main figure figcaption {
+  margin-top: 18px;
+  padding-top: 14px;
+  text-align: left;
+}
+
+/* Keep introductions and sources left-aligned */
+main section > p,
+main .source {
+  text-align: left;
+}
+
+/* Allow wide charts to scroll on small screens */
+main .chart {
+  overflow-x: auto;
+}
+
+@media (max-width: 700px) {
+  main figure {
+    padding: 14px;
+  }
+
+  main .chart svg {
+    max-width: none;
+  }
+}

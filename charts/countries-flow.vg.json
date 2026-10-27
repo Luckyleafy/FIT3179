@@ -1,24 +1,75 @@
 {
   "$schema": "https://vega.github.io/schema/vega/v5.json",
-  "description": "World Sudoku Championship representation connections. Original layout using teal, black, white and coral. Counts are individual-result entries, not travel records.",
+  "description": "Regional overview of WSC 2026 country representation, with country detail and a Europe origin inset. Author-defined display regions.",
   "width": 1000,
-  "height": 660,
   "padding": 10,
-  "background": "#65A0A0",
+  "background": null,
+  "config": {
+    "font": "Arial"
+  },
   "signals": [
+    {
+      "name": "selectedRegion",
+      "value": "Overview",
+      "bind": {
+        "input": "select",
+        "name": "Explore: ",
+        "options": [
+          "Overview",
+          "North America",
+          "Europe",
+          "East Asia",
+          "Southeast Asia",
+          "Western Asia",
+          "Northern Asia",
+          "Africa",
+          "Oceania"
+        ]
+      },
+      "on": [
+        {
+          "events": "@regionHits:click",
+          "update": "datum.region"
+        }
+      ]
+    },
     {
       "name": "hoverCountry",
       "value": null,
       "on": [
         {
-          "events": "@badges:mouseover, @routes:mouseover, @origins:mouseover",
+          "events": "@countryHits:mouseover, @insetPoints:mouseover, @europeRows:mouseover",
           "update": "datum.country"
         },
         {
-          "events": "@badges:mouseout, @routes:mouseout, @origins:mouseout",
+          "events": "@countryHits:mouseout, @insetPoints:mouseout, @europeRows:mouseout",
+          "update": "null"
+        },
+        {
+          "events": {
+            "signal": "selectedRegion"
+          },
           "update": "null"
         }
       ]
+    },
+    {
+      "name": "hoverRegion",
+      "value": null,
+      "on": [
+        {
+          "events": "@regionHits:mouseover",
+          "update": "datum.region"
+        },
+        {
+          "events": "@regionHits:mouseout",
+          "update": "null"
+        }
+      ]
+    },
+    {
+      "name": "height",
+      "update": "selectedRegion === 'Europe' ? 855 : 590"
     }
   ],
   "projections": [
@@ -28,171 +79,38 @@
       "scale": 152.78874536821954,
       "translate": [
         500,
-        389.8725355643583
+        335
+      ]
+    },
+    {
+      "name": "europeProjection",
+      "type": "mercator",
+      "fit": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [
+            -12,
+            35
+          ],
+          [
+            34,
+            63
+          ]
+        ]
+      },
+      "extent": [
+        [
+          10,
+          10
+        ],
+        [
+          450,
+          210
+        ]
       ]
     }
   ],
   "data": [
-    {
-      "name": "badgeLayout",
-      "values": [
-        {
-          "iso3": "USA",
-          "badge_x": 361.44,
-          "badge_y": 245.68
-        },
-        {
-          "iso3": "FRA",
-          "badge_x": 524.04,
-          "badge_y": 264.5
-        },
-        {
-          "iso3": "DEU",
-          "badge_x": 563.11,
-          "badge_y": 177.63
-        },
-        {
-          "iso3": "JPN",
-          "badge_x": 841.51,
-          "badge_y": 287.67
-        },
-        {
-          "iso3": "HUN",
-          "badge_x": 615.6,
-          "badge_y": 290.76
-        },
-        {
-          "iso3": "CHN",
-          "badge_x": 764.13,
-          "badge_y": 288.81
-        },
-        {
-          "iso3": "TUR",
-          "badge_x": 648.25,
-          "badge_y": 275.61
-        },
-        {
-          "iso3": "GBR",
-          "badge_x": 527.25,
-          "badge_y": 228.64
-        },
-        {
-          "iso3": "EST",
-          "badge_x": 625.22,
-          "badge_y": 183.19
-        },
-        {
-          "iso3": "NLD",
-          "badge_x": 559.9,
-          "badge_y": 213.49
-        },
-        {
-          "iso3": "SVK",
-          "badge_x": 618.8,
-          "badge_y": 254.9
-        },
-        {
-          "iso3": "THA",
-          "badge_x": 760.01,
-          "badge_y": 329.61
-        },
-        {
-          "iso3": "ITA",
-          "badge_x": 550.28,
-          "badge_y": 321.06
-        },
-        {
-          "iso3": "RUS",
-          "badge_x": 750.35,
-          "badge_y": 233.08
-        },
-        {
-          "iso3": "HRV",
-          "badge_x": 582.94,
-          "badge_y": 305.91
-        },
-        {
-          "iso3": "KOR",
-          "badge_x": 808.37,
-          "badge_y": 273.61
-        },
-        {
-          "iso3": "BGR",
-          "badge_x": 642.61,
-          "badge_y": 314.56
-        },
-        {
-          "iso3": "CAN",
-          "badge_x": 363.19,
-          "badge_y": 208.71
-        },
-        {
-          "iso3": "CZE",
-          "badge_x": 589.35,
-          "badge_y": 234.19
-        },
-        {
-          "iso3": "PHL",
-          "badge_x": 806.34,
-          "badge_y": 341.31
-        },
-        {
-          "iso3": "CHE",
-          "badge_x": 553.49,
-          "badge_y": 285.2
-        },
-        {
-          "iso3": "AUS",
-          "badge_x": 827.36,
-          "badge_y": 407.73
-        },
-        {
-          "iso3": "AUT",
-          "badge_x": 586.15,
-          "badge_y": 270.05
-        },
-        {
-          "iso3": "BLR",
-          "badge_x": 651.46,
-          "badge_y": 239.75
-        },
-        {
-          "iso3": "DNK",
-          "badge_x": 592.56,
-          "badge_y": 198.34
-        },
-        {
-          "iso3": "LUX",
-          "badge_x": 556.7,
-          "badge_y": 249.34
-        },
-        {
-          "iso3": "MAR",
-          "badge_x": 520.83,
-          "badge_y": 300.35
-        },
-        {
-          "iso3": "POL",
-          "badge_x": 622.01,
-          "badge_y": 219.04
-        },
-        {
-          "iso3": "SGP",
-          "badge_x": 767.51,
-          "badge_y": 364.82
-        },
-        {
-          "iso3": "TWN",
-          "badge_x": 795.15,
-          "badge_y": 307.09
-        },
-        {
-          "iso3": "ARE",
-          "badge_x": 678.27,
-          "badge_y": 309.65
-        }
-      ]
-    },
     {
       "name": "participants",
       "url": "data/wsc-2026-country-flows.csv",
@@ -207,6 +125,230 @@
           "destination_lat": "number"
         }
       }
+    },
+    {
+      "name": "regionLookup",
+      "values": [
+        {
+          "iso3": "USA",
+          "region": "North America"
+        },
+        {
+          "iso3": "CAN",
+          "region": "North America"
+        },
+        {
+          "iso3": "FRA",
+          "region": "Europe"
+        },
+        {
+          "iso3": "DEU",
+          "region": "Europe"
+        },
+        {
+          "iso3": "HUN",
+          "region": "Europe"
+        },
+        {
+          "iso3": "GBR",
+          "region": "Europe"
+        },
+        {
+          "iso3": "EST",
+          "region": "Europe"
+        },
+        {
+          "iso3": "NLD",
+          "region": "Europe"
+        },
+        {
+          "iso3": "SVK",
+          "region": "Europe"
+        },
+        {
+          "iso3": "ITA",
+          "region": "Europe"
+        },
+        {
+          "iso3": "HRV",
+          "region": "Europe"
+        },
+        {
+          "iso3": "BGR",
+          "region": "Europe"
+        },
+        {
+          "iso3": "CZE",
+          "region": "Europe"
+        },
+        {
+          "iso3": "CHE",
+          "region": "Europe"
+        },
+        {
+          "iso3": "AUT",
+          "region": "Europe"
+        },
+        {
+          "iso3": "BLR",
+          "region": "Europe"
+        },
+        {
+          "iso3": "DNK",
+          "region": "Europe"
+        },
+        {
+          "iso3": "LUX",
+          "region": "Europe"
+        },
+        {
+          "iso3": "POL",
+          "region": "Europe"
+        },
+        {
+          "iso3": "JPN",
+          "region": "East Asia"
+        },
+        {
+          "iso3": "CHN",
+          "region": "East Asia"
+        },
+        {
+          "iso3": "KOR",
+          "region": "East Asia"
+        },
+        {
+          "iso3": "TWN",
+          "region": "East Asia"
+        },
+        {
+          "iso3": "THA",
+          "region": "Southeast Asia"
+        },
+        {
+          "iso3": "PHL",
+          "region": "Southeast Asia"
+        },
+        {
+          "iso3": "SGP",
+          "region": "Southeast Asia"
+        },
+        {
+          "iso3": "TUR",
+          "region": "Western Asia"
+        },
+        {
+          "iso3": "ARE",
+          "region": "Western Asia"
+        },
+        {
+          "iso3": "RUS",
+          "region": "Northern Asia"
+        },
+        {
+          "iso3": "MAR",
+          "region": "Africa"
+        },
+        {
+          "iso3": "AUS",
+          "region": "Oceania"
+        },
+        {
+          "iso3": "IND",
+          "region": "Host country"
+        }
+      ]
+    },
+    {
+      "name": "regionLayout",
+      "values": [
+        {
+          "region": "North America",
+          "lon": -100,
+          "lat": 48,
+          "bend": 240
+        },
+        {
+          "region": "Europe",
+          "lon": 12,
+          "lat": 51,
+          "bend": -95
+        },
+        {
+          "region": "East Asia",
+          "lon": 125,
+          "lat": 35,
+          "bend": -120
+        },
+        {
+          "region": "Southeast Asia",
+          "lon": 112,
+          "lat": 8,
+          "bend": 100
+        },
+        {
+          "region": "Western Asia",
+          "lon": 43,
+          "lat": 30,
+          "bend": -55
+        },
+        {
+          "region": "Northern Asia",
+          "lon": 90,
+          "lat": 65,
+          "bend": -60
+        },
+        {
+          "region": "Africa",
+          "lon": -8,
+          "lat": 30,
+          "bend": 85
+        },
+        {
+          "region": "Oceania",
+          "lon": 134,
+          "lat": -25,
+          "bend": 95
+        }
+      ]
+    },
+    {
+      "name": "totals",
+      "source": "participants",
+      "transform": [
+        {
+          "type": "aggregate",
+          "fields": [
+            "competitors"
+          ],
+          "ops": [
+            "sum"
+          ],
+          "as": [
+            "total"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "classified",
+      "source": "participants",
+      "transform": [
+        {
+          "type": "lookup",
+          "from": "regionLookup",
+          "key": "iso3",
+          "fields": [
+            "iso3"
+          ],
+          "values": [
+            "region"
+          ],
+          "as": [
+            "region"
+          ]
+        }
+      ]
     },
     {
       "name": "countries",
@@ -237,13 +379,116 @@
       ]
     },
     {
-      "name": "international",
-      "source": "participants",
+      "name": "regional",
+      "source": "classified",
       "transform": [
         {
           "type": "filter",
           "expr": "datum.iso3 !== 'IND'"
         },
+        {
+          "type": "aggregate",
+          "groupby": [
+            "region"
+          ],
+          "fields": [
+            "competitors"
+          ],
+          "ops": [
+            "sum"
+          ],
+          "as": [
+            "competitors"
+          ]
+        },
+        {
+          "type": "lookup",
+          "from": "regionLayout",
+          "key": "region",
+          "fields": [
+            "region"
+          ],
+          "values": [
+            "lon",
+            "lat",
+            "bend"
+          ],
+          "as": [
+            "origin_lon",
+            "origin_lat",
+            "bend"
+          ]
+        },
+        {
+          "type": "formula",
+          "expr": "100 * datum.competitors / data('totals')[0].total",
+          "as": "share_pct"
+        },
+        {
+          "type": "formula",
+          "expr": "88.36304",
+          "as": "destination_lon"
+        },
+        {
+          "type": "formula",
+          "expr": "22.56263",
+          "as": "destination_lat"
+        }
+      ]
+    },
+    {
+      "name": "overview",
+      "source": "regional",
+      "transform": [
+        {
+          "type": "filter",
+          "expr": "selectedRegion === 'Overview'"
+        }
+      ]
+    },
+    {
+      "name": "detail",
+      "source": "classified",
+      "transform": [
+        {
+          "type": "filter",
+          "expr": "datum.region === selectedRegion && datum.iso3 !== 'IND'"
+        },
+        {
+          "type": "window",
+          "sort": {
+            "field": [
+              "origin_lon",
+              "iso3"
+            ],
+            "order": [
+              "ascending",
+              "ascending"
+            ]
+          },
+          "ops": [
+            "row_number"
+          ],
+          "as": [
+            "routeOrder"
+          ]
+        },
+        {
+          "type": "formula",
+          "expr": "datum.iso3 === 'USA' ? 225 : datum.iso3 === 'CAN' ? 290 : datum.region === 'Oceania' || datum.region === 'Southeast Asia' ? 65 + datum.routeOrder*12 : -35 - datum.routeOrder*9",
+          "as": "bend"
+        },
+        {
+          "type": "formula",
+          "expr": "100 * datum.competitors / data('totals')[0].total",
+          "as": "share_pct"
+        }
+      ]
+    },
+    {
+      "name": "regionRoutes",
+      "source": "overview",
+      "transform": [
         {
           "type": "geopoint",
           "projection": "worldProjection",
@@ -270,59 +515,123 @@
         },
         {
           "type": "formula",
-          "expr": "(datum.sx + datum.tx)/2",
+          "expr": "(datum.sx+datum.tx)/2",
           "as": "cx"
         },
         {
           "type": "formula",
-          "expr": "(datum.sy + datum.ty)/2 - abs(datum.sx - datum.tx)*0.22 - 22",
+          "expr": "datum.bend > 0 ? max(datum.sy,datum.ty)+datum.bend : min(datum.sy,datum.ty)+datum.bend",
           "as": "cy"
         },
         {
           "type": "formula",
-          "expr": "'M' + datum.sx + ',' + datum.sy + ' Q' + datum.cx + ',' + datum.cy + ' ' + datum.tx + ',' + datum.ty",
+          "expr": "'M'+datum.sx+','+datum.sy+' Q'+datum.cx+','+datum.cy+' '+datum.tx+','+datum.ty",
           "as": "route"
         },
         {
-          "type": "lookup",
-          "from": "badgeLayout",
-          "key": "iso3",
+          "type": "formula",
+          "expr": ".5184*datum.sx+.4032*datum.cx+.0784*datum.tx",
+          "as": "ax"
+        },
+        {
+          "type": "formula",
+          "expr": ".5184*datum.sy+.4032*datum.cy+.0784*datum.ty",
+          "as": "ay"
+        },
+        {
+          "type": "formula",
+          "expr": "atan2(1.44*(datum.cy-datum.sy)+.56*(datum.ty-datum.cy),1.44*(datum.cx-datum.sx)+.56*(datum.tx-datum.cx))*180/PI+90",
+          "as": "angle"
+        },
+        {
+          "type": "formula",
+          "expr": ".25*datum.sx+.5*datum.cx+.25*datum.tx",
+          "as": "badge_x"
+        },
+        {
+          "type": "formula",
+          "expr": ".25*datum.sy+.5*datum.cy+.25*datum.ty-26",
+          "as": "badge_y"
+        }
+      ]
+    },
+    {
+      "name": "countryRoutes",
+      "source": "detail",
+      "transform": [
+        {
+          "type": "geopoint",
+          "projection": "worldProjection",
           "fields": [
-            "iso3"
-          ],
-          "values": [
-            "badge_x",
-            "badge_y"
+            "origin_lon",
+            "origin_lat"
           ],
           "as": [
-            "badge_x",
-            "badge_y"
+            "sx",
+            "sy"
+          ]
+        },
+        {
+          "type": "geopoint",
+          "projection": "worldProjection",
+          "fields": [
+            "destination_lon",
+            "destination_lat"
+          ],
+          "as": [
+            "tx",
+            "ty"
           ]
         },
         {
           "type": "formula",
-          "expr": "0.5625*datum.sx + 0.375*datum.cx + 0.0625*datum.tx",
-          "as": "anchor_x"
+          "expr": "(datum.sx+datum.tx)/2",
+          "as": "cx"
         },
         {
           "type": "formula",
-          "expr": "0.5625*datum.sy + 0.375*datum.cy + 0.0625*datum.ty",
-          "as": "anchor_y"
+          "expr": "datum.bend > 0 ? max(datum.sy,datum.ty)+datum.bend : min(datum.sy,datum.ty)+datum.bend",
+          "as": "cy"
         },
         {
           "type": "formula",
-          "expr": "0.09*datum.sx + 0.42*datum.cx + 0.49*datum.tx",
-          "as": "arrow_x"
+          "expr": "'M'+datum.sx+','+datum.sy+' Q'+datum.cx+','+datum.cy+' '+datum.tx+','+datum.ty",
+          "as": "route"
         },
         {
           "type": "formula",
-          "expr": "0.09*datum.sy + 0.42*datum.cy + 0.49*datum.ty",
-          "as": "arrow_y"
+          "expr": ".5184*datum.sx+.4032*datum.cx+.0784*datum.tx",
+          "as": "ax"
         },
         {
           "type": "formula",
-          "expr": "atan2(0.6*(datum.cy-datum.sy) + 1.4*(datum.ty-datum.cy), 0.6*(datum.cx-datum.sx) + 1.4*(datum.tx-datum.cx))*180/PI + 90",
-          "as": "arrow_angle"
+          "expr": ".5184*datum.sy+.4032*datum.cy+.0784*datum.ty",
+          "as": "ay"
+        },
+        {
+          "type": "formula",
+          "expr": "atan2(1.44*(datum.cy-datum.sy)+.56*(datum.ty-datum.cy),1.44*(datum.cx-datum.sx)+.56*(datum.tx-datum.cx))*180/PI+90",
+          "as": "angle"
+        },
+        {
+          "type": "formula",
+          "expr": ".25*datum.sx+.5*datum.cx+.25*datum.tx",
+          "as": "badge_x"
+        },
+        {
+          "type": "formula",
+          "expr": ".25*datum.sy+.5*datum.cy+.25*datum.ty-26",
+          "as": "badge_y"
+        }
+      ]
+    },
+    {
+      "name": "selectedCountry",
+      "source": "countryRoutes",
+      "transform": [
+        {
+          "type": "filter",
+          "expr": "datum.country === hoverCountry"
         }
       ]
     },
@@ -348,28 +657,115 @@
           ]
         }
       ]
+    },
+    {
+      "name": "europe",
+      "source": "classified",
+      "transform": [
+        {
+          "type": "filter",
+          "expr": "datum.region === 'Europe'"
+        },
+        {
+          "type": "geopoint",
+          "projection": "europeProjection",
+          "fields": [
+            "origin_lon",
+            "origin_lat"
+          ],
+          "as": [
+            "ex",
+            "ey"
+          ]
+        },
+        {
+          "type": "window",
+          "sort": {
+            "field": [
+              "competitors",
+              "country"
+            ],
+            "order": [
+              "descending",
+              "ascending"
+            ]
+          },
+          "ops": [
+            "row_number"
+          ],
+          "as": [
+            "rank"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "europePanel",
+      "values": [
+        {}
+      ],
+      "transform": [
+        {
+          "type": "filter",
+          "expr": "selectedRegion === 'Europe'"
+        }
+      ]
+    },
+    {
+      "name": "widthLegend",
+      "values": [
+        {
+          "slot": 0,
+          "y": 516
+        },
+        {
+          "slot": 1,
+          "y": 537
+        },
+        {
+          "slot": 2,
+          "y": 558
+        }
+      ],
+      "transform": [
+        {
+          "type": "formula",
+          "expr": "selectedRegion === 'Overview' ? [5,20,40][datum.slot] : [1,5,8][datum.slot]",
+          "as": "share"
+        }
+      ]
     }
   ],
   "scales": [
     {
       "name": "flowWidth",
       "type": "linear",
-      "domain": [
-        0,
-        15
-      ],
-      "range": [
-        0.45,
-        2.8
-      ],
-      "zero": true
+      "domain": {
+        "signal": "selectedRegion === 'Overview' ? [0,50] : [0,10]"
+      },
+      "range": {
+        "signal": "selectedRegion === 'Overview' ? [0,12] : [0,7]"
+      },
+      "zero": true,
+      "nice": false
     }
   ],
   "marks": [
     {
       "type": "shape",
-      "from": {
-        "data": "countries"
+      "interactive": false,
+      "encode": {
+        "update": {
+          "fill": {
+            "signal": "isValid(datum.represented) ? '#C5D2B8' : '#E5E7DD'"
+          },
+          "stroke": {
+            "value": "#FFFCF0"
+          },
+          "strokeWidth": {
+            "value": 0.6
+          }
+        }
       },
       "transform": [
         {
@@ -377,26 +773,13 @@
           "projection": "worldProjection"
         }
       ],
-      "encode": {
-        "update": {
-          "fill": {
-            "signal": "isValid(datum.represented) ? '#087F7B' : '#101919'"
-          },
-          "stroke": {
-            "value": "#65A0A0"
-          },
-          "strokeWidth": {
-            "value": 0.45
-          }
-        }
+      "from": {
+        "data": "countries"
       }
     },
     {
-      "name": "routes",
       "type": "path",
-      "from": {
-        "data": "international"
-      },
+      "interactive": false,
       "encode": {
         "update": {
           "path": {
@@ -406,58 +789,59 @@
             "value": null
           },
           "stroke": {
-            "value": "#FFFFFF"
+            "value": "#504E76"
           },
           "strokeWidth": {
-            "signal": "hoverCountry === datum.country ? 3 : scale('flowWidth', datum.competitors)"
+            "scale": "flowWidth",
+            "field": "share_pct"
+          },
+          "strokeCap": {
+            "value": "round"
           },
           "opacity": {
-            "signal": "hoverCountry === null || hoverCountry === datum.country ? 0.85 : 0.12"
-          },
-          "tooltip": {
-            "signal": "{'Country': datum.country, 'Competitors': datum.competitors, 'Share of all competitors': format(datum.share_pct, '.2f') + '%', 'Event': '2026 World Sudoku Championship, Kolkata'}"
+            "signal": "hoverRegion === null ? 0.72 : hoverRegion === datum.region ? 1 : 0.1"
           }
         }
+      },
+      "from": {
+        "data": "regionRoutes"
       }
     },
     {
-      "type": "rule",
+      "type": "symbol",
       "interactive": false,
-      "from": {
-        "data": "international"
-      },
       "encode": {
         "update": {
           "x": {
-            "field": "anchor_x"
+            "field": "ax"
           },
           "y": {
-            "field": "anchor_y"
+            "field": "ay"
           },
-          "x2": {
-            "field": "badge_x"
+          "angle": {
+            "field": "angle"
           },
-          "y2": {
-            "field": "badge_y"
+          "shape": {
+            "value": "triangle-up"
           },
-          "stroke": {
-            "value": "#FFFFFF"
+          "size": {
+            "signal": "pow(3+scale('flowWidth',datum.share_pct),2)"
           },
-          "strokeWidth": {
-            "value": 0.65
+          "fill": {
+            "value": "#504E76"
           },
           "opacity": {
-            "signal": "hoverCountry === null || hoverCountry === datum.country ? 0.7 : 0.1"
+            "signal": "hoverRegion === null ? 0.72 : hoverRegion === datum.region ? 1 : 0.1"
           }
         }
+      },
+      "from": {
+        "data": "regionRoutes"
       }
     },
     {
-      "name": "origins",
       "type": "symbol",
-      "from": {
-        "data": "international"
-      },
+      "interactive": false,
       "encode": {
         "update": {
           "x": {
@@ -467,61 +851,203 @@
             "field": "sy"
           },
           "size": {
-            "value": 30
+            "value": 25
           },
           "fill": {
-            "value": "#FFFFFF"
+            "value": "#4F6B4A"
           },
-          "stroke": {
-            "value": "#087F7B"
-          },
-          "strokeWidth": {
-            "value": 0.7
-          },
-          "tooltip": {
-            "signal": "{'Country': datum.country, 'Competitors': datum.competitors}"
+          "opacity": {
+            "signal": "hoverRegion === null ? 0.72 : hoverRegion === datum.region ? 1 : 0.1"
           }
         }
+      },
+      "from": {
+        "data": "regionRoutes"
+      }
+    },
+    {
+      "type": "path",
+      "interactive": true,
+      "encode": {
+        "update": {
+          "path": {
+            "field": "route"
+          },
+          "fill": {
+            "value": null
+          },
+          "stroke": {
+            "value": "transparent"
+          },
+          "strokeWidth": {
+            "value": 12
+          },
+          "cursor": {
+            "value": "pointer"
+          },
+          "tooltip": {
+            "signal": "{'Region':datum.region,'Competitors':datum.competitors,'Share of all competitors':format(datum.share_pct,'.2f')+'%','Action':'Click to explore countries'}"
+          }
+        }
+      },
+      "from": {
+        "data": "regionRoutes"
+      },
+      "name": "regionHits"
+    },
+    {
+      "type": "text",
+      "interactive": false,
+      "encode": {
+        "update": {
+          "x": {
+            "field": "sx"
+          },
+          "y": {
+            "signal": "datum.sy + (datum.region === 'Europe' || datum.region === 'Northern Asia' ? -13 : 19)"
+          },
+          "text": {
+            "field": "region"
+          },
+          "align": {
+            "value": "center"
+          },
+          "fontSize": {
+            "value": 12
+          },
+          "fontWeight": {
+            "value": "bold"
+          },
+          "fill": {
+            "value": "#393747"
+          }
+        }
+      },
+      "from": {
+        "data": "regionRoutes"
+      }
+    },
+    {
+      "type": "path",
+      "interactive": false,
+      "encode": {
+        "update": {
+          "path": {
+            "field": "route"
+          },
+          "fill": {
+            "value": null
+          },
+          "stroke": {
+            "value": "#504E76"
+          },
+          "strokeWidth": {
+            "scale": "flowWidth",
+            "field": "share_pct"
+          },
+          "strokeCap": {
+            "value": "round"
+          },
+          "opacity": {
+            "signal": "hoverCountry === null ? 0.72 : hoverCountry === datum.country ? 1 : 0.1"
+          }
+        }
+      },
+      "from": {
+        "data": "countryRoutes"
       }
     },
     {
       "type": "symbol",
       "interactive": false,
-      "from": {
-        "data": "international"
-      },
       "encode": {
         "update": {
           "x": {
-            "field": "arrow_x"
+            "field": "ax"
           },
           "y": {
-            "field": "arrow_y"
+            "field": "ay"
+          },
+          "angle": {
+            "field": "angle"
           },
           "shape": {
             "value": "triangle-up"
           },
-          "angle": {
-            "field": "arrow_angle"
-          },
           "size": {
-            "value": 38
+            "signal": "pow(3+scale('flowWidth',datum.share_pct),2)"
           },
           "fill": {
-            "value": "#FFFFFF"
+            "value": "#504E76"
           },
           "opacity": {
-            "signal": "hoverCountry === null || hoverCountry === datum.country ? 0.95 : 0.12"
+            "signal": "hoverCountry === null ? 0.72 : hoverCountry === datum.country ? 1 : 0.1"
           }
         }
+      },
+      "from": {
+        "data": "countryRoutes"
       }
     },
     {
-      "name": "badges",
       "type": "symbol",
-      "from": {
-        "data": "international"
+      "interactive": false,
+      "encode": {
+        "update": {
+          "x": {
+            "field": "sx"
+          },
+          "y": {
+            "field": "sy"
+          },
+          "size": {
+            "value": 25
+          },
+          "fill": {
+            "value": "#4F6B4A"
+          },
+          "opacity": {
+            "signal": "hoverCountry === null ? 0.72 : hoverCountry === datum.country ? 1 : 0.1"
+          }
+        }
       },
+      "from": {
+        "data": "countryRoutes"
+      }
+    },
+    {
+      "type": "path",
+      "interactive": true,
+      "encode": {
+        "update": {
+          "path": {
+            "field": "route"
+          },
+          "fill": {
+            "value": null
+          },
+          "stroke": {
+            "value": "transparent"
+          },
+          "strokeWidth": {
+            "value": 8
+          },
+          "cursor": {
+            "value": "pointer"
+          },
+          "tooltip": {
+            "signal": "{'Country':datum.country,'Competitors':datum.competitors,'Share of all competitors':format(datum.share_pct,'.2f')+'%'}"
+          }
+        }
+      },
+      "from": {
+        "data": "countryRoutes"
+      },
+      "name": "countryHits"
+    },
+    {
+      "type": "symbol",
+      "interactive": false,
       "encode": {
         "update": {
           "x": {
@@ -531,26 +1057,26 @@
             "field": "badge_y"
           },
           "size": {
-            "value": 850
+            "value": 1050
           },
           "fill": {
             "value": "#E98B9C"
           },
-          "opacity": {
-            "signal": "hoverCountry === null || hoverCountry === datum.country ? 1 : 0.25"
+          "stroke": {
+            "value": "#FFFCF0"
           },
-          "tooltip": {
-            "signal": "{'Country': datum.country, 'Competitors': datum.competitors, 'Share of all competitors': format(datum.share_pct, '.2f') + '%'}"
+          "strokeWidth": {
+            "value": 2
           }
         }
+      },
+      "from": {
+        "data": "selectedCountry"
       }
     },
     {
       "type": "text",
       "interactive": false,
-      "from": {
-        "data": "international"
-      },
       "encode": {
         "update": {
           "x": {
@@ -568,29 +1094,24 @@
           "baseline": {
             "value": "middle"
           },
-          "font": {
-            "value": "Arial"
-          },
           "fontSize": {
-            "value": 11
+            "value": 13
           },
           "fontWeight": {
-            "value": 600
+            "value": "bold"
           },
           "fill": {
-            "value": "#FFFFFF"
-          },
-          "opacity": {
-            "signal": "hoverCountry === null || hoverCountry === datum.country ? 1 : 0.3"
+            "value": "#393747"
           }
         }
+      },
+      "from": {
+        "data": "selectedCountry"
       }
     },
     {
       "type": "symbol",
-      "from": {
-        "data": "host"
-      },
+      "interactive": true,
       "encode": {
         "update": {
           "x": {
@@ -600,80 +1121,132 @@
             "field": "y"
           },
           "size": {
-            "value": 150
+            "value": 160
           },
           "fill": {
-            "value": "#FFFFFF"
+            "value": "#F1642E"
           },
           "stroke": {
-            "value": "#087F7B"
+            "value": "#FFFCF0"
           },
           "strokeWidth": {
             "value": 2
           },
           "tooltip": {
-            "signal": "{'Host city':'Kolkata, India','India competitors':15,'Competitors representing other countries':138}"
+            "value": {
+              "Host city": "Kolkata, India",
+              "Note": "Host-country competitors are included in all percentage denominators."
+            }
+          }
+        }
+      },
+      "from": {
+        "data": "host"
+      }
+    },
+    {
+      "type": "text",
+      "interactive": false,
+      "encode": {
+        "update": {
+          "x": {
+            "signal": "datum.x+13"
+          },
+          "y": {
+            "signal": "datum.y+21"
+          },
+          "text": {
+            "value": "Kolkata"
+          },
+          "fontSize": {
+            "value": 13
+          },
+          "fontWeight": {
+            "value": "bold"
+          },
+          "fill": {
+            "value": "#393747"
+          }
+        }
+      },
+      "from": {
+        "data": "host"
+      }
+    },
+    {
+      "type": "text",
+      "interactive": false,
+      "encode": {
+        "update": {
+          "text": {
+            "value": "World Sudoku Championship · 2026"
+          },
+          "x": {
+            "value": 22
+          },
+          "y": {
+            "value": 28
+          },
+          "fontSize": {
+            "value": 21
+          },
+          "fill": {
+            "value": "#504E76"
+          },
+          "fontWeight": {
+            "value": "bold"
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "interactive": false,
+      "encode": {
+        "update": {
+          "x": {
+            "value": 22
+          },
+          "y": {
+            "value": 51
+          },
+          "text": {
+            "signal": "selectedRegion === 'Overview' ? 'Select a region from the menu, or click one of the eight connections.' : selectedRegion + ': hover over a country route to reveal its count badge.'"
+          },
+          "fontSize": {
+            "value": 12
+          },
+          "fill": {
+            "value": "#625E70"
           }
         }
       }
     },
     {
       "type": "rule",
-      "from": {
-        "data": "host"
-      },
+      "interactive": false,
       "encode": {
         "update": {
           "x": {
-            "field": "x"
+            "value": 24
+          },
+          "x2": {
+            "value": 70
           },
           "y": {
             "field": "y"
           },
-          "x2": {
-            "signal": "datum.x - 20"
-          },
-          "y2": {
-            "signal": "datum.y + 60"
-          },
           "stroke": {
-            "value": "#FFFFFF"
+            "value": "#504E76"
           },
           "strokeWidth": {
-            "value": 0.8
+            "scale": "flowWidth",
+            "field": "share"
           }
         }
-      }
-    },
-    {
-      "type": "text",
-      "from": {
-        "data": "host"
       },
-      "encode": {
-        "update": {
-          "x": {
-            "signal": "datum.x - 80"
-          },
-          "y": {
-            "signal": "datum.y + 78"
-          },
-          "text": {
-            "value": "KOLKATA · HOST"
-          },
-          "font": {
-            "value": "Arial"
-          },
-          "fontSize": {
-            "value": 13
-          },
-          "fontWeight": {
-            "value": 700
-          },
-          "fill": {
-            "value": "#FFFFFF"
-          }
-        }
+      "from": {
+        "data": "widthLegend"
       }
     },
     {
@@ -682,57 +1255,300 @@
       "encode": {
         "update": {
           "x": {
-            "value": 30
-          },
-          "y": {
-            "value": 45
-          },
-          "text": {
-            "value": "PUZZLES BRING THE WORLD TOGETHER"
-          },
-          "font": {
-            "value": "Arial"
-          },
-          "fontSize": {
-            "value": 35
-          },
-          "fontWeight": {
-            "value": 700
-          },
-          "fill": {
-            "value": "#FFFFFF"
-          }
-        }
-      }
-    },
-    {
-      "type": "text",
-      "interactive": false,
-      "encode": {
-        "update": {
-          "x": {
-            "value": 32
-          },
-          "y": {
             "value": 82
           },
-          "text": {
-            "value": "Countries represented at the 2026 World Sudoku Championship, Kolkata, India."
+          "y": {
+            "field": "y"
           },
-          "font": {
-            "value": "Arial"
+          "text": {
+            "signal": "datum.share+'% of all competitors'"
+          },
+          "baseline": {
+            "value": "middle"
+          },
+          "fontSize": {
+            "value": 11
+          },
+          "fill": {
+            "value": "#625E70"
+          }
+        }
+      },
+      "from": {
+        "data": "widthLegend"
+      }
+    },
+    {
+      "type": "text",
+      "interactive": false,
+      "encode": {
+        "update": {
+          "x": {
+            "value": 310
+          },
+          "y": {
+            "value": 516
+          },
+          "text": {
+            "signal": "hoverCountry !== null ? hoverCountry+' → Kolkata' : selectedRegion === 'Overview' ? 'Overview: regions combined. Select a region to see its countries.' : 'Country view: return to Overview using the menu.'"
+          },
+          "fontSize": {
+            "value": 12
+          },
+          "fontWeight": {
+            "value": "bold"
+          },
+          "fill": {
+            "value": "#504E76"
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "interactive": false,
+      "encode": {
+        "update": {
+          "text": {
+            "value": "Line-width scale changes between regional and country views; see the legend."
+          },
+          "x": {
+            "value": 310
+          },
+          "y": {
+            "value": 540
+          },
+          "fontSize": {
+            "value": 11
+          },
+          "fill": {
+            "value": "#625E70"
+          }
+        }
+      }
+    },
+    {
+      "type": "group",
+      "interactive": true,
+      "encode": {
+        "update": {
+          "x": {
+            "value": 20
+          },
+          "y": {
+            "value": 604
+          },
+          "width": {
+            "value": 470
+          },
+          "height": {
+            "value": 220
+          }
+        }
+      },
+      "from": {
+        "data": "europePanel"
+      },
+      "marks": [
+        {
+          "type": "rect",
+          "interactive": false,
+          "encode": {
+            "update": {
+              "x": {
+                "value": 0
+              },
+              "y": {
+                "value": 0
+              },
+              "width": {
+                "value": 470
+              },
+              "height": {
+                "value": 220
+              },
+              "fill": {
+                "value": "#F4F2E5"
+              }
+            }
+          },
+          "clip": true
+        },
+        {
+          "type": "shape",
+          "interactive": false,
+          "encode": {
+            "update": {
+              "fill": {
+                "value": "#D5DEC9"
+              },
+              "stroke": {
+                "value": "#FFFCF0"
+              },
+              "strokeWidth": {
+                "value": 0.7
+              }
+            }
+          },
+          "transform": [
+            {
+              "type": "geoshape",
+              "projection": "europeProjection"
+            }
+          ],
+          "from": {
+            "data": "countries"
+          },
+          "clip": true
+        },
+        {
+          "type": "symbol",
+          "interactive": true,
+          "encode": {
+            "update": {
+              "x": {
+                "field": "ex"
+              },
+              "y": {
+                "field": "ey"
+              },
+              "size": {
+                "signal": "hoverCountry === datum.country ? 125 : 35"
+              },
+              "fill": {
+                "signal": "hoverCountry === datum.country ? '#F1642E' : '#504E76'"
+              },
+              "stroke": {
+                "value": "#FFFCF0"
+              },
+              "strokeWidth": {
+                "value": 1
+              },
+              "cursor": {
+                "value": "pointer"
+              },
+              "tooltip": {
+                "signal": "{'Country':datum.country,'Competitors':datum.competitors,'Share':format(100*datum.competitors/data('totals')[0].total,'.2f')+'%'}"
+              }
+            }
+          },
+          "from": {
+            "data": "europe"
+          },
+          "name": "insetPoints",
+          "clip": true
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "interactive": false,
+      "encode": {
+        "update": {
+          "x": {
+            "value": 20
+          },
+          "y": {
+            "value": 586
+          },
+          "text": {
+            "value": "Europe · enlarged country origins"
           },
           "fontSize": {
             "value": 15
           },
           "fontWeight": {
-            "value": 400
+            "value": "bold"
           },
           "fill": {
-            "value": "#FFFFFF"
+            "value": "#504E76"
+          },
+          "opacity": {
+            "signal": "selectedRegion === 'Europe' ? 1 : 0"
           }
         }
       }
+    },
+    {
+      "type": "group",
+      "interactive": true,
+      "encode": {
+        "update": {
+          "x": {
+            "value": 525
+          },
+          "y": {
+            "value": 596
+          },
+          "width": {
+            "value": 450
+          },
+          "height": {
+            "value": 240
+          }
+        }
+      },
+      "from": {
+        "data": "europePanel"
+      },
+      "marks": [
+        {
+          "type": "rect",
+          "interactive": true,
+          "encode": {
+            "update": {
+              "x": {
+                "value": 0
+              },
+              "y": {
+                "signal": "(datum.rank-1)*13.2"
+              },
+              "width": {
+                "value": 450
+              },
+              "height": {
+                "value": 13.2
+              },
+              "fill": {
+                "signal": "hoverCountry === datum.country ? '#E8E4F0' : 'transparent'"
+              },
+              "cursor": {
+                "value": "pointer"
+              }
+            }
+          },
+          "from": {
+            "data": "europe"
+          },
+          "name": "europeRows"
+        },
+        {
+          "type": "text",
+          "interactive": false,
+          "encode": {
+            "update": {
+              "x": {
+                "value": 8
+              },
+              "y": {
+                "signal": "(datum.rank-1)*13.2+10"
+              },
+              "text": {
+                "signal": "datum.country + ' · ' + datum.competitors"
+              },
+              "fontSize": {
+                "value": 11
+              },
+              "fill": {
+                "signal": "hoverCountry === datum.country ? '#F1642E' : '#393747'"
+              }
+            }
+          },
+          "from": {
+            "data": "europe"
+          }
+        }
+      ]
     },
     {
       "type": "text",
@@ -740,141 +1556,19 @@
       "encode": {
         "update": {
           "x": {
-            "value": 32
+            "value": 22
           },
           "y": {
-            "value": 108
+            "signal": "height-8"
           },
           "text": {
-            "value": "153 competitors · 32 countries · 15 competitors representing host country India"
-          },
-          "font": {
-            "value": "Arial"
-          },
-          "fontSize": {
-            "value": 13
-          },
-          "fontWeight": {
-            "value": 400
-          },
-          "fill": {
-            "value": "#FFFFFF"
-          }
-        }
-      }
-    },
-    {
-      "type": "text",
-      "interactive": false,
-      "encode": {
-        "update": {
-          "x": {
-            "value": 32
-          },
-          "y": {
-            "value": 595
-          },
-          "text": {
-            "value": "Coral badges show competitor counts. Thicker white connections represent larger groups."
-          },
-          "font": {
-            "value": "Arial"
-          },
-          "fontSize": {
-            "value": 12
-          },
-          "fontWeight": {
-            "value": 400
-          },
-          "fill": {
-            "value": "#FFFFFF"
-          }
-        }
-      }
-    },
-    {
-      "type": "text",
-      "interactive": false,
-      "encode": {
-        "update": {
-          "x": {
-            "value": 32
-          },
-          "y": {
-            "value": 617
-          },
-          "text": {
-            "value": "Connections show representation at the event, not recorded journeys or flight routes."
-          },
-          "font": {
-            "value": "Arial"
-          },
-          "fontSize": {
-            "value": 12
-          },
-          "fontWeight": {
-            "value": 400
-          },
-          "fill": {
-            "value": "#FFFFFF"
-          }
-        }
-      }
-    },
-    {
-      "type": "text",
-      "interactive": false,
-      "encode": {
-        "update": {
-          "x": {
-            "value": 32
-          },
-          "y": {
-            "value": 639
-          },
-          "text": {
-            "value": "Source: Logic Masters India, overall individual results · Natural Earth basemap · GeoNames host location"
-          },
-          "font": {
-            "value": "Arial"
+            "value": "Curves show representation, not journeys. Author-defined regions: Türkiye in Western Asia; Russia in Northern Asia."
           },
           "fontSize": {
             "value": 11
           },
-          "fontWeight": {
-            "value": 400
-          },
           "fill": {
-            "value": "#FFFFFF"
-          }
-        }
-      }
-    },
-    {
-      "type": "text",
-      "interactive": false,
-      "encode": {
-        "update": {
-          "x": {
-            "value": 32
-          },
-          "y": {
-            "value": 565
-          },
-          "text": {
-            "signal": "hoverCountry === null ? 'Hover over a coral badge or a connection to identify the country.' : hoverCountry + ' → Kolkata'"
-          },
-          "font": {
-            "value": "Arial"
-          },
-          "fontSize": {
-            "value": 13
-          },
-          "fontWeight": {
-            "value": 600
-          },
-          "fill": {
-            "value": "#FFFFFF"
+            "value": "#625E70"
           }
         }
       }
