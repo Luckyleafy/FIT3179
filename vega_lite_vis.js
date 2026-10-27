@@ -14,15 +14,6 @@ vegaEmbed("#puzzle_categories", vg_categories, {
   actions: false
 }).catch(console.error);
 
-var vg_types = "charts/puzzle-types-tree.vg.json";
-
-vegaEmbed("#puzzle_types", vg_types, {
-    actions: false
-}).then(function(result) {
-  // The chart is available through result.view.
-}).catch(console.error);
-
-
 var vg_gender = "charts/gender-group.vg.json";
 
 vegaEmbed("#puzzle_gender", vg_gender, {
@@ -56,15 +47,6 @@ vegaEmbed("#countries_flow", vg_flow, {
   actions: false
 }).catch(console.error);
 
-var vg_locations = "charts/escape-rooms-locations-map.vg.json";
-
-vegaEmbed("#escape_rooms_locations", vg_locations, {
-    mode: "vega-lite",
-    actions: false
-}).then(function(result) {
-  // The chart is available through result.view.
-}).catch(console.error);
-
 var vg_escape_rooms = "charts/escape-rooms-map.vg.json";
 
 vegaEmbed("#escape_rooms", vg_escape_rooms, {
@@ -96,13 +78,6 @@ vegaEmbed("#mobile-shares", vg_mobile_shares, {
   actions: false
 }).catch(console.error);
 
-var vg_motivations = "charts/motivations.vg.json";
-
-vegaEmbed("#motivations", vg_motivations, {
-  mode: "vega-lite",
-  actions: false
-}).catch(console.error);
-
 var vg_age_groups = "charts/age-groups.vg.json";
 
 vegaEmbed("#age-groups", vg_age_groups, {
@@ -126,6 +101,16 @@ vegaEmbed("#matching_motivations", vg_matching_radar, {
   renderer: "svg",
   actions: false
 }).catch(console.error);
+
+var vg_puzzle_growth =  "charts/puzzle-revenue-slope.vg.json";
+
+vegaEmbed("#puzzle_growth",vg_puzzle_growth,
+  {
+    mode: "vega-lite",
+    renderer: "svg",
+    actions: false
+  }
+).catch(console.error);
 
 var vg_puzzle_growth =  "charts/puzzle-growth.vg.json";
 

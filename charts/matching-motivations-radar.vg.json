@@ -399,7 +399,7 @@
             "signal": "hoverCountry === '' || hoverCountry === datum.country ? 1 : 0.18"
           },
           "tooltip": {
-            "signal": "{'Country':datum.country,'Players':datum.subgenre,'Reason':datum.source_wording,'Very important':datum.percent + '%','Survey period':datum.survey_period,'Source':'Genre and Great Games (2020), p.'+datum.source_page}"
+            "signal": "{'Country':datum.country,'Players':datum.subgenre,'Reason':datum.source_wording,'Very important':datum.percent + '%','Survey period':datum.survey_period}"
           }
         }
       }

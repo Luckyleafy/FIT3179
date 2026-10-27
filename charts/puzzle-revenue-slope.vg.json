@@ -1,0 +1,692 @@
+{
+  "$schema": "https://vega.github.io/schema/vega/v5.json",
+  "description": "All 26 puzzle subgenres, two annual revenue totals and source-reported percentage change. Revenue uses a shared logarithmic scale. Labels are spread apart with leaders; their rows do not encode revenue.",
+  "width": 1160,
+  "height": 865,
+  "padding": 10,
+  "background": null,
+  "config": {
+    "font": "Arial"
+  },
+  "signals": [
+    {
+      "name": "hovered",
+      "value": null,
+      "on": [
+        {
+          "events": "@slopeHits:mouseover, @leftLabels:mouseover, @rightLabels:mouseover, @changeLabels:mouseover",
+          "update": "datum.subgenre"
+        },
+        {
+          "events": "@slopeHits:mouseout, @leftLabels:mouseout, @rightLabels:mouseout, @changeLabels:mouseout",
+          "update": "null"
+        }
+      ]
+    }
+  ],
+  "data": [
+    {
+      "name": "table",
+      "url": "data/puzzle-growth.csv",
+      "format": {
+        "type": "csv",
+        "parse": {
+          "previous_revenue_usd": "number",
+          "current_revenue_usd": "number",
+          "growth_pct": "number"
+        }
+      },
+      "transform": [
+        {
+          "type": "window",
+          "sort": {
+            "field": [
+              "previous_revenue_usd",
+              "subgenre"
+            ],
+            "order": [
+              "descending",
+              "ascending"
+            ]
+          },
+          "ops": [
+            "row_number"
+          ],
+          "as": [
+            "previousRank"
+          ]
+        },
+        {
+          "type": "window",
+          "sort": {
+            "field": [
+              "current_revenue_usd",
+              "subgenre"
+            ],
+            "order": [
+              "descending",
+              "ascending"
+            ]
+          },
+          "ops": [
+            "row_number"
+          ],
+          "as": [
+            "currentRank"
+          ]
+        },
+        {
+          "type": "formula",
+          "expr": "'M335,'+scale('revenue',datum.previous_revenue_usd)+' L700,'+scale('revenue',datum.current_revenue_usd)",
+          "as": "slope"
+        },
+        {
+          "type": "formula",
+          "expr": "(datum.growth_pct > 0 ? '+' : '') + format(datum.growth_pct,'.2f') + '%'",
+          "as": "growthLabel"
+        }
+      ]
+    },
+    {
+      "name": "ticks",
+      "values": [
+        {
+          "value": 1000000.0,
+          "label": "$1M"
+        },
+        {
+          "value": 10000000.0,
+          "label": "$10M"
+        },
+        {
+          "value": 100000000.0,
+          "label": "$100M"
+        },
+        {
+          "value": 1000000000.0,
+          "label": "$1B"
+        }
+      ]
+    }
+  ],
+  "scales": [
+    {
+      "name": "revenue",
+      "type": "log",
+      "base": 10,
+      "domain": [
+        250000,
+        6000000000
+      ],
+      "range": [
+        790,
+        95
+      ],
+      "zero": false,
+      "nice": false
+    }
+  ],
+  "marks": [
+    {
+      "type": "text",
+      "interactive": false,
+      "encode": {
+        "update": {
+          "text": {
+            "value": "Puzzle revenue: before and after"
+          },
+          "x": {
+            "value": 20
+          },
+          "y": {
+            "value": 25
+          },
+          "fontSize": {
+            "value": 22
+          },
+          "fill": {
+            "value": "#504E76"
+          },
+          "fontWeight": {
+            "value": "bold"
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "interactive": false,
+      "encode": {
+        "update": {
+          "text": {
+            "value": "All 26 subgenres · revenue in USD on a logarithmic scale · hover a line or label to follow it"
+          },
+          "x": {
+            "value": 20
+          },
+          "y": {
+            "value": 49
+          },
+          "fontSize": {
+            "value": 12
+          },
+          "fill": {
+            "value": "#625E70"
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "interactive": false,
+      "encode": {
+        "update": {
+          "text": {
+            "value": "Oct 2023–Sep 2024"
+          },
+          "x": {
+            "value": 20
+          },
+          "y": {
+            "value": 83
+          },
+          "fontSize": {
+            "value": 13
+          },
+          "fill": {
+            "value": "#504E76"
+          },
+          "fontWeight": {
+            "value": "bold"
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "interactive": false,
+      "encode": {
+        "update": {
+          "text": {
+            "value": "Oct 2024–Sep 2025"
+          },
+          "x": {
+            "value": 760
+          },
+          "y": {
+            "value": 83
+          },
+          "fontSize": {
+            "value": 13
+          },
+          "fill": {
+            "value": "#504E76"
+          },
+          "fontWeight": {
+            "value": "bold"
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "interactive": false,
+      "encode": {
+        "update": {
+          "text": {
+            "value": "Reported change"
+          },
+          "x": {
+            "value": 1140
+          },
+          "y": {
+            "value": 83
+          },
+          "fontSize": {
+            "value": 12
+          },
+          "fill": {
+            "value": "#504E76"
+          },
+          "align": {
+            "value": "right"
+          },
+          "fontWeight": {
+            "value": "bold"
+          }
+        }
+      }
+    },
+    {
+      "type": "rule",
+      "interactive": false,
+      "encode": {
+        "update": {
+          "x": {
+            "value": 335
+          },
+          "x2": {
+            "value": 700
+          },
+          "y": {
+            "scale": "revenue",
+            "field": "value"
+          },
+          "stroke": {
+            "value": "#E3DFE7"
+          },
+          "strokeWidth": {
+            "value": 0.7
+          }
+        }
+      },
+      "from": {
+        "data": "ticks"
+      }
+    },
+    {
+      "type": "text",
+      "interactive": false,
+      "encode": {
+        "update": {
+          "x": {
+            "value": 325
+          },
+          "y": {
+            "scale": "revenue",
+            "field": "value"
+          },
+          "align": {
+            "value": "right"
+          },
+          "baseline": {
+            "value": "middle"
+          },
+          "text": {
+            "field": "label"
+          },
+          "fill": {
+            "value": "#625E70"
+          },
+          "fontSize": {
+            "value": 11
+          }
+        }
+      },
+      "from": {
+        "data": "ticks"
+      }
+    },
+    {
+      "type": "rule",
+      "interactive": false,
+      "encode": {
+        "update": {
+          "x": {
+            "value": 270
+          },
+          "x2": {
+            "value": 330
+          },
+          "y": {
+            "signal": "110+(datum.previousRank-1)*26"
+          },
+          "y2": {
+            "scale": "revenue",
+            "field": "previous_revenue_usd"
+          },
+          "stroke": {
+            "value": "#BDB7C8"
+          },
+          "strokeWidth": {
+            "value": 0.6
+          },
+          "opacity": {
+            "signal": "hovered === null || hovered === datum.subgenre ? 1 : 0.10"
+          }
+        }
+      },
+      "from": {
+        "data": "table"
+      }
+    },
+    {
+      "type": "rule",
+      "interactive": false,
+      "encode": {
+        "update": {
+          "x": {
+            "value": 745
+          },
+          "x2": {
+            "value": 706
+          },
+          "y": {
+            "signal": "110+(datum.currentRank-1)*26"
+          },
+          "y2": {
+            "scale": "revenue",
+            "field": "current_revenue_usd"
+          },
+          "stroke": {
+            "value": "#BDB7C8"
+          },
+          "strokeWidth": {
+            "value": 0.6
+          },
+          "opacity": {
+            "signal": "hovered === null || hovered === datum.subgenre ? 1 : 0.10"
+          }
+        }
+      },
+      "from": {
+        "data": "table"
+      }
+    },
+    {
+      "type": "path",
+      "interactive": false,
+      "encode": {
+        "update": {
+          "path": {
+            "field": "slope"
+          },
+          "fill": {
+            "value": null
+          },
+          "stroke": {
+            "signal": "datum.growth_pct >= 0 ? '#4F6B4A' : '#F1642E'"
+          },
+          "strokeWidth": {
+            "signal": "hovered === datum.subgenre ? 3.5 : 1.8"
+          },
+          "opacity": {
+            "signal": "hovered === null || hovered === datum.subgenre ? 1 : 0.10"
+          }
+        }
+      },
+      "from": {
+        "data": "table"
+      }
+    },
+    {
+      "type": "symbol",
+      "interactive": false,
+      "encode": {
+        "update": {
+          "x": {
+            "value": 335
+          },
+          "y": {
+            "scale": "revenue",
+            "field": "previous_revenue_usd"
+          },
+          "size": {
+            "value": 28
+          },
+          "fill": {
+            "signal": "datum.growth_pct >= 0 ? '#4F6B4A' : '#F1642E'"
+          },
+          "opacity": {
+            "signal": "hovered === null || hovered === datum.subgenre ? 1 : 0.10"
+          }
+        }
+      },
+      "from": {
+        "data": "table"
+      }
+    },
+    {
+      "type": "symbol",
+      "interactive": false,
+      "encode": {
+        "update": {
+          "x": {
+            "value": 700
+          },
+          "y": {
+            "scale": "revenue",
+            "field": "current_revenue_usd"
+          },
+          "size": {
+            "value": 28
+          },
+          "fill": {
+            "signal": "datum.growth_pct >= 0 ? '#4F6B4A' : '#F1642E'"
+          },
+          "opacity": {
+            "signal": "hovered === null || hovered === datum.subgenre ? 1 : 0.10"
+          }
+        }
+      },
+      "from": {
+        "data": "table"
+      }
+    },
+    {
+      "type": "path",
+      "interactive": true,
+      "encode": {
+        "update": {
+          "path": {
+            "field": "slope"
+          },
+          "fill": {
+            "value": null
+          },
+          "stroke": {
+            "value": "transparent"
+          },
+          "strokeWidth": {
+            "value": 9
+          },
+          "cursor": {
+            "value": "pointer"
+          },
+          "tooltip": {
+            "signal": "{'Subgenre':datum.subgenre,'Oct 2023–Sep 2024':datum.previous_revenue_label,'Oct 2024–Sep 2025':datum.current_revenue_label,'Reported revenue change':datum.growthLabel}"
+          }
+        }
+      },
+      "from": {
+        "data": "table"
+      },
+      "name": "slopeHits"
+    },
+    {
+      "type": "text",
+      "interactive": true,
+      "encode": {
+        "update": {
+          "x": {
+            "value": 260
+          },
+          "y": {
+            "signal": "110+(datum.previousRank-1)*26"
+          },
+          "text": {
+            "signal": "datum.subgenre+' · '+datum.previous_revenue_label"
+          },
+          "align": {
+            "value": "right"
+          },
+          "baseline": {
+            "value": "middle"
+          },
+          "fontSize": {
+            "value": 12
+          },
+          "fill": {
+            "value": "#393747"
+          },
+          "opacity": {
+            "signal": "hovered === null || hovered === datum.subgenre ? 1 : 0.10"
+          },
+          "cursor": {
+            "value": "pointer"
+          },
+          "tooltip": {
+            "signal": "{'Subgenre':datum.subgenre,'Oct 2023–Sep 2024':datum.previous_revenue_label,'Oct 2024–Sep 2025':datum.current_revenue_label,'Reported revenue change':datum.growthLabel}"
+          }
+        }
+      },
+      "from": {
+        "data": "table"
+      },
+      "name": "leftLabels"
+    },
+    {
+      "type": "text",
+      "interactive": true,
+      "encode": {
+        "update": {
+          "x": {
+            "value": 760
+          },
+          "y": {
+            "signal": "110+(datum.currentRank-1)*26"
+          },
+          "text": {
+            "signal": "datum.subgenre+' · '+datum.current_revenue_label"
+          },
+          "align": {
+            "value": "left"
+          },
+          "baseline": {
+            "value": "middle"
+          },
+          "fontSize": {
+            "value": 12
+          },
+          "fill": {
+            "value": "#393747"
+          },
+          "opacity": {
+            "signal": "hovered === null || hovered === datum.subgenre ? 1 : 0.10"
+          },
+          "cursor": {
+            "value": "pointer"
+          },
+          "tooltip": {
+            "signal": "{'Subgenre':datum.subgenre,'Oct 2023–Sep 2024':datum.previous_revenue_label,'Oct 2024–Sep 2025':datum.current_revenue_label,'Reported revenue change':datum.growthLabel}"
+          }
+        }
+      },
+      "from": {
+        "data": "table"
+      },
+      "name": "rightLabels"
+    },
+    {
+      "type": "text",
+      "interactive": true,
+      "encode": {
+        "update": {
+          "x": {
+            "value": 1140
+          },
+          "y": {
+            "signal": "110+(datum.currentRank-1)*26"
+          },
+          "text": {
+            "field": "growthLabel"
+          },
+          "align": {
+            "value": "right"
+          },
+          "baseline": {
+            "value": "middle"
+          },
+          "fontSize": {
+            "value": 12
+          },
+          "fontWeight": {
+            "value": "bold"
+          },
+          "fill": {
+            "signal": "datum.growth_pct >= 0 ? '#4F6B4A' : '#F1642E'"
+          },
+          "opacity": {
+            "signal": "hovered === null || hovered === datum.subgenre ? 1 : 0.10"
+          },
+          "tooltip": {
+            "signal": "{'Subgenre':datum.subgenre,'Oct 2023–Sep 2024':datum.previous_revenue_label,'Oct 2024–Sep 2025':datum.current_revenue_label,'Reported revenue change':datum.growthLabel}"
+          }
+        }
+      },
+      "from": {
+        "data": "table"
+      },
+      "name": "changeLabels"
+    },
+    {
+      "type": "text",
+      "interactive": false,
+      "encode": {
+        "update": {
+          "text": {
+            "value": "Equal vertical intervals indicate equal ratios, not equal dollar changes. Green = reported increase; orange = reported decrease."
+          },
+          "x": {
+            "value": 20
+          },
+          "y": {
+            "value": 817
+          },
+          "fontSize": {
+            "value": 11
+          },
+          "fill": {
+            "value": "#625E70"
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "interactive": false,
+      "encode": {
+        "update": {
+          "text": {
+            "value": "Labels are spaced with grey leaders. Reported changes are retained from the CSV and may differ from recalculation using its revenue totals."
+          },
+          "x": {
+            "value": 20
+          },
+          "y": {
+            "value": 839
+          },
+          "fontSize": {
+            "value": 11
+          },
+          "fill": {
+            "value": "#625E70"
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "interactive": false,
+      "encode": {
+        "update": {
+          "text": {
+            "value": "Source: AppMagic, Monetization Report 2025, p. 31. Annual periods shown above; revenue excludes advertising."
+          },
+          "x": {
+            "value": 20
+          },
+          "y": {
+            "value": 860
+          },
+          "fontSize": {
+            "value": 11
+          },
+          "fill": {
+            "value": "#625E70"
+          }
+        }
+      }
+    }
+  ]
+}
