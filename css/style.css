@@ -312,3 +312,80 @@ main .story-section .chart svg {
     margin: 20px 0;
   }
 }
+
+/* Large statistic inside an existing side note */
+.story-note .note-stat {
+  display: block;
+  font-family: "Nunito", Arial, sans-serif;
+  font-size: clamp(44px, 5vw, 68px);
+  font-weight: 900;
+  line-height: 1.05;
+  letter-spacing: -2px;
+  color: var(--grape);
+  margin: 0 0 12px;
+}
+
+.story-note .note-stat.orange {
+  color: var(--orange);
+}
+
+/* Small population/date label */
+.story-note .note-context,
+.stat-strip .note-context {
+  display: block;
+  font-size: 11px;
+  line-height: 1.5;
+  color: var(--muted);
+  margin-top: 12px;
+}
+
+/* A longer number or phrase */
+.story-note .note-stat.compact {
+  font-size: clamp(30px, 3vw, 42px);
+  letter-spacing: -1px;
+}
+
+/* Callouts beneath a full-width chart introduction */
+.stat-strip {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 24px 48px;
+  margin: 24px 0;
+}
+
+.stat-strip > div {
+  flex: 1 1 260px;
+  min-width: 0;
+  padding-left: 18px;
+  border-left: 4px solid var(--orange);
+}
+
+.stat-strip strong {
+  display: block;
+  font-family: "Nunito", Arial, sans-serif;
+  font-size: clamp(27px, 3vw, 38px);
+  font-weight: 900;
+  line-height: 1.2;
+  color: var(--grape);
+  margin-bottom: 8px;
+}
+
+.stat-strip p {
+  font-size: 14px;
+  color: var(--muted);
+  margin: 0;
+}
+
+/* Short transitions between sections */
+main > .section-link {
+  max-width: 780px;
+  margin: 26px auto;
+  padding-left: 18px;
+  border-left: 3px solid var(--green);
+  font-family: "Nunito", Arial, sans-serif;
+  font-size: 21px;
+  font-weight: 700;
+  line-height: 1.5;
+  color: var(--grape);
+}
