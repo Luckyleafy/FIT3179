@@ -199,3 +199,116 @@ main figure {
     row-gap: 16px;
   }
 }
+
+/* Chart on the left; note on the right */
+main section.story-section {
+  display: grid;
+  grid-template-columns: minmax(0, 3fr) minmax(200px, 1fr);
+  column-gap: 36px;
+  row-gap: 18px;
+}
+
+/* Reverse the layout */
+main section.story-section.chart-right {
+  grid-template-columns: minmax(200px, 1fr) minmax(0, 3fr);
+}
+
+/* Heading and introduction span the section */
+.story-section > .section-heading {
+  grid-column: 1 / -1;
+  grid-row: 1;
+  margin-bottom: 0;
+}
+
+.story-section > p:not(.source) {
+  grid-column: 1 / -1;
+  grid-row: 2;
+  margin: 0;
+}
+
+/* Chart */
+main .story-section > figure {
+  grid-column: 1;
+  grid-row: 3;
+  width: 100%;
+  min-width: 0;
+  margin: 8px 0 0;
+}
+
+/* Side note */
+.story-section > .story-note {
+  grid-column: 2;
+  grid-row: 3;
+  align-self: center;
+  min-width: 0;
+}
+
+/* Reverse chart and note positions */
+main .story-section.chart-right > figure {
+  grid-column: 2;
+}
+
+.story-section.chart-right > .story-note {
+  grid-column: 1;
+}
+
+/* Source remains below both columns */
+.story-section > .source {
+  grid-column: 1 / -1;
+  grid-row: 4;
+  margin: 0;
+}
+
+/* Small puzzle-themed annotation */
+.story-note {
+  border-left: 4px solid var(--orange);
+  padding-left: 18px;
+}
+
+.story-note .note-label {
+  display: block;
+  color: var(--green);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.story-note h3 {
+  font-family: "Nunito", Arial, sans-serif;
+  font-size: 23px;
+  font-weight: 800;
+  line-height: 1.2;
+  color: var(--grape);
+  margin: 0 0 12px;
+}
+
+.story-note p {
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--muted);
+  margin: 0;
+}
+
+/* Fit SVG diagrams into the chart column */
+main .story-section .chart svg {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Stack chart and annotation on smaller screens */
+@media (max-width: 900px) {
+  main section.story-section,
+  main section.story-section.chart-right {
+    display: block;
+  }
+
+  main .story-section > figure {
+    margin: 24px 0 18px;
+  }
+
+  .story-section > .story-note {
+    margin: 20px 0;
+  }
+}
