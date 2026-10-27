@@ -36,7 +36,7 @@
       "labelFontSize": 12,
       "orient": "top"
     },
-    "background": "#ffffff"
+    "background": null
   },
   "transform": [
     {

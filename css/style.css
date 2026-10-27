@@ -12,7 +12,7 @@ figure{margin:25px 0 15px;padding:24px;background:var(--panel);border:1.5px soli
 @media(max-width:620px){.site-top,.hero,main,footer,.play-strip{width:calc(100% - 32px)}nav{gap:16px}nav a{font-size:12px}.site-logo{font-size:21px}.hero{grid-template-columns:1fr;padding-top:32px;gap:30px}h1{font-size:clamp(46px,11vw,66px);letter-spacing:-2px}.art{width:100%;max-width:390px;margin-inline:auto}.tile{font-size:24px}.section-heading{gap:14px;align-items:flex-start}.number{min-width:44px;height:44px;font-size:19px}h2{font-size:27px}.eyebrow{font-size:10px;letter-spacing:1.4px}section{padding-top:33px}figure{padding:12px}.bridge{padding:25px}.play-strip{font-size:10px;letter-spacing:1px;gap:8px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.start{transition:none}}
 
-/* Consistent figure spacing */
+/*Consistent figure spacing*/
 main figure {
   width: 100%;
   margin: 24px 0 16px;
@@ -20,7 +20,7 @@ main figure {
   box-sizing: border-box;
 }
 
-/* Full-width chart containers */
+/*Full-width chart containers*/
 main .chart,
 main .chart.vega-embed,
 main .chart .vega-embed {
@@ -33,7 +33,7 @@ main .chart .vega-embed {
   box-sizing: border-box;
 }
 
-/* Centre each complete chart, including axes and legends */
+/*Centre each complete chart, including axes and legends*/
 main .chart svg,
 main .chart canvas {
   display: block;
@@ -41,33 +41,33 @@ main .chart canvas {
   margin-right: auto;
 }
 
-/* Fit large SVG charts while preserving their proportions */
+/*Fit large SVG charts while preserving their proportions*/
 main .chart svg {
   max-width: 100%;
   height: auto;
 }
 
-/* Keep dropdowns aligned with the panel's left edge */
+/*Keep dropdowns aligned with the panel's left edge*/
 main .chart .vega-bindings {
   width: 100%;
   margin: 0 0 16px;
   text-align: left;
 }
 
-/* Consistent caption spacing and alignment */
+/*Consistent caption spacing and alignment*/
 main figure figcaption {
   margin-top: 18px;
   padding-top: 14px;
   text-align: left;
 }
 
-/* Keep introductions and sources left-aligned */
+/*Keep introductions and sources left-aligned*/
 main section > p,
 main .source {
   text-align: left;
 }
 
-/* Allow wide charts to scroll on small screens */
+/*Allow wide charts to scroll on small screens*/
 main .chart {
   overflow-x: auto;
 }
@@ -79,5 +79,123 @@ main .chart {
 
   main .chart svg {
     max-width: none;
+  }
+}
+
+/*Remove the outer chart boxes*/
+main figure {
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  padding: 0;
+}
+
+.demographics-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+  gap: 32px;
+  align-items: start;
+}
+
+.demographics-grid > figure {
+  width: auto;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+}
+
+.demographics-grid h3 {
+  font-family: "Nunito", Arial, sans-serif;
+  font-size: 22px;
+  color: var(--grape);
+  margin: 0 0 10px;
+}
+
+.demographics-grid figure > p {
+  min-height: 72px;
+  margin: 0 0 16px;
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.demographics-grid .chart svg {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Stack only on smaller screens */
+@media (max-width: 850px) {
+  .demographics-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .demographics-grid figure > p {
+    min-height: 0;
+  }
+}
+
+/* Two columns with matching heading, introduction,
+   chart and caption rows */
+.demographics-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+  gap: 32px;
+  align-items: stretch;
+}
+
+.demographics-grid > figure {
+  display: grid;
+  grid-template-rows: auto 90px minmax(380px, 1fr) 90px;
+  gap: 0;
+  min-width: 0;
+  width: auto;
+  margin: 0;
+  padding: 0;
+}
+
+.demographics-grid figure > h3 {
+  margin: 0 0 12px;
+}
+
+.demographics-grid figure > p {
+  min-height: 0;
+  margin: 0;
+}
+
+/* Keep the visual inside its own column */
+.demographics-grid .chart,
+.demographics-grid .chart.vega-embed {
+  width: 100%;
+  min-width: 0;
+  min-height: 0;
+  padding: 0;
+}
+
+/* Override earlier rules that disabled SVG fitting */
+.demographics-grid .chart svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin-inline: auto;
+}
+
+/* Matching final rows align the caption divider lines */
+.demographics-grid figcaption {
+  margin: 0;
+  padding-top: 14px;
+  border-top: 1px solid var(--line);
+  align-self: stretch;
+}
+
+/* Stack naturally on smaller screens */
+@media (max-width: 850px) {
+  .demographics-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .demographics-grid > figure {
+    grid-template-rows: auto auto auto auto;
+    row-gap: 16px;
   }
 }

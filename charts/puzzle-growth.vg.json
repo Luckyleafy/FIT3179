@@ -70,7 +70,7 @@
               "axis": {
                 "title": null,
                 "labelExpr": "datum.value + '%'",
-                "gridColor": "#E1E6DF",
+                "gridColor": "E1E6DF", 
                 "tickCount": 6
               }
             }

@@ -4,20 +4,20 @@
   "description": "Country shares of puzzle-game downloads and in-app purchase revenue in Apptica's covered markets, Q1 2023.",
 
   "background": null,
-  "spacing": 25,
+  "spacing": 10,
 
   "hconcat": [
     {
-      "width": 380,
-      "height": 245,
+      "width": 800,
+      "height": 400,
 
       "title": {
         "text": "Downloads",
         "subtitle": "Share of puzzle-game downloads (%)",
-        "anchor": "start",
+        "anchor": "middle",
         "fontSize": 18,
         "subtitleFontSize": 11,
-        "color": "#183733",
+        "color": "#4C496E",
         "subtitleColor": "#596963",
         "offset": 14
       },
@@ -103,7 +103,7 @@
               "scale": {
                 "type": "linear",
                 "domain": [0, 50],
-                "range": [0, 2000]
+                "range": [0, 3000]
               },
               "legend": null
             },
@@ -131,16 +131,16 @@
     },
 
     {
-      "width": 380,
-      "height": 245,
+      "width": 800,
+      "height": 400,
 
       "title": {
         "text": "Spending",
         "subtitle": "Share of puzzle-game IAP revenue (%)",
-        "anchor": "start",
+        "anchor": "middle",
         "fontSize": 18,
         "subtitleFontSize": 11,
-        "color": "#183733",
+        "color": "#4C496E",
         "subtitleColor": "#596963",
         "offset": 14
       },
@@ -226,7 +226,7 @@
               "scale": {
                 "type": "linear",
                 "domain": [0, 50],
-                "range": [0, 2000]
+                "range": [0, 3000]
               },
               "legend": null
             },

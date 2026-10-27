@@ -3,7 +3,7 @@
   "description": "Australia escape-room directory locations, with circular street-map insets. Branches are separate points. This is a directory-based sample, not a census of operating Australian venues.",
   "width": 1120,
   "height": 950,
-  "padding": 10,
+  "padding": 25,
   "background": null,
   "config": {
     "font": "Arial"
@@ -411,7 +411,7 @@
             "value": "left"
           },
           "fill": {
-            "value": "#183733"
+            "value": "#4C496E"
           }
         }
       }
@@ -717,7 +717,7 @@
             "value": "center"
           },
           "fill": {
-            "value": "#183733"
+            "value": "#4C496E"
           }
         }
       }
@@ -890,7 +890,7 @@
             "value": "center"
           },
           "fill": {
-            "value": "#183733"
+            "value": "#4C496E"
           }
         }
       }
@@ -1063,7 +1063,7 @@
             "value": "center"
           },
           "fill": {
-            "value": "#183733"
+            "value": "#4C496E"
           }
         }
       }
@@ -1236,7 +1236,7 @@
             "value": "center"
           },
           "fill": {
-            "value": "#183733"
+            "value": "#4C496E"
           }
         }
       }
@@ -1409,7 +1409,7 @@
             "value": "center"
           },
           "fill": {
-            "value": "#183733"
+            "value": "#4C496E"
           }
         }
       }
@@ -1582,7 +1582,7 @@
             "value": "center"
           },
           "fill": {
-            "value": "#183733"
+            "value": "#4C496E"
           }
         }
       }
@@ -1755,7 +1755,7 @@
             "value": "center"
           },
           "fill": {
-            "value": "#183733"
+            "value": "#4C496E"
           }
         }
       }

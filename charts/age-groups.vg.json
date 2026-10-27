@@ -1,10 +1,14 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
 
-  "width": 650,
-  "height": 320,
-  "background": "#FAFAF7",
-
+  "width": "container",
+  "height": 315,
+  "background": null,
+  "autosize": {
+    "type": "fit",
+    "contains": "padding"
+  },
+ 
   "data": {
     "values": [
       {"generation": "Gen Alpha · 8–13", "percent": 54},
@@ -28,9 +32,9 @@
       ],
       "title": null,
       "axis": {
-        "labelFontSize": 13,
-        "labelLimit": 240,
-        "labelPadding": 12,
+        "labelFontSize": 11,
+        "labelLimit": 170,
+        "labelPadding": 8,
         "domain": false,
         "ticks": false
       }

@@ -107,6 +107,7 @@ var vg_age_groups = "charts/age-groups.vg.json";
 
 vegaEmbed("#age-groups", vg_age_groups, {
   mode: "vega-lite",
+  renderer: "svg",
   actions: false
 }).catch(console.error);
 
