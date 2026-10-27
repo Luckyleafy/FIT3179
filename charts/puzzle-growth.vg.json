@@ -93,9 +93,9 @@
             "color": {
               "condition": {
                 "test": "datum.growth_pct >= 0",
-                "value": "#147D78"
+                "value": "#516b4c"
               },
-              "value": "#BB5032"
+              "value": "#F1642E"
             },
             "tooltip": [
               {
@@ -219,9 +219,9 @@
             "color": {
               "condition": {
                 "test": "datum.growth_pct >= 0",
-                "value": "#147D78"
+                "value": "#516b4c"
               },
-              "value": "#BB5032"
+              "value": "#F1642E"
             },
             "tooltip": [
               {

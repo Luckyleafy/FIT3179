@@ -135,7 +135,7 @@
             "field": "y"
           },
           "stroke": {
-            "signal": "hovered === datum.id ? '#147D78' : '#ADBCB0'"
+            "signal": "hovered === datum.id ? '#504E76' : '#ADBCB0'"
           },
           "strokeWidth": {
             "signal": "hovered === datum.id ? 2.5 : 1.5"
@@ -170,7 +170,7 @@
             "signal": "hovered === datum.id ? '#D4E8DD' : '#E8EDE5'"
           },
           "stroke": {
-            "signal": "hovered === datum.id ? '#147D78' : '#C8D3C6'"
+            "signal": "hovered === datum.id ? '#504E76' : '#C8D3C6'"
           },
           "strokeWidth": {
             "value": 1
@@ -246,7 +246,7 @@
             "value": 15500
           },
           "fill": {
-            "value": "#147D78"
+            "value": "#504E76"
           },
           "stroke": {
             "value": "#FAFAF7"

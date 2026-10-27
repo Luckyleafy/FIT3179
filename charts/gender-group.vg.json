@@ -93,7 +93,7 @@
             "field": "filledPath"
           },
           "fill": {
-            "value": "#147D78"
+            "value": "#504E76"
           },
 
           "tooltip": {
@@ -176,7 +176,7 @@
             "value": 600
           },
           "fill": {
-            "value": "#147D78"
+            "value": "#504E76"
           }
         }
       }

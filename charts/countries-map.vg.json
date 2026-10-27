@@ -80,7 +80,7 @@
 
           "mark": {
             "type": "circle",
-            "color": "#147D78",
+            "color": "#516b4c",
             "opacity": 0.75,
             "stroke": "#FAFAF7",
             "strokeWidth": 0.7
@@ -203,7 +203,7 @@
 
           "mark": {
             "type": "circle",
-            "color": "#BB5032",
+            "color": "#f0652d",
             "opacity": 0.75,
             "stroke": "#FAFAF7",
             "strokeWidth": 0.7
